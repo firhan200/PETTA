@@ -1,10 +1,10 @@
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="#"><span class="material-icons left icon-t">settings</span>&nbsp;&nbsp;PROFIL</a></li>
+  <li><a href="<?php echo site_url('profil'); ?>"><span class="material-icons left icon-t">settings</span>&nbsp;&nbsp;PROFIL</a></li>
   <li class="divider"></li>
   <li><a href="#">KELUAR</a></li>
 </ul>
 <ul id="dropdown2" class="dropdown-content">
-  <li><a href="#"><span class="material-icons left icon-t">settings</span>&nbsp;&nbsp;PROFIL</a></li>
+  <li><a href="<?php echo site_url('profil'); ?>"><span class="material-icons left icon-t">settings</span>&nbsp;&nbsp;PROFIL</a></li>
   <li class="divider"></li>
   <li><a href="#">KELUAR</a></li>
 </ul>

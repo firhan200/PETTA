@@ -14,4 +14,12 @@ class Pesan extends MY_Controller {
 		$this->load->view('pesan_page', $data);
 		$this->load->view('layouts/footer');
 	}
+
+	public function pesan_baru(){
+		$data['menu3'] = true;
+		//$this->sessionIn(); //check session
+		$this->load->view('layouts/header');
+		$this->load->view('pesan_baru_page', $data);
+		$this->load->view('layouts/footer');
+	}
 }

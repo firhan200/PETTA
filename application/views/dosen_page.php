@@ -4,7 +4,7 @@
 	<div class="row">
 		<?php for($i=1;$i<=14;$i++){ ?>
 		<div class="col s12 m4 l3">
-			<div class="box-t">
+			<div class="pad2-t">
 				<div class="card">
 			    	<div class="card-image waves-effect waves-block waves-light">
 			      		<img class="activator" src="<?php echo base_url('assets/img/dosen/noava.png'); ?>">
