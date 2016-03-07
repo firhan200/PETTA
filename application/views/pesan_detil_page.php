@@ -13,7 +13,7 @@ $(document).ready(function(){
 				</div>
 				<ul class="category-t">
 					<li><a href="<?php echo site_url('pesan/pesan_baru'); ?>">(+) Tulis Pesan</a></li>
-					<li><a href="<?php echo site_url('pesan'); ?>">Kotak Masuk <span class="badge-t">1 baru</span></a></li>
+					<li><a href="<?php echo site_url('pesan'); ?>">Kotak Masuk <?php if(isset($notif)) echo $notif; ?></a></li>
 					<li><a href="<?php echo site_url('pesan/pesan_keluar'); ?>">Kotak Keluar</a></li>
 				</ul>
 			</div>

@@ -61,4 +61,9 @@ class Pengguna extends MY_Controller {
 		$this->session->unset_userdata('levelpetta');
 		redirect(site_url(''));
 	}
+
+	public function getNotification(){
+		$notif = $this->pullNotification();
+		echo $notif;
+	}
 }

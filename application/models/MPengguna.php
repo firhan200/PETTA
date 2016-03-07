@@ -23,6 +23,15 @@ class MPengguna extends CI_Model{
 		return $query;
 	}
 
+	function getNotification($id){
+		$this->db->where('id_pengguna', $id);
+		$query = $this->db->get('pengguna');
+		foreach($query->result() as $result){
+			$notification = $result->notifikasi;
+		}
+		return $notification;
+	}
+
 	function update($cond, $data){
 		$this->db->where($cond);
 		$query = $this->db->update('pengguna', $data);

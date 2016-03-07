@@ -8,12 +8,14 @@ class Pesan extends MY_Controller {
 		$this->load->model('MPesan');
 		$this->load->model('MDosen');
 		$this->load->model('MMahasiswa');
+		$this->load->model('MPengguna');
 	}
 
 	public function index(){
 		$data['menu3'] = true;
 		$data['submenu2'] = true;
 		$this->sessionOut(); //check session
+		$data['notif'] = $this->pullMsgNotification();
 
 		$idUser = $this->session->userdata('idpetta');
 		$data['query'] = $this->MPesan->read(array('id_penerima'=>$idUser, 'hapus'=>0), 'id_pesan', 'DESC');
@@ -29,6 +31,7 @@ class Pesan extends MY_Controller {
 		$data['menu3'] = true;
 		$data['submenu3'] = true;
 		$this->sessionOut(); //check session
+		$data['notif'] = $this->pullMsgNotification();
 
 		$idUser = $this->session->userdata('idpetta');
 		$data['query'] = $this->MPesan->read(array('id_pengirim'=>$idUser, 'hapus2'=>0), 'id_pesan', 'DESC');
@@ -43,6 +46,7 @@ class Pesan extends MY_Controller {
 	public function pesan_baru(){
 		$data['menu3'] = true;
 		$this->sessionOut(); //check session
+		$data['notif'] = $this->pullMsgNotification();
 
 		$level = $this->session->userdata('levelpetta');
 		if($level==3){
@@ -67,6 +71,14 @@ class Pesan extends MY_Controller {
 		$data['query'] = $this->MPesan->readMessageDetil($id, $idUser, $level);
 		//config
 		$data['date'] = $this->monthConverter();
+
+		//remove notification
+		$queryAll = $this->MPesan->read(array('id_pengirim'=>$id, 'id_penerima'=>$idUser, 'baca'=>0), null, null);
+		foreach($queryAll->result() as $result){
+			$this->addNotification($idUser, 'del');
+		}
+		//read
+		$read = $this->MPesan->update(array('id_pengirim'=>$id, 'id_penerima'=>$idUser), array('baca'=>'1'));
 
 		$this->load->view('layouts/header');
 		$this->load->view('pesan_detil_page', $data);
@@ -98,6 +110,8 @@ class Pesan extends MY_Controller {
 		}else{
 			$response = 2;
 		}
+		$this->addNotification($this->session->userdata('idpetta'), 'del');
+		$this->MPesan->update(array('id_pesan'=>$id), array('baca'=>'1'));
 		echo $response;
 	}
 
@@ -114,11 +128,16 @@ class Pesan extends MY_Controller {
 		$data = array('id_pengirim'=>$sender, 'id_penerima'=>$receiver, 'pesan'=>$message, 'tanggal'=>$date, 'level'=>$level);
 		$insert = $this->MPesan->create($data);
 		if($insert){
-			if($segment==null){
-				redirect(site_url('pesan/detil/'.$receiver.''));
+			$notify = $this->addNotification($receiver, 'add');
+			if($notify){
+				if($segment==null){
+					redirect(site_url('pesan/detil/'.$receiver.''));
+				}else{
+					redirect(site_url('pesan/detil/'.$segment.''));
+				}
 			}else{
-				redirect(site_url('pesan/detil/'.$segment.''));
-			}
+				redirect(site_url('pesan/pesan_baru?balasan=2'));
+			}	
 		}else{
 			redirect(site_url('pesan/pesan_baru?balasan=2'));
 		}
@@ -131,5 +150,24 @@ class Pesan extends MY_Controller {
 			'11'=>'November','12'=>'Desember',
 		);
 		return $month;
+	}
+
+	public function addNotification($idReceiver, $order){
+		$query = $this->MPengguna->read(array('id_pengguna'=>$idReceiver), null, null);
+		foreach($query->result() as $result){
+			$lastNumber = $result->notifikasi;
+		}
+		if($order=='add'){
+			$newNumber = $lastNumber + 1;
+		}else if($order=='del'){
+			$newNumber = $lastNumber - 1;
+		}
+		$data = array('notifikasi'=>$newNumber);
+		$update = $this->MPengguna->update(array('id_pengguna'=>$idReceiver), $data);
+		if($update){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

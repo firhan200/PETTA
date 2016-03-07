@@ -8,7 +8,7 @@
 				</div>
 				<ul class="category-t">
 					<li><a href="<?php echo site_url('pesan/pesan_baru'); ?>">(+) Tulis Pesan</a></li>
-					<li <?php if(isset($submenu2)) echo 'class=active'; ?>><a href="<?php echo site_url('pesan'); ?>">Kotak Masuk <span class="badge-t">1 baru</span></a></li>
+					<li <?php if(isset($submenu2)) echo 'class=active'; ?>><a href="<?php echo site_url('pesan'); ?>">Kotak Masuk <?php if(isset($notif)) echo $notif; ?></a></li>
 					<li <?php if(isset($submenu3)) echo 'class=active'; ?>><a href="<?php echo site_url('pesan/pesan_keluar'); ?>">Kotak Keluar</a></li>
 				</ul>
 			</div>
@@ -37,8 +37,14 @@
 						<?php 
 						if($query->num_rows() > 0){
 							$i=1;foreach($query->result() as $result){ 
+							if($result->baca==0 AND isset($submenu2)){
 							?>
-							<tr>
+							<tr style="background-color:#F5ECCE;">
+							<?php
+							}else{
+								echo '<tr>';
+							}
+							?>
 								<td><?php echo $i; ?>.</td>
 								<td><?php echo getData($result->level, $result->id_penerima, $result->id_pengirim, $this->session->userdata('levelpetta')); ?></td>
 								<td><?php if(strlen(htmlspecialchars($result->pesan)) < 30){ echo htmlspecialchars($result->pesan); }else{ echo substr(htmlspecialchars($result->pesan), 0, 32).'...'; } ?></td>
