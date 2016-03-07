@@ -18,13 +18,19 @@
       			<li class="<?php if(isset($menu2)) echo 'active'; ?>"><a href="<?php echo site_url('dosen'); ?>">Dosen</a></li>
       		</ul>
       		<ul class="right hide-on-med-and-down">
+            <?php if($this->session->userdata('levelpetta')==2){ ?>
+            <li class="<?php if(isset($menu32)) echo 'active'; ?>"><a href="<?php echo site_url('tema/riwayat'); ?>"><i class="large material-icons" style="float:left;">book</i>&nbsp;Tema <span id="notifta"></span></a></li>
+            <?php } ?>
             <li class="<?php if(isset($menu3)) echo 'active'; ?>"><a href="<?php echo site_url('pesan'); ?>"><i class="large material-icons" style="float:left;">email</i>&nbsp;Pesan <span id="notif"></span></a></li>
       			<li class="<?php if(isset($menu4)) echo 'active'; ?>"><a href="#" class="dropdown-button" data-activates="dropdown1"><i class="large material-icons" style="float:left;">person</i>&nbsp;<?php echo htmlspecialchars($this->session->userdata('namapetta')); ?><i class="material-icons right">arrow_drop_down</i></a></li>
       		</ul>
       		<ul class="side-nav" id="mobile-demo">
             <li class="<?php if(isset($menu1)) echo 'active'; ?>"><a href="<?php echo site_url('tema'); ?>">Beranda</a></li>
             <li class="<?php if(isset($menu2)) echo 'active'; ?>"><a href="<?php echo site_url('dosen'); ?>">Dosen</a></li>
-            <li class="<?php if(isset($menu3)) echo 'active'; ?>"><a href="<?php echo site_url('pesan'); ?>"><i class="large material-icons" style="float:left;">email</i>&nbsp;Pesan <span class="new badge">1</span></a></li>
+            <?php if($this->session->userdata('levelpetta')==2){ ?>
+            <li class="<?php if(isset($menu32)) echo 'active'; ?>"><a href="<?php echo site_url('tema/riwayat'); ?>"><i class="large material-icons" style="float:left;">book</i>&nbsp;Tema <span id="notifta"></span></a></li>
+            <?php } ?>
+            <li class="<?php if(isset($menu3)) echo 'active'; ?>"><a href="<?php echo site_url('pesan'); ?>"><i class="large material-icons" style="float:left;">email</i>&nbsp;Pesan <span id="notif2"></span></a></li>
             <li class="<?php if(isset($menu4)) echo 'active'; ?>"><a href="#" class="dropdown-button" data-activates="dropdown2"><i class="large material-icons" style="float:left;">person</i>&nbsp;<?php echo htmlspecialchars($this->session->userdata('namapetta')); ?><i class="material-icons right">arrow_drop_down</i></a></li>
       		</ul>
     	</div>
@@ -39,6 +45,7 @@ $(document).ready(function(){
       data:{},
       success:function(data){
         $("#notif").html(data);
+        $("#notif2").html(data);
       }
     });
   }, 500);

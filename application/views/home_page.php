@@ -52,7 +52,7 @@
 		      			</div>
 		      		</div>
 		      		<span class="title"><b>Judul Tema TA</b></span>
-		      		<p>
+		      		<p style="margin-bottom:5px;">
 		      			Paragraf keterangan untuk judul tema TA Paragraf keterangan untuk judul tema TA
 		      			Paragraf keterangan untuk judul tema TA Paragraf keterangan untuk judul tema TA
 		      			Paragraf keterangan untuk jud...
@@ -76,7 +76,7 @@
 		      			</div>
 		      		</div>
 		      		<span class="title"><b>Judul Tema TA</b></span>
-		      		<p>
+		      		<p style="margin-bottom:5px;">
 		      			Paragraf keterangan untuk judul tema TA Paragraf keterangan untuk judul tema TA
 		      			Paragraf keterangan untuk judul tema TA Paragraf keterangan untuk judul tema TA
 		      			Paragraf keterangan untuk jud...
