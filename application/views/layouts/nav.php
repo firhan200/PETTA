@@ -36,8 +36,16 @@
     	</div>
   	</nav>
 </div>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-tiny blue">
+      <i id="i_up" class="large material-icons tooltipped" data-position="top" data-tooltip="Scroll ke Atas" data-delay="1">keyboard_arrow_up</i>
+    </a>
+  </div>
 <script type="text/javascript">
 $(document).ready(function(){
+  $("#i_up").click(function(){
+    $('html, body').animate({scrollTop:0}, 'slow');
+  });
   var host = location.protocol + '//' + location.host + '/';
   setInterval(function(){
     $.ajax({
