@@ -2,7 +2,7 @@
 <div class="container pad-t">
 	<center><h4>DAFTAR DOSEN</h4></center>
 	<div class="row">
-		<?php for($i=1;$i<=14;$i++){ ?>
+		<?php foreach($query->result() as $result){ ?>
 		<div class="col s12 m4 l3">
 			<div class="pad2-t">
 				<div class="card">
@@ -11,7 +11,7 @@
 			    	</div>
 				    <div class="card-content">
 				      	<span class="card-title activator grey-text text-darken-4">
-				      		Firhan Faisal Ali Balweel, S.KOM
+				      		<?php echo htmlspecialchars($result->nama_dosen); ?>
 				      		<i class="material-icons right">more_vert</i>
 				      	</span>
 				    	<div align="right">
@@ -20,12 +20,12 @@
 				    </div>
 				    <div class="card-reveal">
 				      	<span class="card-title grey-text text-darken-4">
-				      		Firhan Faisal Ali Balweel, S.KOM
+				      		<?php echo htmlspecialchars($result->nama_dosen); ?>
 				      		<i class="material-icons right">close</i>
 				      	</span>
 				      	<br/>
-			      		<b>Telepon:</b><br/>08453543453<br/>
-			      		<b>E-Mail:</b><br/>firhan.faisal1995@gmail.com
+			      		<b>Telepon:</b><br/><?php echo htmlspecialchars($result->telepon); ?><br/>
+			      		<b>E-Mail:</b><br/><?php echo htmlspecialchars($result->email); ?>
 				    </div>
 			  	</div>
 			</div>

@@ -38,7 +38,7 @@ $(document).ready(function(){
 							      				<b><?php echo htmlspecialchars($info['ni']); ?></b>
 							      			</div>
 							      		</div>
-							      		<div class="col s6" align="right">
+							      		<div class="col s6 msg-date-t" align="right">
 							      			<?php echo date("d ", strtotime($result->tanggal)).$date[date("m", strtotime($result->tanggal))].date(" Y, H:i", strtotime($result->tanggal)); ?>
 							      		</div>
 							      	</div>
@@ -58,7 +58,7 @@ $(document).ready(function(){
 					      				<div class="col s6">
 							      			<b>Saya</b>
 							      		</div>
-							      		<div class="col s6" align="right">
+							      		<div class="col s6 msg-date-t" align="right">
 							      			<?php echo date("d ", strtotime($result->tanggal)).$date[date("m", strtotime($result->tanggal))].date(" Y, H:i", strtotime($result->tanggal)); ?>
 							      		</div>
 							      	</div>

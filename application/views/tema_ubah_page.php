@@ -7,15 +7,16 @@
 					<i class="material-icons">book</i>&nbsp;TEMA TUGAS AKHIR
 				</div>
 				<ul class="category-t">
-					<li class="active"><a href="<?php echo site_url('tema/tambah'); ?>">(+) Tambah Tema</a></li>
+					<li><a href="<?php echo site_url('tema/tambah'); ?>">(+) Tambah Tema</a></li>
 					<li><a href="<?php echo site_url('tema/riwayat'); ?>">Riwayat <?php if(isset($notif)) echo $notif; ?></a></li>
-					<li><a href="<?php echo site_url('tema/data'); ?>">List Tema</a></li>
+					<li class="active"><a href="<?php echo site_url('tema/data'); ?>">List Tema</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="col s12 m9">
 			<div class="box-t" style="padding-bottom:20px;">
-				<h5>+ Tema Baru</h5>
+				<h5>Ubah Tema</h5>
+				<?php foreach($query->result() as $result2){ ?>
 				<div class="row">
 					<div class="col s10 offset-s1">
 						<?php
@@ -27,7 +28,7 @@
 							}
 						}
 						?>
-						<form action="<?php echo site_url('tema/create'); ?>" method="post" id="submit">
+						<form action="<?php echo site_url('tema/update/'.$result2->id_tema.''); ?>" method="post" id="submit">
 							<div class="input-field">
 						    	<select class="browser-default" id="kategori">
 							      <option value="">Pilih Bidang</option>
@@ -41,24 +42,26 @@
 						  	</div>
 						  	<div id="report1" class="error"></div>
 						  	<div class="input-field">
-						    	<textarea id="judul" name="judul" class="materialize-textarea def-input" length="200" maxlength="200" required></textarea>
+						    	<textarea id="judul" name="judul" class="materialize-textarea def-input" length="200" maxlength="200" required><?php echo htmlspecialchars($result2->judul); ?></textarea>
 		            			<label for="judul">Judul</label>
+		            			<input type="hidden" value="<?php echo htmlspecialchars($result2->judul); ?>" id="judul_lama">
 						  	</div>
 						  	<div class="input-field">
-						    	<textarea id="keterangan" name="keterangan" class="materialize-textarea def-input" length="2000" maxlength="2000" required></textarea>
+						    	<textarea id="keterangan" name="keterangan" class="materialize-textarea def-input" length="2000" maxlength="2000" required><?php echo htmlspecialchars($result2->keterangan); ?></textarea>
 		            			<label for="keterangan">Keterangan</label>
 						  	</div>
-						  	<center><button type="submit" class="btn waves-effect waves-light">TAMBAHKAN</a></center>
+						  	<center><button type="submit" class="btn waves-effect waves-light">SIMPAN</a></center>
 						</form>
 					</div>
 				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-	var cek1=0;
+	var cek1=1;
 	var host = location.protocol + '//' + location.host + '/';
 	$("#kategori_pilih").load(host+'/PETTA/tema/getTags');
 	$("#kategori").change(function(){
@@ -73,8 +76,9 @@ $(document).ready(function(){
 	});
 	$("#judul").bind('keyup change', function(){
 		var judul = $(this).val();
+		var judulLama = $("#judul_lama").val();
 		$.ajax({
-			url:host+'PETTA/tema/checkTitle/'+judul,
+			url:host+'PETTA/tema/checkEditTitle/'+judul+'/'+judulLama,
 			data:{},
 			success:function(data){
 				if(data==1){

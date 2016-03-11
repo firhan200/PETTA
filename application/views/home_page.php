@@ -41,53 +41,61 @@
 				</div>
 			</div>
 			<ul class="collection">
-		    	<li class="collection-item avatar">
+				<?php 
+				if($query->num_rows() > 0){
+				foreach($query->result() as $result){ ?>
+				<li class="collection-item avatar">
 		      		<img src="<?php echo base_url('assets/img/dosen/noava.png'); ?>" alt="" class="circle">
 		      		<div class="row" style="margin-bottom:-5px;">
 		      			<div class="col s8 m6 l6">
-		      				<a href="#"><div class="dosen-t">Firhan, S.KOM</div></a>
+		      				<a href="<?php echo site_url('profil/'.$result->id_pengguna.''); ?>"><div class="dosen-t"><?php echo htmlspecialchars($result->nama_dosen); ?></div></a>
 		      			</div>
 		      			<div class="col s4 m6 l6" align="right">
-		      				<a href="#" class="ketchup tooltip" title="<?php for($i=1;$i<=10;$i++){ echo "Firhan<br/>"; }; ?>"><i class="material-icons tiny">grade</i>&nbsp;10 Peminat</a>
+		      				<a href="#" class="ketchup tooltip" title="<?php echo getPeminat($result->id_tema); ?>"><i class="material-icons tiny">grade</i>&nbsp;<?php echo getJumlahPeminat($result->id_tema); ?>&nbsp;Peminat</a>
 		      			</div>
 		      		</div>
-		      		<span class="title"><b>Judul Tema TA</b></span>
+		      		<span class="title"><b><?php echo htmlspecialchars($result->judul); ?></b></span>
 		      		<p style="margin-bottom:5px;">
-		      			Paragraf keterangan untuk judul tema TA Paragraf keterangan untuk judul tema TA
-		      			Paragraf keterangan untuk judul tema TA Paragraf keterangan untuk judul tema TA
-		      			Paragraf keterangan untuk jud...
+		      			<?php if(strlen(htmlspecialchars($result->keterangan)) < 200){ echo htmlspecialchars($result->keterangan); }else{ echo substr(htmlspecialchars($result->keterangan), 0, 200).'...'; } ?>
 		      		</p>
-		      		<span class="chip">Bidang Tema</span>
-		      		<span class="chip">Bidang Tema</span>
-		      		<span class="chip">Bidang Tema</span>
+		      		<div style="font-size:10pt;color:#61210B">
+			      		<i><b>waktu post:</b> <?php echo date("d ", strtotime($result->tanggal_post)).$date[date("m", strtotime($result->tanggal_post))].date(" Y, H:i", strtotime($result->tanggal_post)); ?></i>
+			      	</div>
+		      		<?php echo getTags($result->id_tema); ?>
 		      		<div align="right" style="margin-top:10px;">
-		      			<a href="#" class="btn btn-small waves-light waves-effect blue">Minat</a>
-		      			<a href="#" class="btn btn-small waves-light waves-effect gray">Lihat Detil</a>
-		      		</div>
+	      				<a href="<?php echo site_url('tema/detil/'.$result->id_tema.''); ?>" class="btn btn-small waves-light waves-effect">Lihat Detil</a>
+	      			</div>
 		    	</li>
-		    	<li class="collection-item avatar">
-		      		<img src="<?php echo base_url('assets/img/dosen/noava.png'); ?>" alt="" class="circle">
-		      		<div class="row" style="margin-bottom:-5px;">
-		      			<div class="col s8 m6 l6">
-		      				<a href="#"><div class="dosen-t">Firhan, S.KOM</div></a>
-		      			</div>
-		      			<div class="col s4 m6 l6" align="right">
-		      				<a href="#" class="ketchup tooltip" title="<?php for($i=1;$i<=4;$i++){ echo "Firhan<br/>"; }; ?>"><i class="material-icons tiny">grade</i>&nbsp;4 Peminat</a>
-		      			</div>
-		      		</div>
-		      		<span class="title"><b>Judul Tema TA</b></span>
-		      		<p style="margin-bottom:5px;">
-		      			Paragraf keterangan untuk judul tema TA Paragraf keterangan untuk judul tema TA
-		      			Paragraf keterangan untuk judul tema TA Paragraf keterangan untuk judul tema TA
-		      			Paragraf keterangan untuk jud...
-		      		</p>
-		      		<span class="chip">Bidang Tema</span>
-		      		<div align="right" style="margin-top:10px;">
-		      			<a href="#" class="btn btn-small waves-light waves-effect red">Batalkan</a>
-		      			<a href="#" class="btn btn-small waves-light waves-effect gray">Lihat Detil</a>
-		      		</div>
-		    	</li>
-		  	</ul>
+		    	<?php 
+		    	}
+		    	}else{
+		    		echo '<center><i class="material-icons tiny">error</i>Tidak ada Data</center>';
+		    	} ?>
+		    </ul>
 		</div>
 	</div>
 </div>
+<?php
+function getTags($id){
+	$ci =& get_instance();
+	$q = "SELECT * FROM tag T, kategori K WHERE T.id_kategori=K.id_kategori AND T.id_tema=".$id."";
+	$query = $ci->db->query($q);
+	foreach($query->result() as $result){
+		echo '<span class="chip">'.$result->nama_kategori.'</span>&nbsp';
+	}
+}
+function getPeminat($id){
+	$ci =& get_instance();
+	$q = "SELECT * FROM peminatan P, mahasiswa M WHERE P.id_pengguna=M.id_pengguna AND id_tema=".$id." ORDER BY P.id DESC";
+	$query = $ci->db->query($q);
+	foreach($query->result() as $result){
+		echo $result->nama_mahasiswa.'<br/>';
+	}
+}
+function getJumlahPeminat($id){
+	$ci =& get_instance();
+	$q = "SELECT * FROM peminatan P WHERE id_tema=".$id."";
+	$query = $ci->db->query($q);
+	return $query->num_rows();
+}
+?>
