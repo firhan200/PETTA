@@ -1,4 +1,16 @@
 <?php $this->load->view('layouts/nav'); ?>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#filter_dosen").change(function(){
+		var id_dosen = $(this).val();
+		window.location.href = 'tema?dosen='+id_dosen;
+	});
+	$("#search_btn").click(function(){
+		var keyword = $("#search").val();
+		window.location.href = 'tema?cari='+keyword;
+	});
+});
+</script>
 <div class="container pad-t">
 	<div class="row">
 		<div class="col s12 m3">
@@ -7,9 +19,10 @@
 					<i class="material-icons">bookmark</i>&nbsp;KATEGORI
 				</div>
 				<ul class="category-t">
-					<li><a href="#">Bidang Tema</a></li>
-					<li><a href="#">Bidang Tema</a></li>
-					<li><a href="#">Bidang Tema</a></li>
+					<li><a href="<?php echo site_url('tema'); ?>">semua bidang</a></li>
+					<?php foreach($queryKategori->result() as $result){ ?>
+					<li <?php if(isset($filterKategori)){ if($filterKategori==$result->id_kategori){ echo 'class="active"'; } } ?>><a href="<?php echo site_url('tema?kategori='.$result->id_kategori.''); ?>"><?php echo htmlspecialchars($result->nama_kategori); ?></a></li>
+					<?php } ?>
 				</ul>
 			</div>
 		</div>
@@ -20,21 +33,21 @@
 						<div class="row">
 							<div class="col s12 m8 l8">
 								<div class="input-field">
-							        <input id="search" type="text" placeholder="cari tema">
+							        <input id="search" type="text" placeholder="cari judul" value="<?php if(isset($filterCari)){ echo $filterCari; } ?>">
 								</div>
 							</div>
 							<div class="col s12 m4 l4">
-								<a href="#" style="margin-top:20px;width:100%;" class="waves-light waves-effect btn blue darken-1">Cari</a>
+								<a href="#" id="search_btn" style="margin-top:20px;width:100%;" class="waves-light waves-effect btn blue darken-1">Cari</a>
 							</div>
 						</div>
 					</div>
 					<div class="col s12 m4 l4 offset-m2 offset-l3">
 						<div class="input-field">
-					    	<select class="browser-default">
-						      <option value="">Saring Tema</option>
-						      <option value="1">Option 1</option>
-						      <option value="2">Option 2</option>
-						      <option value="3">Option 3</option>
+					    	<select class="browser-default" id="filter_dosen">
+						      <option value="">Semua Dosen</option>
+						      <?php foreach($queryDosen->result() as $result){ ?>
+						      <option value="<?php echo $result->id_pengguna; ?>" <?php if(isset($filterDosen)){ if($filterDosen==$result->id_pengguna){ echo 'selected'; } } ?>><?php echo htmlspecialchars($result->nama_dosen); ?></option>
+						      <?php } ?>
 					    	</select>
 					  	</div>
 					</div>

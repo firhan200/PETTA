@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 Mar 2016 pada 05.11
+-- Generation Time: 12 Mar 2016 pada 11.22
 -- Versi Server: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `peminatan` (
   `id_pengguna` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
   `waktu_peminatan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `peminatan`
@@ -107,7 +107,8 @@ CREATE TABLE IF NOT EXISTS `peminatan` (
 INSERT INTO `peminatan` (`id`, `id_pengguna`, `id_tema`, `waktu_peminatan`) VALUES
 (5, 2, 10, '2016-03-11 04:04:40'),
 (7, 4, 10, '2016-03-11 04:05:30'),
-(8, 4, 7, '2016-03-11 04:09:53');
+(8, 4, 7, '2016-03-11 04:09:53'),
+(9, 4, 2, '2016-03-12 10:19:29');
 
 -- --------------------------------------------------------
 
@@ -174,19 +175,19 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `id` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
   `id_kategori` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tag`
 --
 
 INSERT INTO `tag` (`id`, `id_tema`, `id_kategori`) VALUES
-(9, 7, 3),
 (47, 2, 1),
 (48, 2, 3),
 (49, 2, 2),
-(59, 10, 2),
-(60, 10, 3);
+(63, 7, 3),
+(64, 10, 2),
+(65, 10, 3);
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `tema` (
 INSERT INTO `tema` (`id_tema`, `id_pengguna`, `judul`, `keterangan`, `tanggal_post`, `status_tema`) VALUES
 (2, 3, 'Prediksi Kurs Dollar Jaringan Syaraf Tiruan', 'asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdas', '2016-03-07 20:46:18', 0),
 (7, 5, 'Yes', 'asdasdasdasdasd', '2016-03-07 21:28:29', 0),
-(10, 3, 'tttte', 'asdasdasdasdasda asdas asd ad asd as\r\nasda\r\nsd\r\nas\r\nd\r\nasdasd', '2016-03-09 14:09:02', 0);
+(10, 3, 'Membuat sistem pendeteksi tingkat kesiapan panen menggunakan satelit Membuat sistem pendeteksi tingkat kesiapan panen menggunakan satelit', 'asdasdasdasdasda asdas asd ad asd as\r\nasda\r\nsd\r\nas\r\nd\r\nasdasd', '2016-03-09 14:09:02', 0);
 
 --
 -- Indexes for dumped tables
@@ -287,7 +288,7 @@ ALTER TABLE `mahasiswa`
 -- AUTO_INCREMENT for table `peminatan`
 --
 ALTER TABLE `peminatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
@@ -302,7 +303,7 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `tema`
 --

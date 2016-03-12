@@ -23,6 +23,19 @@ class MPeminatan extends CI_Model{
 		return $query;
 	}
 
+	function readRiwayat($cond){
+		$this->db->select('*');
+		$this->db->from('peminatan');
+		$this->db->join('mahasiswa','peminatan.id_pengguna = mahasiswa.id_pengguna');
+		$this->db->join('tema','peminatan.id_tema = tema.id_tema');
+		if($cond!=null){
+			$this->db->like($cond);
+		}
+		$this->db->order_by('peminatan.id', 'DESC');
+		$query = $this->db->get();
+		return $query;
+	}
+
 	/*function update($cond, $data){
 		$this->db->where($cond);
 		$query = $this->db->update('tag', $data);

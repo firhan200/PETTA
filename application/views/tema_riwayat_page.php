@@ -14,18 +14,21 @@
 			</div>
 		</div>
 		<div class="col s12 m9">
+			<?php foreach($query->result() as $result){ ?>
 			<a href="#">
 				<div class="history-t">
 					<div class="row">
 						<div class="col s9">
-							<a href="#" class="notif-t">Firhan</a> meminati tema TA <a href="#" class="notif-t">Pembuatan Sistem Pendeteksi Meno-pause dengan metode Jaringa...</a>
+							<a href="#" class="notif-t"><?php echo htmlspecialchars($result->nama_mahasiswa); ?></a> meminati tema TA 
+							<a href="<?php echo site_url('tema/detil/'.$result->id_tema.''); ?>" class="notif-t"><?php if(strlen(htmlspecialchars($result->judul)) < 50){ echo htmlspecialchars($result->judul); }else{ echo substr(htmlspecialchars($result->judul), 0, 50).'...'; } ?></a>
 						</div>
 						<div class="col s3" align="right">
-							23 Mar 2016, 10:42
+							<?php echo date("d ", strtotime($result->tanggal_post)).$date[date("m", strtotime($result->tanggal_post))].date(" Y, H:i", strtotime($result->tanggal_post)); ?>
 						</div>
 					</div>
 				</div>
 			</a>
+			<?php } ?>
 		</div>
 	</div>
 </div>

@@ -38,6 +38,33 @@ class MTema extends CI_Model{
 		return $query;
 	}
 
+	function readSearch($cond, $ordField, $ordType){
+		$this->db->select('*');
+		$this->db->from('tema');
+		$this->db->join('dosen','tema.id_pengguna = dosen.id_pengguna');
+		if($cond!=null){
+			$this->db->like($cond);
+		}
+		if($ordField!=null){
+			$this->db->order_by($ordField, $ordType);
+		}
+		$query = $this->db->get();
+		return $query;
+	}
+
+	function readByKategori($cond){
+		$this->db->select('*');
+		$this->db->from('tema');
+		$this->db->join('dosen','tema.id_pengguna = dosen.id_pengguna');
+		$this->db->join('tag','tema.id_tema = tag.id_tema');
+		if($cond!=null){
+			$this->db->where($cond);
+		}
+		$this->db->order_by('tema.id_tema', 'DESC');
+		$query = $this->db->get();
+		return $query;
+	}
+
 	function readTemaPersonal($id){
 		$query = $this->db->query("SELECT * FROM tema T, dosen D WHERE T.id_pengguna=D.id_pengguna AND T.id_pengguna=".$id." ORDER BY T.id_tema DESC");
 		return $query;

@@ -8,6 +8,8 @@ class Tema extends MY_Controller {
 		$this->load->model('MKategori');
 		$this->load->model('MTema');
 		$this->load->model('MTag');
+		$this->load->model('MDosen');
+		$this->load->model('MPeminatan');
 	}
 
 	public function index(){
@@ -15,6 +17,25 @@ class Tema extends MY_Controller {
 		$data['menu1'] = true;
 		
 		$data['query'] = $this->MTema->readAll(null, 'id_tema', 'DESC');
+		$data['queryKategori'] = $this->MKategori->read(null, 'nama_kategori', 'ASC');
+		$data['queryDosen'] = $this->MDosen->read(null, 'nama_dosen', 'ASC');
+
+		//filter kategori
+		if($this->input->get('kategori')!=null){
+			$data['query'] = $this->MTema->readByKategori(array('id_kategori'=>$this->input->get('kategori')));
+			$data['filterKategori'] = $this->input->get('kategori');
+		}
+		//filter dosen
+		if($this->input->get('dosen')!=null){
+			$data['query'] = $this->MTema->readAll(array('tema.id_pengguna'=>$this->input->get('dosen')), 'id_tema', 'DESC');
+			$data['filterDosen'] = $this->input->get('dosen');
+		}
+		//filter dosen
+		if($this->input->get('cari')!=null){
+			$data['query'] = $this->MTema->readSearch(array('tema.judul'=>$this->input->get('cari')), 'id_tema', 'DESC');
+			$data['filterCari'] = $this->input->get('cari');
+		}
+
 		//config
 		$data['date'] = $this->monthConverter();
 
@@ -28,6 +49,10 @@ class Tema extends MY_Controller {
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		$data['menu32'] = true;
 
+		$data['query'] = $this->MPeminatan->readRiwayat(array('tema.id_pengguna'=>($this->session->userdata('idpetta'))));
+		//config
+		$data['date'] = $this->monthConverter();
+		
 		$this->load->view('layouts/header');
 		$this->load->view('tema_riwayat_page', $data);
 		$this->load->view('layouts/footer');
