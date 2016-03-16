@@ -30,12 +30,7 @@
 					<li>082372738231</li>
 				</ul>
 				<div align="right">
-				<!-- <a href="#"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editModal">Ubah</button></a> -->
-					<a href="#modal1" class="waves-effect waves-light modal-trigger"><i class="material-icons tiny">settings</i>&nbsp;ubah</a>
-
-
-
-
+					<a href="#"><i class="material-icons tiny">settings</i>&nbsp;ubah</a>
 				</div>
 			</div>
 		</div>
@@ -69,36 +64,3 @@
 		</div>
 	</div>
 </div>
-
-	<!-- Edit Modal Structure Start -->
-    <div id="modal1" class="modal" style="width: 40%;">
-  		<div class="modal-dialog">
-  			<div class="modal-content">
-  				<div class="modal-header">
-  				 <i class="medium material-icons prefix">account_circle</i>
-  					<h4 class="modal-title"> Ubah Informasi</h4>
-  				</div>
-  				<div class="modal-body">
-					<form action="edit" id="editform" method="post" enctype="multipart/form-data">
-						<div class="form-group input-field col s12">
-							<label>Nama </label><span class="error" id="editreport1"></span>
-							<input type="text" id="editNama" name="ubahNama" class="form-control" maxlength="100" required>
-						</div>
-						<div class="form-group input-field col s12">
-							<label>E-mail </label><span class="error" id="editreport1"></span>
-							<input type="text" id="editEmail" name="ubahEmail" class="form-control" maxlength="100" required>
-						</div>
-						<div class="form-group input-field col s12">
-							<label>Telephone </label><span class="error" id="editreport1"></span>
-							<input type="text" id="editTelephone" name="ubahTelephone" class="form-control" maxlength="100" required>
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary" >Simpan</button>
-						</div>
-						
-					</form>
-				</div>
-  			</div>	
-  		</div>
-  	</div>
-  	<!-- Edit Modal Structure End -->
