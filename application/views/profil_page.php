@@ -7,10 +7,10 @@
 			</div>
 			<div class="col s12 m9 l9 info-t">
 				<div style="font-size:18pt;">
-					Firhan
+					<?php echo $row->nama_mahasiswa; ?>
 				</div>
 				<div style="font-size:12pt;">
-					firhan.faisal1995@gmail.com
+					<?php echo $row->email; ?>
 				</div>
 			</div>
 		</div>
@@ -24,18 +24,15 @@
 					<i class="material-icons">account_circle</i>&nbsp;INFORMASI
 				</div>
 				<ul class="category-t">
-					<li>24010313130080</li>
-					<li>Firhan</li>
-					<li>firhan.faisal1995@gmail.com</li>
-					<li>082372738231</li>
+					<li><?php echo $row->nim;?></li>
+					<li><?php echo $row->nama_mahasiswa; ?></li>
+					<li><?php echo $row->email; ?></li>
+					<li><?php echo $row->telepon; ?></li>
 				</ul>
 				<div align="right">
 				<!-- <a href="#"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editModal">Ubah</button></a> -->
 					<a href="#modal1" class="waves-effect waves-light modal-trigger"><i class="material-icons tiny">settings</i>&nbsp;ubah</a>
-
-
-
-
+					<a href="#modalUpload" class="waves-effect waves-light modal-trigger"><i class="material-icons tiny">assignment_ind</i>&nbsp;Upload</a>
 				</div>
 			</div>
 		</div>
@@ -102,3 +99,29 @@
   		</div>
   	</div>
   	<!-- Edit Modal Structure End -->
+  	
+  	<!-- Upload Modal Structure Start -->
+    <div id="modalUpload" class="modal" style="width: 40%; height: auto">
+  		<div class="modal-dialog">
+  			<div class="modal-content">
+  				<div class="modal-header">
+  				 <i class="medium material-icons prefix">assignment_ind</i>
+  					<h4 class="modal-title"> Upload Foto</h4>
+  				</div>
+  				<div class="modal-body">
+					<form action="edit" id="editForm" method="post" enctype="multipart/form-data">
+						<div class="file-field input-field">
+						    <div class="btn">
+						        <span>File</span>
+						    	<input type="file">
+						    </div>
+						    <div class="file-path-wrapper">
+						        <input class="file-path validate" type="text">
+						    </div>
+						</div>
+					</form>
+				</div>
+  			</div>	
+  		</div>
+  	</div>
+  	<!-- Upload Modal Structure End -->

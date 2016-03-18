@@ -40,6 +40,7 @@ class Pengguna extends MY_Controller {
 			}else if($level==3){
 				$query = $this->MMahasiswa->read(array('id_pengguna'=>$idUser));
 				foreach($query->result() as $result){
+					$idpengguna = $result->id_pengguna;
 					$nama = $result->nama_mahasiswa;
 				}
 			}else{
@@ -48,6 +49,7 @@ class Pengguna extends MY_Controller {
 
 			//set session
 			$this->session->set_userdata('idpetta', $idUser);
+			$this->session->set_userdata('idpengguna', $idpengguna);
 			$this->session->set_userdata('levelpetta', $level);
 			$this->session->set_userdata('namapetta', $nama);
 			redirect(site_url('tema'));
