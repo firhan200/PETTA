@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 12 Mar 2016 pada 11.22
+-- Generation Time: 21 Mar 2016 pada 13.16
 -- Versi Server: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -19,6 +19,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_petta`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(11) NOT NULL,
+  `id_pengguna` int(11) NOT NULL,
+  `nama_admin` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id`, `id_pengguna`, `nama_admin`) VALUES
+(1, 6, 'Administrator');
 
 -- --------------------------------------------------------
 
@@ -105,7 +124,6 @@ CREATE TABLE IF NOT EXISTS `peminatan` (
 --
 
 INSERT INTO `peminatan` (`id`, `id_pengguna`, `id_tema`, `waktu_peminatan`) VALUES
-(5, 2, 10, '2016-03-11 04:04:40'),
 (7, 4, 10, '2016-03-11 04:05:30'),
 (8, 4, 7, '2016-03-11 04:09:53'),
 (9, 4, 2, '2016-03-12 10:19:29');
@@ -122,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
   `password` varchar(60) NOT NULL,
   `level` char(2) NOT NULL,
   `notifikasi` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pengguna`
@@ -130,9 +148,10 @@ CREATE TABLE IF NOT EXISTS `pengguna` (
 
 INSERT INTO `pengguna` (`id_pengguna`, `username`, `password`, `level`, `notifikasi`) VALUES
 (2, '24010313130080', 'a296d91f1ea267320f3f4d27800a59c32237e143', '3', 0),
-(3, '123', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '2', -1),
+(3, '123', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '2', 0),
 (4, '24010313130081', '26752e7353a62fcabd95b8077fe7fe6ce16d5b9b', '3', 0),
-(5, '321', '5f6955d227a320c7f1f6c7da2a6d96a851a8118f', '2', 0);
+(5, '321', '5f6955d227a320c7f1f6c7da2a6d96a851a8118f', '2', 0),
+(6, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '1', 0);
 
 -- --------------------------------------------------------
 
@@ -150,20 +169,15 @@ CREATE TABLE IF NOT EXISTS `pesan` (
   `baca` int(2) NOT NULL,
   `hapus` int(2) NOT NULL,
   `hapus2` int(2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `pesan`
 --
 
 INSERT INTO `pesan` (`id_pesan`, `id_pengirim`, `id_penerima`, `pesan`, `tanggal`, `level`, `baca`, `hapus`, `hapus2`) VALUES
-(84, 3, 2, 'woi...', '2016-03-07 14:38:46', '2', 1, 0, 0),
-(85, 2, 3, 'ya?', '2016-03-07 14:39:22', '3', 1, 1, 0),
-(86, 3, 2, 'hola', '2016-03-07 14:46:14', '2', 1, 0, 1),
-(87, 3, 2, 'oi', '2016-03-09 00:00:03', '2', 1, 0, 0),
-(88, 2, 3, 'ya?', '2016-03-09 00:04:02', '3', 1, 0, 0),
-(89, 3, 2, 'Tes', '2016-03-09 00:04:31', '2', 1, 0, 0),
-(90, 3, 2, 'A', '2016-03-09 00:04:46', '2', 1, 0, 0);
+(96, 3, 2, 'asdasd', '2016-03-13 09:27:59', '2', 1, 1, 1),
+(97, 3, 2, 'asdasdasd', '2016-03-13 09:28:01', '2', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -218,6 +232,12 @@ INSERT INTO `tema` (`id_tema`, `id_pengguna`, `judul`, `keterangan`, `tanggal_po
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `dosen`
 --
 ALTER TABLE `dosen`
@@ -270,6 +290,11 @@ ALTER TABLE `tema`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
@@ -293,12 +318,12 @@ ALTER TABLE `peminatan`
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `id_pesan` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=91;
+  MODIFY `id_pesan` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT for table `tag`
 --

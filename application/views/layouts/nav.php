@@ -14,6 +14,9 @@
       		<a href="{{ URL() }}" class="brand-logo"><img src="{{ asset('assets/img/logocolor.png') }}" class="logo-t"></a>
       		<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons" style="color:#0489B1">menu</i></a>
       		<ul class="left hide-on-med-and-down" style="margin-left:10em;">
+            <?php if($this->session->userdata('levelpetta')==1){ ?>
+            <li class="<?php if(isset($menu01)) echo 'active'; ?>"><a href="<?php echo site_url('dashbor'); ?>">Dashbor</a></li>
+            <?php } ?>
             <li class="<?php if(isset($menu1)) echo 'active'; ?>"><a href="<?php echo site_url('tema'); ?>">Beranda</a></li>
       			<li class="<?php if(isset($menu2)) echo 'active'; ?>"><a href="<?php echo site_url('dosen'); ?>">Dosen</a></li>
       		</ul>
