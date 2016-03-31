@@ -34,12 +34,4 @@ class MMahasiswa extends CI_Model{
 		$query = $this->db->delete('mahasiswa');
 		return $query;
 	}
-	function getMhs($table, $cond, $ordField, $ordType){
-		$this->db->select('*');
-		$this->db->from($table);
-		$this->db->join('mahasiswa', $table.'.id_pengguna = mahasiswa.id_pengguna');
-		$this->db->where('pengguna.id_pengguna ='.$this->session->userdata("idpetta"));
-		$query = $this->db->get();
-		return $query;
-	}
 }
