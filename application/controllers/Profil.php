@@ -17,8 +17,12 @@ class Profil extends MY_Controller {
 		//$this->sessionIn(); //check session
 		$data["row"] = $this->MMahasiswa->getMhs('pengguna',null,null,null);
 		$data['query'] = $this->MDosen->getWali('pengguna',null,null,null);
-		$data['query1'] = $this->MPeminatan->readRiwayat(array('tema.id_pengguna'=>($this->session->userdata('idpetta'))));
 		
+		if($this->session->userdata('levelpetta')==2){
+			$data['query1'] = $this->MPeminatan->readRiwayat(array('tema.id_pengguna'=>($this->session->userdata('idpetta'))));
+		}else if($this->session->userdata('levelpetta')==3){
+			$data['query1'] = $this->MPeminatan->readRiwayat(array('peminatan.id_pengguna'=>($this->session->userdata('idpetta'))));	
+		} 
 		$this->load->view('layouts/header');
 		$this->load->view('profil_page', $data);
 		$this->load->view('layouts/footer');
