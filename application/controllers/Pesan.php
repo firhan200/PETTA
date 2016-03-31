@@ -110,12 +110,8 @@ class Pesan extends MY_Controller {
 		}else{
 			$response = 2;
 		}
-		//cek valid pesan
-		$queryPesan = $this->MPesan->read(array('id_penerima'=>$this->session->userdata('idpetta'), 'baca'=>0), null, null);
-		if($queryPesan->num_rows() > 0){
-			$this->addNotification($this->session->userdata('idpetta'), 'del');
-			$this->MPesan->update(array('id_pesan'=>$id), array('baca'=>'1'));
-		}
+		$this->addNotification($this->session->userdata('idpetta'), 'del');
+		$this->MPesan->update(array('id_pesan'=>$id), array('baca'=>'1'));
 		echo $response;
 	}
 

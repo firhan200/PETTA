@@ -8,7 +8,6 @@ class Pengguna extends MY_Controller {
 		$this->load->model('MPengguna');
 		$this->load->model('MMahasiswa');
 		$this->load->model('MDosen');
-		$this->load->model('MAdmin');
 	}
 
 	public function masuk(){
@@ -32,10 +31,7 @@ class Pengguna extends MY_Controller {
 				$level = $result->level;
 			}
 			if($level==1){
-				$query = $this->MAdmin->read(array('id_pengguna'=>$idUser));
-				foreach($query->result() as $result){
-					$nama = $result->nama_admin;
-				}
+
 			}else if($level==2){
 				$query = $this->MDosen->read(array('id_pengguna'=>$idUser));
 				foreach($query->result() as $result){
@@ -48,7 +44,7 @@ class Pengguna extends MY_Controller {
 					$nama = $result->nama_mahasiswa;
 				}
 			}else{
-				show_404();
+
 			}
 
 			//set session
@@ -56,11 +52,7 @@ class Pengguna extends MY_Controller {
 			$this->session->set_userdata('idpengguna', $idpengguna);
 			$this->session->set_userdata('levelpetta', $level);
 			$this->session->set_userdata('namapetta', $nama);
-			if($level==1){
-				redirect(site_url('dashbor'));
-			}else{
-				redirect(site_url('tema'));
-			}
+			redirect(site_url('tema'));
 		}else{
 			redirect(site_url('?balasan=2'));
 		}
