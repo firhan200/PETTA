@@ -5,6 +5,7 @@ class Profil extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
+		$this->load->helper('date');
 		$this->load->model('MDosen');
 		$this->load->model('MMahasiswa');
 		$this->load->model('MTema');

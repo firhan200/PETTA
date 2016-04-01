@@ -5,9 +5,11 @@
 	<div class="container">
 		<div class="row">
 			<?php if ($this->session->userdata("levelpetta")==2){?>
+			<?php foreach($query->result() as $result){?>
 			<div class="col s12 m3 l3" align="center">
-				<img class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/noava.png'); ?>">
+				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>">
 			</div>
+			<?php }?>
 			<?php	}else {?>
 			<div class="col s12 m3 l3" align="center"></div>
 			<?php }?>
@@ -88,7 +90,7 @@
 							<a href="<?php echo site_url('tema/detil/'.$result->id_tema.''); ?>" class="notif-t"><?php if(strlen(htmlspecialchars($result->judul)) < 50){ echo htmlspecialchars($result->judul); }else{ echo substr(htmlspecialchars($result->judul), 0, 50).'...'; } ?></a>
 						</div>
 						<div class="col s3" align="right">
-							31 Mar 2016, 15:00
+							<?php echo tgl(date("Y-m-d", strtotime($result->waktu_peminatan))).", ".date("H:i", strtotime($result->waktu_peminatan));?>
 						</div>
 					</div>
 				</div>
@@ -100,7 +102,7 @@
 							Anda mengirim pesan ke <b>Firhan, S.KOM</b>
 						</div>
 						<div class="col s3" align="right">
-							23 Mar 2016, 10:42
+							23 Maret 2016, 10:42
 						</div>
 					</div>
 				</div>
@@ -174,6 +176,26 @@
   		</div>
   	</div>
   	<!-- Upload Modal Structure End -->
+  	<?php
+function tgl($date){
+  list($year, $month, $day) = explode('-', $date);
+  switch ($month) {
+        case "1" : $month="Januari";break;
+        case "2" : $month="Februari";break;
+        case "3" : $month="Maret";break;
+        case "4" : $month="April";break;
+        case "5" : $month="Mei";break;
+        case "6" : $month="Juni";break;
+        case "7" : $month="Juli";break;
+        case "8" : $month="Agustus";break;
+        case "9" : $month="September";break;
+        case "10" : $month="Oktober";break;
+        case "11" : $month="November";break;
+        case "12" : $month="Desember";break;
+    }
+    return $day." ".$month." ".$year;
+}
+?>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var id;var id1;
