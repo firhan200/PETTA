@@ -10,6 +10,9 @@ class MMahasiswa extends CI_Model{
 	function create($data){
 		$query = $this->db->insert('mahasiswa', $data);
 		return $query;
+		//INSERT INTO mahasiswa VALUE $data
+		//cari di controller yang make fungsi create dari model MMahasiswa samakan parameter
+		//kalau tidak ada abaikan 
 	}
 
 	function read($cond, $ordField, $ordType){
@@ -21,18 +24,21 @@ class MMahasiswa extends CI_Model{
 		}
 		$query = $this->db->get('mahasiswa');
 		return $query;
+		//SELECT * FROM mahasiswa WHERE=null ORDER BY nama_mahasiswa ASC
 	}
 
 	function update($cond, $data){
 		$this->db->where($cond);
 		$query = $this->db->update('mahasiswa', $data);
 		return $query;
+		//UPDATE mahasiswa SET $data
 	}
 
 	function delete($cond){
 		$this->db->where($cond);
 		$query = $this->db->delete('mahasiswa');
 		return $query;
+		//DELETE FROM mahasiswa WHERE id=$id
 	}
 	function getMhs($table, $cond, $ordField, $ordType){
 		$this->db->select('*');

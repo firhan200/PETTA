@@ -26,6 +26,7 @@ class MPesan extends CI_Model{
 	function readMessageDetil($user, $self, $level){
 		$query = $this->db->query("SELECT * FROM pesan WHERE (id_penerima=".$user." OR id_pengirim=".$user.") AND (id_penerima=".$self." OR id_pengirim=".$self.") AND (hapus=0 OR level=".$level.") ORDER BY id_pesan ASC");
 		return $query;
+		//SELECT * FROM pesan WHERE (id_penerima=$user OR id_pengirim=$user) AND (id_penerima = $self OR id_pengirim=$self) AND(hapus = 0 OR level = $level) ORDER BY id_pesan ASC
 	}
 
 	function update($cond, $data){

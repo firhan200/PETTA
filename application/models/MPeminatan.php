@@ -34,13 +34,10 @@ class MPeminatan extends CI_Model{
 		$this->db->order_by('peminatan.id', 'DESC');
 		$query = $this->db->get();
 		return $query;
+		//SELECT * FROM peminatan JOIN mahasiswa ON peminatan.id_pengguna = mahasiswa.id_pengguna
+		//JOIN tema on peminatan.id_tema = tema.id_tema WHERE tema.id_pengguna=$iduser ORDER BY peminatan.id DESC
 	}
 
-	/*function update($cond, $data){
-		$this->db->where($cond);
-		$query = $this->db->update('tag', $data);
-		return $query;
-	}*/
 
 	function delete($cond){
 		$this->db->where($cond);

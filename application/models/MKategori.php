@@ -10,6 +10,8 @@ class MKategori extends CI_Model{
 	function create($data){
 		$query = $this->db->insert('kategori', $data);
 		return $query;
+		//INSERT INTO kategori column1=value1,column2=value2
+		//lihat controlelr yang pake fungsi ini lihat arraynya itu yang di masukin liat dosen untuk lebih jelas bagian update
 	}
 
 	function read($cond, $ordField, $ordType){
@@ -21,6 +23,9 @@ class MKategori extends CI_Model{
 		}
 		$query = $this->db->get('kategori');
 		return $query;
+		//SELECT * FROM kategori WHERE=null ORDER BY nama_kategori ASC
+		//cari di controller yang menggunakan fungsi read lihat parameter dan samakan
+		//ini ada di controller tema
 	}
 
 	function update($cond, $data){

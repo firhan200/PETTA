@@ -30,6 +30,7 @@ class MPengguna extends CI_Model{
 			$notification = $result->notifikasi;
 		}
 		return $notification;
+		//SELECT * FROM pengguna WHERE id_pengguna=$id
 	}
 
 	function update($cond, $data){

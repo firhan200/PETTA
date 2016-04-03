@@ -13,6 +13,9 @@ class Dosen extends MY_Controller {
 		$this->sessionOut(); //check session
 
 		$data['query'] = $this->MDosen->read(null, 'nama_dosen', 'ASC');
+		//START ACTIVE QUERY
+		//SELECT * FROM dosen WHERE=null ORDER BY nama_dosen ASC
+		//END ACTIVE QUERY
 
 		$this->load->view('layouts/header');
 		$this->load->view('dosen_page', $data);

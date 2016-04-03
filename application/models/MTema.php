@@ -36,6 +36,7 @@ class MTema extends CI_Model{
 		}
 		$query = $this->db->get();
 		return $query;
+		//SELECT * FROM tema JOIN dosen ON tema.id_pengguna=dosen.id_pengguna WHERE=null ORDER BY nama_dsoen ASC
 	}
 
 	function readSearch($cond, $ordField, $ordType){
@@ -50,6 +51,7 @@ class MTema extends CI_Model{
 		}
 		$query = $this->db->get();
 		return $query;
+		//SELECT * FROM tema JOIN dosen ON tema.id_pengguna=dosen.id_pengguna WHERE=null ORDER BY nama_dsoen ASC
 	}
 
 	function readByKategori($cond){
@@ -63,6 +65,8 @@ class MTema extends CI_Model{
 		$this->db->order_by('tema.id_tema', 'DESC');
 		$query = $this->db->get();
 		return $query;
+		//SELECT * FROM tema JOIN dosen ON tema.id_pengguna=dosen.id_pengguna JOIN tag ON tema.id_tema = tag.id_tema
+		//WHERE=null ORDER BY tema.id_tema DESC
 	}
 
 	function readTemaPersonal($id){
