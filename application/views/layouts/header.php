@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>PETTA</title>
+		<link rel="shortcut icon" href="<?php echo base_url('assets/img/icon.png'); ?>">
 		<link href="<?php echo base_url('assets/materialize/css/materialize.min.css'); ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/materialize/css/googlefont.css'); ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/css/style.css" rel="stylesheet'); ?>">

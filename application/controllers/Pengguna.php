@@ -12,7 +12,7 @@ class Pengguna extends MY_Controller {
 	}
 
 	public function masuk(){
-		$this->sessionIn();
+		$this->sessionIn(); //cek session
 		if($this->input->get('balasan')!=null){
 			$data['report'] = 1;
 		}else{

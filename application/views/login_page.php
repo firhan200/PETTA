@@ -1,6 +1,7 @@
 <div class="container">
+	<center><img src="<?php echo base_url('assets/img/logo.png'); ?>" class="img-responsive log-logo-t"></center>
 	<div class="row">
-		<div class="col s12 m6 l4 offset-m3 offset-l4" style="margin-top:75px;margin-bottom:50px;">
+		<div class="col s12 m6 l4 offset-m3 offset-l4" style="margin-top:-15px;margin-bottom:50px;">
 			<div class="box-t" style="padding:40px 20px 30px 20px;border-top:4px solid #81BEF7;border-bottom:4px solid #81BEF7;">
 				<div style="font-size:16pt;padding-bottom:10px;" align="center">
 	      			MASUK PENGGUNA

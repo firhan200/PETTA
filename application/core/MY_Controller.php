@@ -11,11 +11,7 @@ class MY_Controller extends CI_Controller{
 	
 	public function sessionIn(){
 		if($this->session->userdata('idpetta')!=null){
-			if($this->session->userdata('levelaks')==1){
-				redirect('admin/dashbor', 'refresh');
-			}else{
-				redirect('tema', 'refresh');
-			}
+			redirect('tema', 'refresh');
 		}
 	}
 	
