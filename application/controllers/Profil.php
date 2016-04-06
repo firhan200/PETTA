@@ -98,14 +98,13 @@ class Profil extends MY_Controller {
 		//Foto Set
 		$photoName = gmdate("d-m-y-H-i-s", time()+3600*7).".jpg";
 		$config['upload_path'] = './assets/img/dosen/';
-		$config['allowed_types'] = 'gif||jpg||png';
-		$config['max_size'] = '2048000';
+		$config['allowed_types'] = 'gif||jpg||png||jpeg';
+		$config['max_size'] = '1000';
 		$config['file_name'] = $photoName;
 		$this->load->library('upload',$config);
 		if($this->upload->do_upload('userfile')){			
 			$upload = 1;
-		}
-		else{
+		}else if (!$this->upload->do_upload('userfile')){
 			$upload = 2;
 		}
 		if($upload==1){
@@ -117,6 +116,11 @@ class Profil extends MY_Controller {
 			}else{
 				echo 2;
 			}
+		}else if($upload==2){
+			alert('error');
+			echo "failed";
+			$errors = $this->upload->display_errors('<p>','failed try again','</p');
+			flashMsg($errors);
 		}//else kalo gagal
 	}
 }
