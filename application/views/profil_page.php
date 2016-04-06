@@ -1,7 +1,11 @@
 <?php $this->load->view('layouts/nav'); ?>
 
 
+<?php if ($this->session->userdata("levelpetta")==2){?>
 <div class="profile-t blue lighten-1">
+<?php } else{?>
+<div class="profile-t blue lighten-1" style="margin-bottom: 10px;">
+<?php }?>
 	<div class="container">
 		<div class="row">
 			<?php if ($this->session->userdata("levelpetta")==2){?>
@@ -11,9 +15,9 @@
 			</div>
 			<?php }?>
 			<?php	}else {?>
-			<div class="col s12 m3 l3" align="center"></div>
+			<div class="col s12 m3 l3" align="center" ></div>
 			<?php }?>
-			<div class="col s12 m9 l9 info-t">
+			<div class="col s12 m9 l9 info-t" >
 				<?php if ($this->session->userdata("levelpetta")==2){?><!-- DOSEN -->
 					<?php foreach($query->result() as $result){?>
 						<div style="font-size:18pt;">
@@ -37,9 +41,9 @@
 		</div>
 	</div>
 </div>
-<div class="container pad-t">
+<div class="container pad-t" >
 	<div class="row">
-		<div class="col s12 m4 l3">
+		<div class="col s12 m4 l3" >
 			<div class="box-t">
 				<div class="content-title-t blue">
 					<i class="material-icons">account_circle</i>&nbsp;INFORMASI
@@ -95,18 +99,6 @@
 					</div>
 				</div>
 			</a>
-			<a href="#">
-				<div class="history-t">
-					<div class="row">
-						<div class="col s9">
-							Anda mengirim pesan ke <b>Firhan, S.KOM</b>
-						</div>
-						<div class="col s3" align="right">
-							23 Maret 2016, 10:42
-						</div>
-					</div>
-				</div>
-			</a>
 			<?php } ?>
 		</div>
 	</div>
@@ -123,19 +115,11 @@
   				<div class="modal-body">
 					<form action="edit" id="editform" method="post" enctype="multipart/form-data">
 						<div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditEmail" name="EditEmail" class="form-control" type="text" class="validate">
+					        <input placeholder="Placeholder" id="EditEmail" name="EditEmail" class="form-control" type="text" class="validate" required="required">
 					        <label for="Editmhs_email">Email</label>
 				        </div>
-						<!-- <div class="form-group input-field col s12">
-							<label>E-mail </label><span class="error" id="editreport1"></span>
-							<input type="text" id="EditdosenEmail" name="EditdosenEmail" class="form-control" maxlength="100" required>
-						</div> -->
-						<!-- <div class="form-group input-field col s12">
-							<label>Telephone </label><span class="error" id="editreport1"></span>
-							<input type="text" id="EditdosenTelepon" name="EditdosenTelepon" class="form-control" maxlength="100" required>
-						</div> -->
 						<div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditTelepon" name="EditTelepon" class="form-control" type="text" class="validate">
+					        <input placeholder="Placeholder" id="EditTelepon" name="EditTelepon" class="form-control" type="number" class="validate" required="required">
 					        <label for="Editmhs_telepon">telepon</label>
 				        </div>
 						<div class="modal-footer">
@@ -161,7 +145,7 @@
 						<div class="file-field input-field">
 						    <div class="btn">
 						        <span>File</span>
-						    	<input type="file" name="userfile">
+						    	<input type="file" name="userfile" accept=".png,.jpg,.gif,.jpeg">
 						    </div>
 						    <div class="file-path-wrapper">
 						        <input class="file-path validate" type="text">
@@ -195,6 +179,7 @@ function tgl($date){
     }
     return $day." ".$month." ".$year;
 }
+
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -249,5 +234,6 @@ function tgl($date){
 				}
 			});
 		});
+		
 	});
 </script>
