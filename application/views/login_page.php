@@ -17,7 +17,7 @@
 	      		?>
 	      		<form action="<?php echo site_url('pengguna/loginProcess') ?>" method="post">
 		        	<div class="input-field">
-		          		<i class="material-icons prefix">email</i>
+		          		<i class="material-icons prefix">person</i>
 		          		<input id="username" name="username" type="text" maxlength="40" class="validate" required>
 		          		<label for="username">username</label>
 		        	</div>

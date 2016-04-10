@@ -42,6 +42,7 @@ table{word-wrap:break-word;}
 .alert-success{background-color:#9FF781;}
 .alert-danger{background-color:#F5BCA9;}
 .msg-date-t{font-size:80%;}
+.d-title{margin-top:-20px !important;color:#1c1c1c;}
 @media only screen and (max-width: 760px) {
 	.filter-t{margin-bottom:0px;}
 	.info-t{color:#1c1c1c;margin-top:5px;margin-bottom:10px;}
