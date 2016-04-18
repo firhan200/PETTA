@@ -9,14 +9,23 @@
 				<div class="row">
 					<div class="col s12 m6" style="margin-bottom:5px;">
 						<a href="<?php echo $link; ?>" class="btn btn-s"><i class="material-icons left">replay</i>&nbsp;Kembali</a>
+						<?php if($result->status_tema==1){ ?>
+							<button class="btn disabled">Tema Tutup</button>
+						<?php } ?>
 					</div>
 					<div class="col s12 m6" align="right">
-						<?php if($self==1){ ?>
+						<?php if($self==1){ 
+							if($result->status_tema==1){ ?>
+								<a href="<?php echo site_url('tema/ubah_status/'.$result->id_tema.'/0'); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect green"><i class="material-icons left">done</i>Buka</a>
+							<?php }else{ ?>
+								<a href="<?php echo site_url('tema/ubah_status/'.$result->id_tema.'/1'); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect grey"><i class="material-icons left">clear</i>Tutup</a>
+							<?php }
+						?>
 						<a href="<?php echo site_url('tema/ubah/'.$result->id_tema.''); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect blue"><i class="material-icons left">settings</i>Ubah</a>
 			      		<a href="<?php echo site_url('tema/hapus/'.$result->id_tema.''); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect red" onclick="return confirm('Hapus Tema?')"><i class="material-icons left">delete</i>Hapus</a>
-						<?php }else if($self==3){ ?>
+						<?php }else if($self==3 AND $result->status_tema==0){ ?>
 						<a href="<?php echo site_url('tema/minat/'.$result->id_tema.''); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect blue"><i class="material-icons left">done</i>Minati</a>
-						<?php }else if($self==4){ ?>
+						<?php }else if($self==4 AND $result->status_tema==0){ ?>
 						<a href="<?php echo site_url('tema/batal_minat/'.$result->id_tema.''); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect red"><i class="material-icons left">clear</i>Batalkan</a>
 						<?php } ?>
 					</div>

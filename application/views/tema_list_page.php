@@ -27,8 +27,13 @@
 				<ul class="collection" style="border:0px;">
 					<?php 
 					if($query->num_rows() > 0){
-					foreach($query->result() as $result){ ?>
-					<li class="collection-item avatar">
+					foreach($query->result() as $result){ 
+						if($result->status_tema==1){
+							echo '<li class="collection-item avatar" style="opacity:0.5;background-color:#f8f8f8">';
+						}else{
+							echo '<li class="collection-item avatar">';
+						}
+					?>
 			      		<img src="<?php echo base_url('assets/img/dosen/noava.png'); ?>" alt="" class="circle">
 			      		<div class="row" style="margin-bottom:-5px;">
 			      			<div class="col s8 m6 l6">

@@ -16,24 +16,33 @@ class Tema extends MY_Controller {
 		$this->sessionOut();
 		$data['menu1'] = true;
 		
-		$data['query'] = $this->MTema->readAll(null, 'id_tema', 'DESC');
+		$data['query'] = $this->MTema->readAll(array('status_tema'=>0), 'id_tema', 'DESC');
 		$data['queryKategori'] = $this->MKategori->read(null, 'nama_kategori', 'ASC');
 		$data['queryDosen'] = $this->MDosen->read(null, 'nama_dosen', 'ASC');
 
 		//filter kategori
 		if($this->input->get('kategori')!=null){
-			$data['query'] = $this->MTema->readByKategori(array('id_kategori'=>$this->input->get('kategori')));
+			$data['query'] = $this->MTema->readByKategori(array('id_kategori'=>$this->input->get('kategori'), 'status_tema'=>0));
 			$data['filterKategori'] = $this->input->get('kategori');
 		}
 		//filter dosen
 		if($this->input->get('dosen')!=null){
-			$data['query'] = $this->MTema->readAll(array('tema.id_pengguna'=>$this->input->get('dosen')), 'id_tema', 'DESC');
+			$data['query'] = $this->MTema->readAll(array('tema.id_pengguna'=>$this->input->get('dosen'), 'status_tema'=>0), 'id_tema', 'DESC');
 			$data['filterDosen'] = $this->input->get('dosen');
 		}
 		//filter dosen
 		if($this->input->get('cari')!=null){
-			$data['query'] = $this->MTema->readSearch(array('tema.judul'=>$this->input->get('cari')), 'id_tema', 'DESC');
+			$data['query'] = $this->MTema->readSearch(array('tema.judul'=>$this->input->get('cari'), 'status_tema'=>0), 'id_tema', 'DESC');
 			$data['filterCari'] = $this->input->get('cari');
+		}
+		//filter tema
+		if($this->input->get('tema')!=null){
+			if($this->input->get('tema')=='tutup'){
+				$data['query'] = $this->MTema->readAll(array('status_tema'=>1), 'id_tema', 'DESC');			
+			}else{
+				$data['query'] = $this->MTema->readAll(array('status_tema'=>0), 'id_tema', 'DESC');
+			}
+			$data['filterTema'] = $this->input->get('tema');
 		}
 
 		//config
@@ -207,6 +216,12 @@ class Tema extends MY_Controller {
 		}else{
 			show_404();
 		}
+	}
+
+	public function ubah_status($id, $status){
+		$data = array('status_tema'=>$status);
+		$update = $this->MTema->update(array('id_tema'=>$id), $data);
+		redirect(site_url('tema/detil/'.$id.'?balasan=1'));
 	}
 
 	public function minat($id = null){

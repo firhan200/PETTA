@@ -5,6 +5,10 @@ $(document).ready(function(){
 		var id_dosen = $(this).val();
 		window.location.href = 'tema?dosen='+id_dosen;
 	});
+	$("#filter_tema").change(function(){
+		var status = $(this).val();
+		window.location.href = 'tema?tema='+status;
+	});
 	$("#search_btn").click(function(){
 		var keyword = $("#search").val();
 		window.location.href = 'tema?cari='+keyword;
@@ -41,7 +45,7 @@ $(document).ready(function(){
 							</div>
 						</div>
 					</div>
-					<div class="col s12 m4 l4 offset-m2 offset-l3">
+					<div class="col s12 m4 l4">
 						<div class="input-field">
 					    	<select class="browser-default" id="filter_dosen">
 						      <option value="">Semua Dosen</option>
@@ -51,13 +55,26 @@ $(document).ready(function(){
 					    	</select>
 					  	</div>
 					</div>
+					<div class="col s12 m2 l3">
+						<div class="input-field">
+					    	<select class="browser-default" id="filter_tema">
+						      <option value="buka" <?php if(isset($filterTema)){ if($filterTema=='buka'){ echo 'selected'; } } ?>>Tema Buka/Tersedia</option>
+						      <option value="tutup" <?php if(isset($filterTema)){ if($filterTema=='tutup'){ echo 'selected'; } } ?>>Tema Tutup</option>
+					    	</select>
+					  	</div>
+					</div>
 				</div>
 			</div>
 			<ul class="collection">
 				<?php 
 				if($query->num_rows() > 0){
-				foreach($query->result() as $result){ ?>
-				<li class="collection-item avatar">
+				foreach($query->result() as $result){ 
+					if($result->status_tema==1){
+						echo '<li class="collection-item avatar" style="opacity:0.5;background-color:#f8f8f8">';
+					}else{
+						echo '<li class="collection-item avatar">';
+					}
+				?>
 		      		<img src="<?php echo base_url('assets/img/dosen/noava.png'); ?>" alt="" class="circle">
 		      		<div class="row" style="margin-bottom:-5px;">
 		      			<div class="col s8 m6 l6">
