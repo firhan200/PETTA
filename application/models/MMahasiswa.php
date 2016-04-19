@@ -7,12 +7,9 @@ class MMahasiswa extends CI_Model{
 		$this->load->database();
 	}
 
-	function create($data){
-		$query = $this->db->insert('mahasiswa', $data);
-		return $query;
-		//INSERT INTO mahasiswa VALUE $data
-		//cari di controller yang make fungsi create dari model MMahasiswa samakan parameter
-		//kalau tidak ada abaikan 
+	function create($table,$data){
+		$query = $this->db->insert($table, $data);
+		return $this->db->insert_id();
 	}
 
 	function read($cond, $ordField, $ordType){
@@ -34,12 +31,12 @@ class MMahasiswa extends CI_Model{
 		//UPDATE mahasiswa SET $data
 	}
 
-	function delete($cond){
+	function delete($table,$cond){
 		$this->db->where($cond);
-		$query = $this->db->delete('mahasiswa');
+		$query = $this->db->delete($table);
 		return $query;
-		//DELETE FROM mahasiswa WHERE id=$id
 	}
+
 	function getMhs($table, $cond, $ordField, $ordType){
 		$this->db->select('*');
 		$this->db->from($table);

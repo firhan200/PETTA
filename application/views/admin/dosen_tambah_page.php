@@ -26,7 +26,7 @@
 				?>
 				<div class="row">
 					<div class="col s12 m8 l6 offset-m2 offset-l3" align="center">
-						<form action="<?php echo site_url('dosen/create') ?>" method="post">
+						<form action="<?php echo site_url('dosen/insertDosen') ?>" method="post">
 				        	<div class="input-field">
 				          		<i class="material-icons prefix">person</i>
 				          		<input id="username" name="username" type="text" maxlength="40" class="validate" required>

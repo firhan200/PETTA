@@ -17,9 +17,9 @@
 				<?php
 				if($this->input->get('balasan')!=null){
 					if($this->input->get('balasan')==1){
-						echo '<div class="alert alert-success" align="center"><i class="material-icons tiny">done</i> Hapus Tema Berhasil</div>';
+						echo '<div class="alert alert-danger" align="center"><i class="material-icons tiny">error</i> Hapus Kategori Berhasil</div>';
 					}else if($this->input->get('balasan')==2){
-						echo '<div class="alert alert-danger" align="center"><i class="material-icons tiny">error</i> Hapus Tema Gagal</div>';
+						echo '<div class="alert alert-success" align="center"><i class="material-icons tiny">done</i> Tambah Kategori Berhasil</div>';
 					}
 				}
 				?>
@@ -39,8 +39,9 @@
 								<td width="7%"><?php echo $no; ?></td>
 								<td width="30%"><?php echo htmlspecialchars($result->nama_kategori); ?></td>
 								<td width="10%">
-									<a class="btn-floating blue tooltipped" data-tooltip="Lihat Mahasiswa" data-delay="1"><i class="material-icons">zoom_in</i></a>
-									<a class="del btn-floating red tooltipped" href="#!" id="<?php echo $result->id_kategori; ?>" data-tooltip="Hapus Mahasiswa" data-delay="1"><i class="material-icons">clear</i></a>
+									<!-- <a class="btn-floating blue tooltipped" data-tooltip="Lihat Kategori" data-delay="1"><i class="material-icons">zoom_in</i></a> -->
+									<!-- <a class="del btn-floating red tooltipped" href="#!" id="<?php echo $result->id_kategori; ?>" data-tooltip="Hapus Kategori" data-delay="1"><i class="material-icons">clear</i></a> -->
+									<a class="del btn-floating red tooltipped" href="<?php echo site_url('kategori/delete/'.$result->id_kategori.''); ?>" class="material-icons" onclick="return confirm('Hapus Kategori?')" data-tooltip="Hapus Kategori" data-delay="1"><i class="material-icons left">clear</i></a>
 								</td>
 							</tr>
 				    	<?php 

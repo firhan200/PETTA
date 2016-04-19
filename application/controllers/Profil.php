@@ -5,6 +5,8 @@ class Profil extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
+		$this->load->helper('form');
+		$this->load->library('form_validation');
 		$this->load->helper('date');
 		$this->load->model('MDosen');
 		$this->load->model('MMahasiswa');
@@ -62,7 +64,14 @@ class Profil extends MY_Controller {
 		header('Content-Type: application/json');
 		echo json_encode($data);
 	}
-
+	public function insertKategori(){
+		$namaKategori = $this->input->post('kategori');
+		$data = array(
+				'kategori'=>$namaKategori
+			);
+		$insert = $this->MAdmin->create('kategori', $data);
+		redirect(site_url('kategori/data'));
+	}
 	public function update($id){
 		if($this->session->userdata('levelpetta')==2){//DOSEN
 			$emailDsn = $this->input->post('EditEmail');
@@ -94,6 +103,7 @@ class Profil extends MY_Controller {
 	}
 
 	public function Upload($id){
+		
 		$upload = $this->input->post('fotoDsn');
 		//Foto Set
 		$photoName = gmdate("d-m-y-H-i-s", time()+3600*7).".jpg";
@@ -117,6 +127,9 @@ class Profil extends MY_Controller {
 				echo 2;
 			}
 		}else if($upload==2){
+			/*$error = $this->upload->display_errors();
+		    $this->session->set_flashdata('error', '$error');
+		       redirect($_SERVER['HTTP_REFERER']);*/
 			alert('error');
 			echo "failed";
 			$errors = $this->upload->display_errors('<p>','failed try again','</p');

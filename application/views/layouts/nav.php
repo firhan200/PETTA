@@ -1,13 +1,20 @@
+<?php if(($this->session->userdata('levelpetta')==2) || ($this->session->userdata('levelpetta')==3)){?>
 <ul id="dropdown1" class="dropdown-content">
   <li><a href="<?php echo site_url('profil'); ?>"><span class="material-icons left icon-t">settings</span>&nbsp;&nbsp;PROFIL</a></li>
   <li class="divider"></li>
   <li><a href="<?php echo site_url('pengguna/logoutProcess'); ?>">KELUAR</a></li>
 </ul>
-<ul id="dropdown2" class="dropdown-content">
-  <li><a href="<?php echo site_url('profil'); ?>"><span class="material-icons left icon-t">settings</span>&nbsp;&nbsp;PROFIL</a></li>
+<?php } else{?>
+<ul id="dropdown1" class="dropdown-content">
   <li class="divider"></li>
   <li><a href="<?php echo site_url('pengguna/logoutProcess'); ?>">KELUAR</a></li>
 </ul>
+<?php }?>
+<!-- <ul id="dropdown2" class="dropdown-content">
+  <li><a href="<?php echo site_url('profil'); ?>"><span class="material-icons left icon-t">settings</span>&nbsp;&nbsp;PROFIL</a></li>
+  <li class="divider"></li>
+  <li><a href="<?php echo site_url('pengguna/logoutProcess'); ?>">KELUAR</a></li>
+</ul> -->
 <div class="navbar-fixed">
 	<nav>
 		<div class="nav-wrapper blue">

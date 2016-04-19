@@ -18,7 +18,7 @@
 				<?php
 				if($this->input->get('balasan')!=null){
 					if($this->input->get('balasan')==1){
-						echo '<div class="alert alert-success" align="center"><i class="material-icons tiny">done</i> Hapus Tema Berhasil</div>';
+						echo '<div class="alert alert-success" align="center"><i class="material-icons tiny">done</i> Tambah Mahasiswa Berhasil</div>';
 					}else if($this->input->get('balasan')==2){
 						echo '<div class="alert alert-danger" align="center"><i class="material-icons tiny">error</i> Hapus Tema Gagal</div>';
 					}
@@ -26,7 +26,7 @@
 				?>
 				<div class="row">
 					<div class="col s12 m8 l6 offset-m2 offset-l3" align="center">
-						<form action="<?php echo site_url('mahasiswa/create') ?>" method="post">
+						<form action="<?php echo site_url('mahasiswa/insertMahasiswa') ?>" method="post">
 				        	<div class="input-field">
 				          		<i class="material-icons prefix">person</i>
 				          		<input id="username" name="username" type="text" maxlength="40" class="validate" required>

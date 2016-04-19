@@ -7,12 +7,9 @@ class MDosen extends CI_Model{
 		$this->load->database();
 	}
 
-	function create($data){
-		$query = $this->db->insert('dosen', $data);
-		return $query;
-		//START ACTIVE QUERY
-		//ISNERT INTO dosen Value $data
-		//END ACTIVE QUERY
+	function create($table,$data){
+		$query = $this->db->insert($table, $data);
+		return $this->db->insert_id();
 	}
 
 	function read($cond, $ordField, $ordType){

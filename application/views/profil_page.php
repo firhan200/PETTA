@@ -142,6 +142,7 @@
   				</div>
   				<div class="modal-body">
 					<form action="upload" id="tambahFormUpload" method="post" enctype="multipart/form-data">
+					<?php echo validation_errors(); ?>
 						<div class="file-field input-field">
 						    <div class="btn">
 						        <span>File</span>

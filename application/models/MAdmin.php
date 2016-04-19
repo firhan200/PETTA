@@ -7,10 +7,10 @@ class MAdmin extends CI_Model{
 		$this->load->database();
 	}
 
-	/*function create($data){
+	function create($data){
 		$query = $this->db->insert('dosen', $data);
 		return $query;
-	}*/
+	}
 
 	function read($cond, $ordField, $ordType){
 		if($cond!=null){
@@ -23,7 +23,7 @@ class MAdmin extends CI_Model{
 		return $query;
 	}
 
-	/*function update($cond, $data){
+	function update($cond, $data){
 		$this->db->where($cond);
 		$query = $this->db->update('dosen', $data);
 		return $query;
@@ -33,5 +33,5 @@ class MAdmin extends CI_Model{
 		$this->db->where($cond);
 		$query = $this->db->delete('dosen');
 		return $query;
-	}*/
+	}
 }
