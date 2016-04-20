@@ -55,3 +55,40 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	/*$(document).ready(function(){
+		$("#nama").bind("keyup change", function(){
+		var nama = $(this).val();
+		$.ajax({
+			url:'kategori/cekData/kategori/nama'+nama,
+			data:{send:true},
+			success:function(data){
+				if(data==1){
+					$("#report1").text("");
+					check1=1;
+				}else{
+					$("#report1").text("*nama kategori sudah terpakai");
+					check1=0;
+					}
+				}
+			});
+		});
+	
+		$("#nama").bind("keyup change", function(){
+		var nama = $(this).val();
+		$.ajax({
+			url:'cekData/kategori/nama'+nama,
+			data:{send:true},
+			success:function(data){
+				if(data==1){
+					$("#report1").text("");
+					check1=1;
+				}else{
+					$("#report1").text("*nama kategori sudah terpakai");
+					check1=0;
+					}
+				}
+			});
+		});
+	});*/
+</script>

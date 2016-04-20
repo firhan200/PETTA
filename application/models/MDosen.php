@@ -12,23 +12,23 @@ class MDosen extends CI_Model{
 		return $this->db->insert_id();
 	}
 
-	function read($cond, $ordField, $ordType){
+	function read($table,$cond, $ordField, $ordType){
 		if($cond!=null){
 			$this->db->where($cond);
 		}
 		if($ordField!=null){
 			$this->db->order_by($ordField, $ordType);
 		}
-		$query = $this->db->get('dosen');
+		$query = $this->db->get($table);
 		return $query;
 		//START ACTIVE QUERY
 		//SELECT * FROM dosen WHERE=null ORDER BY nama_dosen ASC
 		//END ACTIVE QUERY
 	}
 
-	function update($cond, $data){
+	function update($table,$cond, $data){
 		$this->db->where($cond);
-		$query = $this->db->update('dosen', $data);
+		$query = $this->db->update($table, $data);
 		return $query;
 		//START ACTIVE QUERY
 		//UPDATE dosen SET column1=value1, column2=value2 dst WHERE id=$id

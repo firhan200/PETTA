@@ -107,6 +107,7 @@ function getTotalPeminatan($id){
 <script type="text/javascript">
 	$(document).ready(function(){
 		var id;var id1;
+		
 
 		//GET DATA
 		$(".edit").click(function(){
@@ -141,4 +142,5 @@ function getTotalPeminatan($id){
 				});
 		});
 	});
+	
 </script>

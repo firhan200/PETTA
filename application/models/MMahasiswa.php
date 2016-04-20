@@ -12,14 +12,14 @@ class MMahasiswa extends CI_Model{
 		return $this->db->insert_id();
 	}
 
-	function read($cond, $ordField, $ordType){
+	function read($table,$cond, $ordField, $ordType){
 		if($cond!=null){
 			$this->db->where($cond);
 		}
 		if($ordField!=null){
 			$this->db->order_by($ordField, $ordType);
 		}
-		$query = $this->db->get('mahasiswa');
+		$query = $this->db->get($table);
 		return $query;
 		//SELECT * FROM mahasiswa WHERE=null ORDER BY nama_mahasiswa ASC
 	}

@@ -12,7 +12,7 @@ class Kategori extends MY_Controller {
 		$data['menu04'] = true;
 		$this->sessionOut(); //check session
 
-		$data['query'] = $this->MKategori->read(null, 'nama_kategori', 'ASC');
+		$data['query'] = $this->MKategori->read('kategori',null, 'nama_kategori', 'ASC');
 
 		$this->load->view('layouts/header');
 		$this->load->view('admin/kategori_list_page', $data);
@@ -40,5 +40,14 @@ class Kategori extends MY_Controller {
 	public function delete($id){
 		$delete = $this->MKategori->delete(array('id_kategori'=>$id));
 			redirect(site_url('kategori/data?balasan=1'));	
+	}
+	public function cekData($table, $field, $data){
+		$match = $this->MKategori->read($table, array($field=>$data), null, null);
+		if($match->num_rows() > 0){
+			$report = 2;
+		}else{
+			$report = 1;
+		}
+		echo $report;
 	}
 }

@@ -14,14 +14,14 @@ class MKategori extends CI_Model{
 		//lihat controlelr yang pake fungsi ini lihat arraynya itu yang di masukin liat dosen untuk lebih jelas bagian update
 	}
 
-	function read($cond, $ordField, $ordType){
+	function read($table,$cond, $ordField, $ordType){
 		if($cond!=null){
 			$this->db->where($cond);
 		}
 		if($ordField!=null){
 			$this->db->order_by($ordField, $ordType);
 		}
-		$query = $this->db->get('kategori');
+		$query = $this->db->get($table);
 		return $query;
 		//SELECT * FROM kategori WHERE=null ORDER BY nama_kategori ASC
 		//cari di controller yang menggunakan fungsi read lihat parameter dan samakan

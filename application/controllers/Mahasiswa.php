@@ -16,7 +16,7 @@ class Mahasiswa extends MY_Controller {
 		$data['menu03'] = true;
 		$this->sessionOut(); //check session
 
-		$data['query'] = $this->MMahasiswa->read(null, 'nama_mahasiswa', 'ASC');
+		$data['query'] = $this->MMahasiswa->read('mahasiswa',null, 'nama_mahasiswa', 'ASC');
 
 		$this->load->view('layouts/header');
 		$this->load->view('admin/mahasiswa_list_page', $data);
@@ -62,7 +62,7 @@ class Mahasiswa extends MY_Controller {
 		redirect(site_url('mahasiswa/data?balasan=2'));	
 	}
 	public function getData($id){
-			$query = $this->MMahasiswa->read( array('id'=>$id), null, null);
+			$query = $this->MMahasiswa->read('mahasiswa', array('id'=>$id), null, null);
 			foreach($query->result() as $result){
 				$data = array(
 					'nim'=>$result->nim,
@@ -88,5 +88,14 @@ class Mahasiswa extends MY_Controller {
 				);
 		$update = $this->MMahasiswa->update(array('id'=>$id),  $data);
 		redirect(site_url('mahasiswa/data?balasan=1'));
+	}
+	public function cekData($table, $field, $data){
+		$match = $this->MMahasiswa->read($table, array($field=>$data), null, null);
+		if($match->num_rows() > 0){
+			$report = 2;
+		}else{
+			$report = 1;
+		}
+		echo $report;
 	}
 }

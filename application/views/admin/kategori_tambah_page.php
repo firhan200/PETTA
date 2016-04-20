@@ -29,10 +29,10 @@
 						<form action="<?php echo site_url('kategori/insertKategori') ?>" method="post">
 				        	<div class="input-field">
 				          		<input id="kategori" name="kategori" type="text" maxlength="40" class="validate" required>
-				          		<label for="kategori">nama kategori</label>
-				        	</div>			
+				          		<label for="kategori">nama kategori</label>&nbsp;<span class="error" id="report1"></span>
+				        	</div>	
 				      		<br/>
-				      		<button type="submit" class="waves-effect waves-light btn blue darken-1">Tambah</button>
+				      		<button type="submit" class="submit1 waves-effect waves-light btn blue darken-1">Tambah</button>
 				      	</form>
 				      	<br/>
 					</div>
@@ -41,3 +41,26 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var check1=0;
+		$("#kategori").bind("keyup change", function(){
+		var nama = $(this).val();
+		$.ajax({
+			url:'cekData/kategori/nama_kategori/'+nama,
+			data:{send:true},
+			success:function(data){
+				if(data==1){
+					$("#report1").text("");
+					check1=1;
+					 $('button[type="submit"]').prop('disabled','');
+				}else{
+					$("#report1").text("*kategori sudah ada");
+					check1=0;
+					 $('button[type="submit"]').prop('disabled',true);
+					}
+				}
+			});
+		});
+	});
+</script>

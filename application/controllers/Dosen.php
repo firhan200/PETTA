@@ -12,7 +12,7 @@ class Dosen extends MY_Controller {
 		$data['menu2'] = true;
 		$this->sessionOut(); //check session
 
-		$data['query'] = $this->MDosen->read(null, 'nama_dosen', 'ASC');
+		$data['query'] = $this->MDosen->read('dosen',null, 'nama_dosen', 'ASC');
 		//START ACTIVE QUERY
 		//SELECT * FROM dosen WHERE=null ORDER BY nama_dosen ASC
 		//END ACTIVE QUERY
@@ -26,7 +26,7 @@ class Dosen extends MY_Controller {
 		$data['menu02'] = true;
 		$this->sessionOut(); //check session
 
-		$data['query'] = $this->MDosen->read(null, 'nama_dosen', 'ASC');
+		$data['query'] = $this->MDosen->read('dosen',null, 'nama_dosen', 'ASC');
 		//START ACTIVE QUERY
 		//SELECT * FROM dosen WHERE=null ORDER BY nama_dosen ASC
 		//END ACTIVE QUERY
@@ -76,7 +76,7 @@ class Dosen extends MY_Controller {
 		redirect(site_url('dosen/data?balasan=2'));	
 	}
 	public function getData($id){
-			$query = $this->MDosen->read( array('id'=>$id), null, null);
+			$query = $this->MDosen->read('dosen', array('id'=>$id), null, null);
 			foreach($query->result() as $result){
 				$data = array(
 					'nip'=>$result->nip,
@@ -102,5 +102,14 @@ class Dosen extends MY_Controller {
 				);
 		$update = $this->MDosen->update(array('id'=>$id),  $data);
 		redirect(site_url('dosen/data?balasan=1'));
+	}
+	public function cekData($table,$field, $data){
+		$match = $this->MDosen->read($table,array($field=>$data), null, null);
+		if($match->num_rows() > 0){
+			$report = 2;
+		}else{
+			$report = 1;
+		}
+		echo $report;
 	}
 }
