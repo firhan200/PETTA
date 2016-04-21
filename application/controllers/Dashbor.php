@@ -16,9 +16,9 @@ class Dashbor extends MY_Controller {
 		$this->sessionOut(); //check session
 
 		//information
-		$data['totalDosen'] = $this->MDosen->read(null, null, null);
+		$data['totalDosen'] = $this->MDosen->read('dosen',null, null, null);
 		$data['totalDosen'] = $data['totalDosen']->num_rows();
-		$data['totalMahasiswa'] = $this->MMahasiswa->read(null, null, null);
+		$data['totalMahasiswa'] = $this->MMahasiswa->read('mahasiswa',null, null, null);
 		$data['totalMahasiswa'] = $data['totalMahasiswa']->num_rows();
 		$data['totalTema'] = $this->MTema->read(null, null, null);
 		$data['totalTema'] = $data['totalTema']->num_rows();

@@ -51,10 +51,10 @@ class Pesan extends MY_Controller {
 		$level = $this->session->userdata('levelpetta');
 		if($level==3){
 			$data['for'] = 1;
-			$data['receiverQuery'] = $this->MDosen->read(null, 'nama_dosen', 'ASC');
+			$data['receiverQuery'] = $this->MDosen->read('dosen',null, 'nama_dosen', 'ASC');
 		}else{
 			$data['for'] = 2;
-			$data['receiverQuery'] = $this->MMahasiswa->read(null, 'nama_mahasiswa', 'ASC');
+			$data['receiverQuery'] = $this->MMahasiswa->read('mahasiswa',null, 'nama_mahasiswa', 'ASC');
 		}
 
 		$this->load->view('layouts/header');

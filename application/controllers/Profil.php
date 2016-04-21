@@ -32,7 +32,7 @@ class Profil extends MY_Controller {
 	}
 
 	public function getDataMhs($id){
-		$query = $this->MMahasiswa->read( array('id'=>$id), null, null);
+		$query = $this->MMahasiswa->read('mahasiswa', array('id'=>$id), null, null);
 		foreach($query->result() as $result){
 			$data = array(
 					'emailMhs'=>$result->email,
@@ -44,7 +44,7 @@ class Profil extends MY_Controller {
 
 	public function getData($id){
 		if ($this->session->userdata("levelpetta")==2){
-			$query = $this->MDosen->read( array('id'=>$id), null, null);
+			$query = $this->MDosen->read('dosen', array('id'=>$id), null, null);
 			foreach($query->result() as $result){
 				$data = array(
 					'email'=>$result->email,
@@ -52,7 +52,7 @@ class Profil extends MY_Controller {
 				);
 			}
 		}else if ($this->session->userdata("levelpetta")==3){
-			$query = $this->MMahasiswa->read( array('id'=>$id), null, null);
+			$query = $this->MMahasiswa->read('mahasiswa', array('id'=>$id), null, null);
 			foreach($query->result() as $result){
 				$data = array(
 					'email'=>$result->email,

@@ -17,8 +17,8 @@ class Tema extends MY_Controller {
 		$data['menu1'] = true;
 		
 		$data['query'] = $this->MTema->readAll(array('status_tema'=>0), 'id_tema', 'DESC');
-		$data['queryKategori'] = $this->MKategori->read(null, 'nama_kategori', 'ASC');
-		$data['queryDosen'] = $this->MDosen->read(null, 'nama_dosen', 'ASC');
+		$data['queryKategori'] = $this->MKategori->read('kategori',null, 'nama_kategori', 'ASC');
+		$data['queryDosen'] = $this->MDosen->read('dosen',null, 'nama_dosen', 'ASC');
 
 		//filter kategori
 		if($this->input->get('kategori')!=null){
@@ -88,7 +88,7 @@ class Tema extends MY_Controller {
 		unset($_SESSION['tag']);
 		$data['menu32'] = true;
 
-		$data['kategoriQuery'] = $this->MKategori->read(null, 'nama_kategori', 'ASC');
+		$data['kategoriQuery'] = $this->MKategori->read('kategori',null, 'nama_kategori', 'ASC');
 
 		$this->load->view('layouts/header');
 		$this->load->view('tema_tambah_page', $data);
@@ -135,7 +135,7 @@ class Tema extends MY_Controller {
 		$data['menu32'] = true;
 
 		$data['query'] = $this->MTema->read(array('id_tema'=>$id), null, null);
-		$data['kategoriQuery'] = $this->MKategori->read(null, 'nama_kategori', 'ASC');
+		$data['kategoriQuery'] = $this->MKategori->read('kategori',null, 'nama_kategori', 'ASC');
 		//get tag
 		unset($_SESSION['tag']);
 		$queryTag = $this->MTag->read(array('id_tema'=>$id), null, null);

@@ -37,12 +37,12 @@ class Pengguna extends MY_Controller {
 					$nama = $result->nama_admin;
 				}
 			}else if($level==2){
-				$query = $this->MDosen->read(array('id_pengguna'=>$idUser));
+				$query = $this->MDosen->read('dosen',array('id_pengguna'=>$idUser));
 				foreach($query->result() as $result){
 					$nama = $result->nama_dosen;
 				}
 			}else if($level==3){
-				$query = $this->MMahasiswa->read(array('id_pengguna'=>$idUser));
+				$query = $this->MMahasiswa->read('mahasiswa',array('id_pengguna'=>$idUser));
 				foreach($query->result() as $result){
 					$idpengguna = $result->id_pengguna;
 					$nama = $result->nama_mahasiswa;
