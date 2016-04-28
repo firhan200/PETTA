@@ -71,6 +71,14 @@ class Dosen extends MY_Controller {
 		redirect(site_url('dosen/data?balasan=1'));
 	}
 	public function delete($id){
+		$query=   $this->MDosen->read('dosen',null, null, null);/*(
+				($this->db->delete('dosen',array('id_pengguna'=>$id))) 
+				&& 
+				($this->db->delete('pengguna',array('id_pengguna'=>$id)))
+				);*/
+		foreach($query->result() as $result){
+			unlink('assets/img/dosen/'.$result->foto_dosen);
+		}
 		$this->db->delete('dosen',array('id_pengguna'=>$id));
 		$this->db->delete('pengguna',array('id_pengguna'=>$id));
 		redirect(site_url('dosen/data?balasan=2'));	
