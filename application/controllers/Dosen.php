@@ -82,8 +82,11 @@ class Dosen extends MY_Controller {
 					'nip'=>$result->nip,
 					'nama_dosen'=>$result->nama_dosen,
 					'email'=>$result->email,
-					'telepon'=>$result->telepon
+					'telepon'=>$result->telepon,
+					'foto_dosen'=>$result->foto_dosen
 				);
+				$data['foto_dosen'] = '<img src="'.base_url('assets/img/dosen/'.$result->foto_dosen).'" class="circle responsive-image " style="max-width:300px;max-height:400px">';
+				$data['fotoNameOnly'] = $result->foto_dosen;
 			}
 		header('Content-Type: application/json');
 		echo json_encode($data);

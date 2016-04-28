@@ -26,9 +26,9 @@ class MDosen extends CI_Model{
 		//END ACTIVE QUERY
 	}
 
-	function update($table,$cond, $data){
+	function update($cond, $data){
 		$this->db->where($cond);
-		$query = $this->db->update($table, $data);
+		$query = $this->db->update('dosen', $data);
 		return $query;
 		//START ACTIVE QUERY
 		//UPDATE dosen SET column1=value1, column2=value2 dst WHERE id=$id

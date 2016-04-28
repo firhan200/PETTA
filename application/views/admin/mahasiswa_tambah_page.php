@@ -30,7 +30,7 @@
 				        	<div class="input-field">
 				          		<i class="material-icons prefix">person</i>
 				          		<input id="username" name="username" type="text" maxlength="14" class="validate" required>
-				          		<label for="username">username</label>&nbsp;<span class="error" id="report1"></span>
+				          		<label for="username">username</label>&nbsp;<span class="error" id="reportUsername"></span>
 				        	</div>
 				        	<div class="input-field">
 				          		<i class="material-icons prefix">lock</i>
@@ -39,15 +39,15 @@
 				        	</div>
 				        	<div class="input-field">
 				          		<input id="nim" name="nim" type="text" maxlength="14" class="validate" required>
-				          		<label for="nim">NIM</label>&nbsp;<span class="error" id="report3"></span>
+				          		<label for="nim">NIM</label>&nbsp;<span class="error" id="reportNim"></span>
 				        	</div>
 				        	<div class="input-field">
 				          		<input id="nama" name="nama" type="text" maxlength="40" class="validate" required>
-				          		<label for="nama">Nama</label>
+				          		<label for="nama">Nama</label>&nbsp;<span class="error" id="reportNama"></span>
 				        	</div>
 				        	<div class="input-field">
 				          		<input id="email" name="email" type="email" maxlength="100" class="validate" required>
-				          		<label for="email">E-mail</label>
+				          		<label for="email">E-mail</label>&nbsp;<span class="error" id="reportEmail"></span>
 				        	</div>
 				        	<div class="input-field">
 				          		<input id="telepon" name="telepon" type="text" pattern="[0-9]{1,12}" maxlength="12" class="validate" required>
@@ -73,24 +73,74 @@
 			data:{send:true},
 			success:function(data){
 				if(data==1){
-					$("#report3").text("");
-					check1=1;
+					$("#reportNim").text("");
 					 $('button[type="submit"]').prop('disabled','');
 					 $("#username").prop("disabled", '');
 					 $("#password").prop("disabled", '');
 					 $("#nama").prop("disabled", '');
 					 $("#email").prop("disabled", '');
-					 $("#dosen").prop("disabled", '');
 					 $("#telepon").prop("disabled", '');
 				}else{
-					$("#report3").text("*nim sudah ada");
-					check1=0;
+					$("#reportNim").text("*nim sudah ada");
 					 $('button[type="submit"]').prop('disabled',true);
 					 $("#username").prop("disabled", true);
 					 $("#password").prop("disabled", true);
 					 $("#nama").prop("disabled", true);
 					 $("#email").prop("disabled", true);
-					 $("#dosen").prop("disabled", true);
+					 $("#telepon").prop("disabled", true);
+					}
+				}
+			});
+		});
+		$("#nama").bind("keyup change", function(){
+		var nama = $(this).val();
+		$.ajax({
+			url:'cekData/mahasiswa/nama_mahasiswa/'+nama,
+			data:{send:true},
+			success:function(data){
+				if(data==1){
+					$("#reportNama").text("");
+					 $('button[type="submit"]').prop('disabled','');
+					 $("#username").prop("disabled", '');
+					 $("#password").prop("disabled", '');
+					 $("#nim").prop("disabled", '');
+					 $("#email").prop("disabled", '');
+					 $("#telepon").prop("disabled", '');
+				}else{
+					$("#reportNama").text("*nama sudah ada");
+					 $('button[type="submit"]').prop('disabled',true);
+					 $("#username").prop("disabled", true);
+					 $("#password").prop("disabled", true);
+					 $("#nim").prop("disabled", true);
+					 $("#email").prop("disabled", true);
+					 $("#telepon").prop("disabled", true);
+					}
+				}
+			});
+		});
+		$("#email").bind("keyup change", function(){
+		var email = $(this).val();
+		$.ajax({
+			url:'cekData/mahasiswa/email/'+email,
+			data:{send:true},
+			success:function(data){
+				if(data==1){
+					$("#reportEmail").text("");
+					check1=1;
+					 $('button[type="submit"]').prop('disabled','');
+					 $("#username").prop("disabled", '');
+					 $("#password").prop("disabled", '');
+					 $("#nama").prop("disabled", '');
+					 $("#nim").prop("disabled", '');
+					 $("#telepon").prop("disabled", '');
+				}else{
+					$("#reportEmail").text("*email sudah ada");
+					check1=0;
+					 $('button[type="submit"]').prop('disabled',true);
+					 $("#username").prop("disabled", true);
+					 $("#password").prop("disabled", true);
+					 $("#nama").prop("disabled", true);
+					 $("#nim").prop("disabled", true);
 					 $("#telepon").prop("disabled", true);
 					}
 				}
@@ -103,7 +153,7 @@
 			data:{send:true},
 			success:function(data){
 				if(data==1){
-					$("#report1").text("");
+					$("#reportUsername").text("");
 					check1=1;
 					 $('button[type="submit"]').prop('disabled','');
 					  $("#nim").prop("disabled", '');
@@ -113,7 +163,7 @@
 					 $("#dosen").prop("disabled", '');
 					 $("#telepon").prop("disabled", '');
 				}else{
-					$("#report1").text("*username sudah ada");
+					$("#reportUsername").text("*username sudah ada");
 					check1=0;
 					 $('button[type="submit"]').prop('disabled',true);
 					 $("#nim").prop("disabled", true);

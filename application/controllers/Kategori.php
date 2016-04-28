@@ -50,4 +50,23 @@ class Kategori extends MY_Controller {
 		}
 		echo $report;
 	}
+	public function getData($id){
+			$query = $this->MKategori->read('kategori', array('id_kategori'=>$id), null, null);
+			foreach($query->result() as $result){
+				$data = array(
+					'nama_kategori'=>$result->nama_kategori
+				);
+			}
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
+
+	public function update($id){
+		$kategori = $this->input->post('EditKategori');
+		$data = array(
+				'nama_kategori'=>$kategori
+				);
+		$update = $this->MKategori->update(array('id_kategori'=>$id),  $data);
+		redirect(site_url('mahasiswa/data?balasan=1'));
+	}
 }

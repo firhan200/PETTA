@@ -17,7 +17,6 @@ class Profil extends MY_Controller {
 
 	public function index(){
 		$data['menu4'] = true;
-		//$this->sessionIn(); //check session
 		$data["row"] = $this->MMahasiswa->getMhs('pengguna',null,null,null);
 		$data['query'] = $this->MDosen->getWali('pengguna',null,null,null);
 		
@@ -29,6 +28,9 @@ class Profil extends MY_Controller {
 		$this->load->view('layouts/header');
 		$this->load->view('profil_page', $data);
 		$this->load->view('layouts/footer');
+	}
+	public function showProfileDsn(){
+
 	}
 
 	public function getDataMhs($id){

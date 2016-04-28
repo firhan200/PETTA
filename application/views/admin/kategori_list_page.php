@@ -40,7 +40,7 @@
 								<td width="30%"><?php echo htmlspecialchars($result->nama_kategori); ?></td>
 								<td width="10%">
 									<!-- <a class="btn-floating blue tooltipped" data-tooltip="Lihat Kategori" data-delay="1"><i class="material-icons">zoom_in</i></a> -->
-									<!-- <a class="del btn-floating red tooltipped" href="#!" id="<?php echo $result->id_kategori; ?>" data-tooltip="Hapus Kategori" data-delay="1"><i class="material-icons">clear</i></a> -->
+									<a href="#modalEdit" id="<?php echo $result->id_kategori ?>" class="edit btn-floating grey tooltipped modal-trigger" data-tooltip="Ubah Kategori" data-delay="1"><i class="material-icons">settings</i></a>
 									<a class="del btn-floating red tooltipped" href="<?php echo site_url('kategori/delete/'.$result->id_kategori.''); ?>" class="material-icons" onclick="return confirm('Hapus Kategori?')" data-tooltip="Hapus Kategori" data-delay="1"><i class="material-icons left">clear</i></a>
 								</td>
 							</tr>
@@ -55,40 +55,62 @@
 		</div>
 	</div>
 </div>
+<div id="modalEdit" class="modal" style="width: 40%;">
+  		<div class="modal-dialog">
+  			<div class="modal-content">
+  				<div class="modal-header">
+  				 <i class="medium material-icons prefix">account_circle</i>
+  					<h4 class="modal-title"> Ubah Informasi</h4>
+  				</div>
+  				<div class="modal-body">
+					<form action="edit" id="editform" method="post" enctype="multipart/form-data">
+						<div class="form-group input-field col s12">
+					        <input placeholder="Placeholder" id="EditKategori" name="EditKategori" class="form-control" type="text" class="validate" required="required">
+					        <label for="Editkategori">Kategori</label>
+				        </div>
+				     
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary" >Simpan</button>
+						</div>				
+					</form>
+				</div>
+  			</div>	
+  		</div>
+  	</div>
+  	<!-- Edit Modal Structure End -->
+  	<!-- Edit Modal Structure End -->
 <script type="text/javascript">
-	/*$(document).ready(function(){
-		$("#nama").bind("keyup change", function(){
-		var nama = $(this).val();
-		$.ajax({
-			url:'kategori/cekData/kategori/nama'+nama,
-			data:{send:true},
-			success:function(data){
-				if(data==1){
-					$("#report1").text("");
-					check1=1;
-				}else{
-					$("#report1").text("*nama kategori sudah terpakai");
-					check1=0;
-					}
+	$(document).ready(function(){
+		var id;
+		//GET DATA
+		$(".edit").click(function(){
+		 id = $(this).attr('id');
+			$.ajax({
+				url:'getData/'+id,
+				data:{send:true},
+				success:function(data){
+					/*$("#EditmhsNim").val(namaOld);//Tidak usah sesuai urutan yang penting ID nya bener
+					$("#EditmhsName").val(data['nameMhs']);//Id buat naro hasil nya, sedangkan yang (data[''])*/
+					$("#EditKategori").val(data['nama_kategori']);// di dapet dari controller
 				}
 			});
 		});
+		//EDIT FORM
+		$("#editform").submit(function(e){
+				e.preventDefault();
+				var formData = new FormData($(this)[0]);
+				$.ajax({
+					url:'update/'+id,
+					data:formData,
+					type:'POST',
+					contentType: false,
+					processData: false,
+					success:function(data){
+						$("#modalEdit").hide();
+						window.location.reload(true);
+					}
+				});
+		});
+	});
 	
-		$("#nama").bind("keyup change", function(){
-		var nama = $(this).val();
-		$.ajax({
-			url:'cekData/kategori/nama'+nama,
-			data:{send:true},
-			success:function(data){
-				if(data==1){
-					$("#report1").text("");
-					check1=1;
-				}else{
-					$("#report1").text("*nama kategori sudah terpakai");
-					check1=0;
-					}
-				}
-			});
-		});
-	});*/
 </script>

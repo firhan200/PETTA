@@ -63,39 +63,40 @@
 </div>
 
 <div id="modalEdit" class="modal" style="width: 40%;">
-  		<div class="modal-dialog">
-  			<div class="modal-content">
-  				<div class="modal-header">
-  				 <i class="medium material-icons prefix">account_circle</i>
-  					<h4 class="modal-title"> Ubah Informasi</h4>
-  				</div>
-  				<div class="modal-body">
-					<form action="edit" id="editform" method="post" enctype="multipart/form-data">
-						<div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditNim" name="EditNim" class="form-control" type="text" class="validate" required="required">
-					        <label for="Editmhs_nim">Nim</label>
-				        </div>
-				        <div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditNama" name="EditNama" class="form-control" type="text" class="validate" required="required">
-					        <label for="Editmhs_nama">Nama</label>
-				        </div>
-				        <div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditEmail" name="EditEmail" class="form-control" type="text" class="validate" required="required">
-					        <label for="Editmhs_email">Email</label>
-				        </div>
-						<div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditTelepon" name="EditTelepon" class="form-control" type="number" class="validate" required="required">
-					        <label for="Editmhs_telepon">telepon</label>
-				        </div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary" >Simpan</button>
-						</div>				
-					</form>
-				</div>
-  			</div>	
-  		</div>
+  	<div class="modal-dialog">
+  		<div class="modal-content">
+  			<div class="modal-header">
+  			 <i class="medium material-icons prefix">account_circle</i>
+  				<h4 class="modal-title"> Ubah Informasi</h4>
+  			</div>
+  			<div class="modal-body">
+				<form action="edit" id="editform" method="post" enctype="multipart/form-data">
+					<div class="form-group input-field col s12">
+				        <input placeholder="Placeholder" id="EditNim" name="EditNim" class="form-control" type="text" class="validate" required="required">
+				        <label for="Editmhs_nim">Nim</label>&nbsp;<span class="error" id="report3"></span>
+			        </div>
+			        <div class="form-group input-field col s12">
+				        <input placeholder="Placeholder" id="EditNama" name="EditNama" class="form-control" type="text" class="validate" required="required">
+				        <label for="Editmhs_nama">Nama</label>&nbsp;<span class="error" id="report3"></span>
+			        </div>
+			        <div class="form-group input-field col s12">
+				        <input placeholder="Placeholder" id="EditEmail" name="EditEmail" class="form-control" type="text" class="validate" required="required">
+				        <label for="Editmhs_email">Email</label>&nbsp;<span class="error" id="report3"></span>
+			        </div>
+					<div class="form-group input-field col s12">
+				        <input placeholder="Placeholder" id="EditTelepon" name="EditTelepon" class="form-control" type="number" class="validate" required="required">
+				        <label for="Editmhs_telepon">telepon</label>&nbsp;<span class="error" id="report3"></span>
+			        </div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary" >Simpan</button>
+					</div>				
+				</form>
+			</div>
+  		</div>	
   	</div>
-  	<!-- Edit Modal Structure End -->
+ </div>
+<!-- Edit Modal Structure End -->
+
 <?php
 function getTotalPeminatan($id){
 	$ci =& get_instance();
@@ -107,8 +108,6 @@ function getTotalPeminatan($id){
 <script type="text/javascript">
 	$(document).ready(function(){
 		var id;var id1;
-		
-
 		//GET DATA
 		$(".edit").click(function(){
 		 id = $(this).attr('id');
@@ -142,5 +141,34 @@ function getTotalPeminatan($id){
 				});
 		});
 	});
-	
+	$("#EditNim").bind("keyup change", function(){
+		var nim = $(this).val();
+		$.ajax({
+			url:'cekData/mahasiswa/nim/'+nim,
+			data:{send:true},
+			success:function(data){
+				if(data==1){
+					$("#report3").text("");
+					check1=1;
+					 $('button[type="submit"]').prop('disabled','');
+					/* $("#username").prop("disabled", '');
+					 $("#password").prop("disabled", '');*/
+					 $("#EditNama").prop("disabled", '');
+					/* $("#email").prop("disabled", '');
+					 $("#dosen").prop("disabled", '');
+					 $("#telepon").prop("disabled", '');*/
+				}else{
+					$("#report3").text("*nim sudah ada");
+					check1=0;
+					 $('button[type="submit"]').prop('disabled',true);
+					 /*$("#username").prop("disabled", true);
+					 $("#password").prop("disabled", true);*/
+					 $("#EditNama").prop("disabled", true);
+					/* $("#email").prop("disabled", true);
+					 $("#dosen").prop("disabled", true);
+					 $("#telepon").prop("disabled", true);*/
+					}
+				}
+			});
+		});
 </script>

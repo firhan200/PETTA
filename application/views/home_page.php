@@ -75,7 +75,7 @@ $(document).ready(function(){
 						echo '<li class="collection-item avatar">';
 					}
 				?>
-		      		<img src="<?php echo base_url('assets/img/dosen/noava.png'); ?>" alt="" class="circle">
+		      		<img src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>" alt="" class="circle">
 		      		<div class="row" style="margin-bottom:-5px;">
 		      			<div class="col s8 m6 l6">
 		      				<a href="<?php echo site_url('profil/'.$result->id_pengguna.''); ?>"><div class="dosen-t"><?php echo htmlspecialchars($result->nama_dosen); ?></div></a>

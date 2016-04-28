@@ -45,7 +45,7 @@
 								<td width="30%"><?php echo htmlspecialchars($result->nama_dosen); ?></td>
 								<td width="10%"><?php getTotalTema($result->id_pengguna); ?></td>
 								<td width="15%">
-									<a class="btn-floating blue tooltipped" data-tooltip="Lihat Dosen" data-delay="1"><i class="material-icons">zoom_in</i></a>
+									<a href="#infoModal" id="<?php echo $result->id ?>" class="info btn-floating blue tooltipped modal-trigger" data-tooltip="Lihat Dosen" data-delay="1"><i class="material-icons">zoom_in</i></a>
 									<a href="#modalEdit" id="<?php echo $result->id ?>" class="edit btn-floating grey tooltipped modal-trigger" data-tooltip="Ubah Dosen" data-delay="1"><i class="material-icons">settings</i></a>
 									<a class="del btn-floating red tooltipped" href="<?php echo site_url('dosen/delete/'.$result->id_pengguna.''); ?>" class="material-icons" onclick="return confirm('Hapus Dosen?')" data-tooltip="Hapus Dosen" data-delay="1"><i class="material-icons left">clear</i></a>
 								</td>
@@ -61,40 +61,67 @@
 		</div>
 	</div>
 </div>
+<!-- Edit Modal Structure Start -->
 <div id="modalEdit" class="modal" style="width: 40%;">
-  		<div class="modal-dialog">
-  			<div class="modal-content">
-  				<div class="modal-header">
-  				 <i class="medium material-icons prefix">account_circle</i>
-  					<h4 class="modal-title"> Ubah Informasi</h4>
-  				</div>
-  				<div class="modal-body">
-					<form action="edit" id="editform" method="post" enctype="multipart/form-data">
-						<div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditNip" name="EditNip" class="form-control" type="text" class="validate" required="required">
-					        <label for="Editmhs_nim">Nip</label>
-				        </div>
-				        <div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditNama" name="EditNama" class="form-control" type="text" class="validate" required="required">
-					        <label for="Editmhs_nama">Nama</label>
-				        </div>
-				        <div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditEmail" name="EditEmail" class="form-control" type="text" class="validate" required="required">
-					        <label for="Editmhs_email">Email</label>
-				        </div>
-						<div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditTelepon" name="EditTelepon" class="form-control" type="number" class="validate" required="required">
-					        <label for="Editmhs_telepon">telepon</label>
-				        </div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary" >Simpan</button>
-						</div>				
-					</form>
-				</div>
-  			</div>	
-  		</div>
+  	<div class="modal-dialog">
+  		<div class="modal-content">
+  			<div class="modal-header">
+  			 <i class="medium material-icons prefix">account_circle</i>
+  				<h4 class="modal-title"> Ubah Informasi</h4>
+  			</div>
+  			<div class="modal-body">
+				<form action="edit" id="editform" method="post" enctype="multipart/form-data">
+					<div class="form-group input-field col s12">
+				        <input placeholder="Placeholder" id="EditNip" name="EditNip" class="form-control" type="text" class="validate" required="required">
+				        <label for="Editmhs_nim">Nip</label>
+			        </div>
+			        <div class="form-group input-field col s12">
+				        <input placeholder="Placeholder" id="EditNama" name="EditNama" class="form-control" type="text" class="validate" required="required">
+				        <label for="Editmhs_nama">Nama</label>
+			        </div>
+			        <div class="form-group input-field col s12">
+				        <input placeholder="Placeholder" id="EditEmail" name="EditEmail" class="form-control" type="text" class="validate" required="required">
+				        <label for="Editmhs_email">Email</label>
+			        </div>
+					<div class="form-group input-field col s12">
+				        <input placeholder="Placeholder" id="EditTelepon" name="EditTelepon" class="form-control" type="number" class="validate" required="required">
+				        <label for="Editmhs_telepon">telepon</label>
+			        </div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary" >Simpan</button>
+					</div>				
+				</form>
+			</div>
+  		</div>	
   	</div>
-  	<!-- Edit Modal Structure End -->
+</div>
+<!-- Edit Modal Structure End -->
+<!-- Info Modal -->
+<div id="infoModal" class="modal" role ="modal" style="width: 40%;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<i class="medium material-icons prefix">account_circle</i>
+				<h3 class="modal-title"><span class="glyphicon glyphicon-eye-open"></span> Info Dosen</h3>
+			</div>
+			<div class="modal-body">
+				<center><div id="infofoto"></div></center>
+				<div class="form-group">
+					<label style="font-size: 16px;font-weight: bold;color: black">Nip</label>
+					<div id="infoNip"></div>
+					<label style="font-size: 16px;font-weight: bold;color: black">Nama</label>
+					<div id="infoNama"></div>
+					<label style="font-size: 16px;font-weight: bold;color: black">Email</label>
+					<div id="infoEmail"></div>
+					<label style="font-size: 16px;font-weight: bold;color: black">Telepon</label>
+					<div id="infoTelepon"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Info Modal end -->
+
 <?php
 function getTotalTema($id){
 	$ci =& get_instance();
@@ -138,6 +165,20 @@ function getTotalTema($id){
 						window.location.reload(true);
 					}
 				});
+		});
+		$(".info").click(function(){
+			id = $(this).attr('id');
+			$.ajax({
+				url:'getData/'+id,
+				data:{send:true},
+				success:function(data){
+					$("#infoNip").text(data['nip']);
+					$("#infoNama").text(data['nama_dosen']);
+					$("#infoEmail").text(data['email']);
+					$("#infoTelepon").text(data['telepon']);
+					$("#infofoto").html(data['foto_dosen']);		
+				}
+			});
 		});
 	});
 </script>
