@@ -38,6 +38,11 @@ class MPeminatan extends CI_Model{
 		//JOIN tema on peminatan.id_tema = tema.id_tema WHERE tema.id_pengguna=$iduser ORDER BY peminatan.id DESC
 	}
 
+	function update($cond, $data){
+		$this->db->where($cond);
+		$query = $this->db->update('peminatan', $data);
+		return $query;
+	}
 
 	function delete($cond){
 		$this->db->where($cond);

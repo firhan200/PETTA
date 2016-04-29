@@ -63,7 +63,14 @@
 			      		<br/>
 			      		<h5>Peminat</h5>
 			      		<hr/>
-			      		<?php echo getPeminat($result->id_tema); ?>
+			      		<table class="table striped">
+			      			<?php if($self==1){
+			      					echo getPeminat($result->id_tema); 
+			      				}else{
+			      					echo getPeminatLainnya($result->id_tema); 
+			      				}
+			      			?>
+			      		</table>
 			    	</li>
 			    </ul>
 			    <?php 
@@ -89,7 +96,25 @@ function getPeminat($id){
 	$q = "SELECT * FROM peminatan P, mahasiswa M WHERE P.id_pengguna=M.id_pengguna AND id_tema=".$id." ORDER BY P.id DESC";
 	$query = $ci->db->query($q);
 	foreach($query->result() as $result){
-		echo $result->nama_mahasiswa.'<br/>';
+		echo '<tr><td width="80%">'.$result->nama_mahasiswa.'</td>';
+		if($result->status_peminatan==1){
+			?>
+			<td align="right"><a href="<?php echo site_url('tema/batalkan_peminat/'.$id.'/'.$result->id_pengguna.''); ?>" onclick="return confirm('Batalkan Peminatan Mahasiswa?')"><button type="button" class="btn waves-effect red">Batalkan</button></a></td>
+			<?php
+		}else{
+			?>
+			<td align="right"><a href="<?php echo site_url('tema/setujui_peminat/'.$id.'/'.$result->id_pengguna.''); ?>" onclick="return confirm('Setujui Peminatan Mahasiswa?')"><button type="button" class="btn waves-effect blue">Setujui</button></a></td>
+			<?php
+		}
+		echo '</tr>';
+	}
+}
+function getPeminatLainnya($id){
+	$ci =& get_instance();
+	$q = "SELECT * FROM peminatan P, mahasiswa M WHERE P.id_pengguna=M.id_pengguna AND id_tema=".$id." ORDER BY P.id DESC";
+	$query = $ci->db->query($q);
+	foreach($query->result() as $result){
+		echo '<tr><td width="80%">'.$result->nama_mahasiswa.'</td></tr>';
 	}
 }
 ?>

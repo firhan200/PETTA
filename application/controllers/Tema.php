@@ -10,6 +10,8 @@ class Tema extends MY_Controller {
 		$this->load->model('MTag');
 		$this->load->model('MDosen');
 		$this->load->model('MPeminatan');
+		$this->load->model('MPengguna');
+		$this->load->model('MPesan');
 	}
 
 	public function index(){
@@ -253,6 +255,47 @@ class Tema extends MY_Controller {
 			show_404();
 		}
 	}
+
+	//tambahan
+
+	public function setujui_peminat($idTema = null, $idPengguna = null){
+		//update status
+		$data_baru = array('status_peminatan'=>1);
+		$update_peminatan = $this->MPeminatan->update(array('id_pengguna'=>$idPengguna, 'id_tema'=>$idTema), $data_baru);
+
+		//get judul tema
+		$query = $this->MTema->read(array('id_tema'=>$idTema), null, null);
+		foreach($query->result() as $result){
+			$judul_tema = $result->judul;
+		}
+
+		//kirim pesan
+		$message = "Peminatan anda pada tema: '".$judul_tema."' Telah di setujui";
+		$date = gmdate("Y-m-d, H:i:s", time()+3600*7);
+		$level = $this->session->userdata('levelpetta');
+		$data = array('id_pengirim'=>$this->session->userdata('idpetta'), 'id_penerima'=>$idPengguna, 'pesan'=>$message, 'tanggal'=>$date, 'level'=>$level);
+		$insert = $this->MPesan->create($data);
+		if($insert){
+			$notify = $this->addNotification($idPengguna, 'add');
+			if($notify){
+				redirect(site_url('tema/detil/'.$idTema));
+			}else{
+				redirect(site_url('tema/detil/'.$idTema));
+			}	
+		}else{
+			redirect(site_url('tema/detil/'.$idTema));
+		}
+	}
+
+	public function batalkan_peminat($idTema = null, $idPengguna = null){
+		//update status
+		$data_baru = array('status_peminatan'=>null);
+		$update_peminatan = $this->MPeminatan->update(array('id_pengguna'=>$idPengguna, 'id_tema'=>$idTema), $data_baru);
+
+		redirect(site_url('tema/detil/'.$idTema));
+	}
+
+	//tambahan
 	
 	public function checkTitle($judul){
 		$match = $this->MTema->read(array('judul'=>$judul), null, null);
@@ -303,5 +346,24 @@ class Tema extends MY_Controller {
 			'11'=>'November','12'=>'Desember',
 		);
 		return $month;
+	}
+
+	public function addNotification($idReceiver, $order){
+		$query = $this->MPengguna->read(array('id_pengguna'=>$idReceiver), null, null);
+		foreach($query->result() as $result){
+			$lastNumber = $result->notifikasi;
+		}
+		if($order=='add'){
+			$newNumber = $lastNumber + 1;
+		}else if($order=='del'){
+			$newNumber = $lastNumber - 1;
+		}
+		$data = array('notifikasi'=>$newNumber);
+		$update = $this->MPengguna->update(array('id_pengguna'=>$idReceiver), $data);
+		if($update){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
