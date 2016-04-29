@@ -66,11 +66,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		var check1=0;
-		$("#nim").bind("keyup change", function(){
+		$("#nim").bind("keyup change","on change", function(){
 		var nim = $(this).val();
 		$.ajax({
 			url:'cekData/mahasiswa/nim/'+nim,
-			data:{send:true},
+			data:{send:true, value:nim},
 			success:function(data){
 				if(data==1){
 					$("#reportNim").text("");
@@ -92,11 +92,11 @@
 				}
 			});
 		});
-		$("#nama").bind("keyup change", function(){
+		$("#nama").bind("keyup change","on change", function(){
 		var nama = $(this).val();
 		$.ajax({
 			url:'cekData/mahasiswa/nama_mahasiswa/'+nama,
-			data:{send:true},
+			data:{send:true,value:nama},
 			success:function(data){
 				if(data==1){
 					$("#reportNama").text("");
@@ -118,11 +118,11 @@
 				}
 			});
 		});
-		$("#email").bind("keyup change", function(){
+		$("#email").bind("keyup change","on change", function(){
 		var email = $(this).val();
 		$.ajax({
-			url:'cekData/mahasiswa/email/'+email,
-			data:{send:true},
+			url:'cekData/mahasiswa/email/',
+			data:{send:true, value:email},
 			success:function(data){
 				if(data==1){
 					$("#reportEmail").text("");
@@ -146,11 +146,11 @@
 				}
 			});
 		});
-		$("#username").bind("keyup change", function(){
+		$("#username").bind("keyup change","on change", function(){
 		var username = $(this).val();
 		$.ajax({
 			url:'cekData/pengguna/username/'+username,
-			data:{send:true},
+			data:{send:true,value:username},
 			success:function(data){
 				if(data==1){
 					$("#reportUsername").text("");

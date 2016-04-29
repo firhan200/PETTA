@@ -71,14 +71,10 @@ class Dosen extends MY_Controller {
 		redirect(site_url('dosen/data?balasan=1'));
 	}
 	public function delete($id){
-		$query=   $this->MDosen->read('dosen',null, null, null);/*(
-				($this->db->delete('dosen',array('id_pengguna'=>$id))) 
-				&& 
-				($this->db->delete('pengguna',array('id_pengguna'=>$id)))
-				);*/
-		foreach($query->result() as $result){
-			unlink('assets/img/dosen/'.$result->foto_dosen);
-		}
+		$query = $this->MDosen->read('dosen',array('id_pengguna'=>$id), null, null); 
+foreach ($query->result_array() as $result) { 
+unlink('assets/img/dosen/'.$result['foto_dosen']); 
+}
 		$this->db->delete('dosen',array('id_pengguna'=>$id));
 		$this->db->delete('pengguna',array('id_pengguna'=>$id));
 		redirect(site_url('dosen/data?balasan=2'));	
@@ -114,7 +110,8 @@ class Dosen extends MY_Controller {
 		$update = $this->MDosen->update(array('id'=>$id),  $data);
 		redirect(site_url('dosen/data?balasan=1'));
 	}
-	public function cekData($table,$field, $data){
+	public function cekData($table,$field){
+		$data = $this->input->get('value');
 		$match = $this->MDosen->read($table,array($field=>$data), null, null);
 		if($match->num_rows() > 0){
 			$report = 2;

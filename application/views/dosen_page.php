@@ -14,9 +14,9 @@
 				      		<?php echo htmlspecialchars($result->nama_dosen); ?>
 				      		<i class="material-icons right">more_vert</i>
 				      	</span>
-				    	<div align="right">
+				    	<!-- <div align="right">
 				    		<a href="<?php echo base_url('profil/showProfileDsn/'.$result->id); ?>"><i class="material-icons tiny">visibility</i> Lihat</a>
-				    	</div>
+				    	</div> -->
 				    </div>
 				    <div class="card-reveal">
 				      	<span class="card-title grey-text text-darken-4">

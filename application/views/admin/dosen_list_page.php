@@ -105,7 +105,7 @@
 				<h3 class="modal-title"><span class="glyphicon glyphicon-eye-open"></span> Info Dosen</h3>
 			</div>
 			<div class="modal-body">
-				<center><div id="infofoto"></div></center>
+				<center><div id="infofoto" alt="$result->foto_dosen"></div></center>
 				<div class="form-group">
 					<label style="font-size: 16px;font-weight: bold;color: black">Nip</label>
 					<div id="infoNip"></div>
@@ -176,7 +176,7 @@ function getTotalTema($id){
 					$("#infoNama").text(data['nama_dosen']);
 					$("#infoEmail").text(data['email']);
 					$("#infoTelepon").text(data['telepon']);
-					$("#infofoto").html(data['foto_dosen']);		
+					$("#infofoto").html(data['foto_dosen']);			
 				}
 			});
 		});

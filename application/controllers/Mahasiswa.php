@@ -89,7 +89,8 @@ class Mahasiswa extends MY_Controller {
 		$update = $this->MMahasiswa->update(array('id'=>$id),  $data);
 		redirect(site_url('mahasiswa/data?balasan=1'));
 	}
-	public function cekData($table, $field, $data){
+	public function cekData($table, $field){
+		$data = $this->input->get('value');
 		$match = $this->MMahasiswa->read($table, array($field=>$data), null, null);
 		if($match->num_rows() > 0){
 			$report = 2;

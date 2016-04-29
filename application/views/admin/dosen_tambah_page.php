@@ -66,11 +66,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		var check1=0;
-		$("#nip").bind("keyup change", function(){
+		$("#nip").bind("keyup change","on change", function(){
 		var nip = $(this).val();
 		$.ajax({
 			url:'cekData/dosen/nip/'+nip,
-			data:{send:true},
+			data:{send:true,value:nip},
 			success:function(data){
 				if(data==1){
 					$("#reportNip").text("");
@@ -96,11 +96,11 @@
 				}
 			});
 		});
-		$("#nama").bind("keyup change", function(){
+		$("#nama").bind("keyup change","on change", function(){
 		var nama = $(this).val();
 		$.ajax({
 			url:'cekData/dosen/nama_dosen/'+nama,
-			data:{send:true},
+			data:{send:true, value:nama},
 			success:function(data){
 				if(data==1){
 					$("#reportNama").text("");
@@ -122,11 +122,39 @@
 				}
 			});
 		});
-		$("#username").bind("keyup change", function(){
+		$("#email").bind("keyup change","on change", function(){
+		var email = $(this).val();
+		$.ajax({
+			url:'cekData/dosen/email/',
+			data:{send:true, value:email},
+			success:function(data){
+				if(data==1){
+					$("#reportEmail").text("");
+					check1=1;
+					 $('button[type="submit"]').prop('disabled','');
+					 $("#username").prop("disabled", '');
+					 $("#password").prop("disabled", '');
+					 $("#nama").prop("disabled", '');
+					 $("#nim").prop("disabled", '');
+					 $("#telepon").prop("disabled", '');
+				}else{
+					$("#reportEmail").text("*email sudah ada");
+					check1=0;
+					 $('button[type="submit"]').prop('disabled',true);
+					 $("#username").prop("disabled", true);
+					 $("#password").prop("disabled", true);
+					 $("#nama").prop("disabled", true);
+					 $("#nim").prop("disabled", true);
+					 $("#telepon").prop("disabled", true);
+					}
+				}
+			});
+		});
+		$("#username").bind("keyup change","on change", function(){
 		var username = $(this).val();
 		$.ajax({
 			url:'cekData/pengguna/username/'+username,
-			data:{send:true},
+			data:{send:true,value:username},
 			success:function(data){
 				if(data==1){
 					$("#reportUsername").text("");

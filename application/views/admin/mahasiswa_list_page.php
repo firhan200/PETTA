@@ -45,7 +45,7 @@
 								<td width="30%"><?php echo htmlspecialchars($result->nama_mahasiswa); ?></td>
 								<td width="10%"><?php getTotalPeminatan($result->id_pengguna); ?></td>
 								<td width="15%">
-									<a class="btn-floating blue tooltipped" data-tooltip="Lihat Mahasiswa" data-delay="1"><i class="material-icons">zoom_in</i></a>
+									<a href="#infoModal" id="<?php echo $result->id ?>" class="info btn-floating blue tooltipped modal-trigger" data-tooltip="Lihat Mahasiswa" data-delay="1"><i class="material-icons">zoom_in</i></a>
 									<a href="#modalEdit" id="<?php echo $result->id ?>" class="edit btn-floating grey tooltipped modal-trigger" data-tooltip="Ubah Mahasiswa" data-delay="1"><i class="material-icons">settings</i></a>
 									<a class="del btn-floating red tooltipped" href="<?php echo site_url('mahasiswa/delete/'.$result->id_pengguna.''); ?>" class="material-icons" onclick="return confirm('Hapus Mahasiswa?')" data-tooltip="Hapus Mahasiswa" data-delay="1"><i class="material-icons left">clear</i></a>
 								</td>
@@ -62,7 +62,7 @@
 	</div>
 </div>
 
-<div id="modalEdit" class="modal" style="width: 40%;">
+<div id="modalEdit" class="modal" style="width: 40%;height: auto;">
   	<div class="modal-dialog">
   		<div class="modal-content">
   			<div class="modal-header">
@@ -96,6 +96,30 @@
   	</div>
  </div>
 <!-- Edit Modal Structure End -->
+<!-- Info Modal -->
+<div id="infoModal" class="modal" role ="modal" style="width: 40%;height: auto;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<i class="medium material-icons prefix">account_circle</i>
+				<h3 class="modal-title"><span class="glyphicon glyphicon-eye-open"></span> Info Mahasiswa</h3>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label style="font-size: 16px;font-weight: bold;color: black">Nim</label>
+					<div id="infoNim"></div>
+					<label style="font-size: 16px;font-weight: bold;color: black">Nama</label>
+					<div id="infoNama"></div>
+					<label style="font-size: 16px;font-weight: bold;color: black">Email</label>
+					<div id="infoEmail"></div>
+					<label style="font-size: 16px;font-weight: bold;color: black">Telepon</label>
+					<div id="infoTelepon"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Info Modal end -->
 
 <?php
 function getTotalPeminatan($id){
@@ -140,35 +164,48 @@ function getTotalPeminatan($id){
 					}
 				});
 		});
-	});
-	$("#EditNim").bind("keyup change", function(){
-		var nim = $(this).val();
-		$.ajax({
-			url:'cekData/mahasiswa/nim/'+nim,
-			data:{send:true},
-			success:function(data){
-				if(data==1){
-					$("#report3").text("");
-					check1=1;
-					 $('button[type="submit"]').prop('disabled','');
-					/* $("#username").prop("disabled", '');
-					 $("#password").prop("disabled", '');*/
-					 $("#EditNama").prop("disabled", '');
-					/* $("#email").prop("disabled", '');
-					 $("#dosen").prop("disabled", '');
-					 $("#telepon").prop("disabled", '');*/
-				}else{
-					$("#report3").text("*nim sudah ada");
-					check1=0;
-					 $('button[type="submit"]').prop('disabled',true);
-					 /*$("#username").prop("disabled", true);
-					 $("#password").prop("disabled", true);*/
-					 $("#EditNama").prop("disabled", true);
-					/* $("#email").prop("disabled", true);
-					 $("#dosen").prop("disabled", true);
-					 $("#telepon").prop("disabled", true);*/
+		$("#EditNim").bind("keyup change", function(){
+			var nim = $(this).val();
+			$.ajax({
+				url:'cekData/mahasiswa/nim/'+nim,
+				data:{send:true},
+				success:function(data){
+					if(data==1){
+						$("#report3").text("");
+						check1=1;
+						 $('button[type="submit"]').prop('disabled','');
+						/* $("#username").prop("disabled", '');
+						 $("#password").prop("disabled", '');*/
+						 $("#EditNama").prop("disabled", '');
+						/* $("#email").prop("disabled", '');
+						 $("#dosen").prop("disabled", '');
+						 $("#telepon").prop("disabled", '');*/
+					}else{
+						$("#report3").text("*nim sudah ada");
+						check1=0;
+						 $('button[type="submit"]').prop('disabled',true);
+						 /*$("#username").prop("disabled", true);
+						 $("#password").prop("disabled", true);*/
+						 $("#EditNama").prop("disabled", true);
+						/* $("#email").prop("disabled", true);
+						 $("#dosen").prop("disabled", true);
+						 $("#telepon").prop("disabled", true);*/
 					}
 				}
 			});
 		});
+		$(".info").click(function(){
+			id = $(this).attr('id');
+			$.ajax({
+				url:'getData/'+id,
+				data:{send:true},
+				success:function(data){
+					$("#infoNim").text(data['nim']);
+					$("#infoNama").text(data['nama_mahasiswa']);
+					$("#infoEmail").text(data['email']);
+					$("#infoTelepon").text(data['telepon']);	
+				}
+			});
+		});
+	});
 </script>
