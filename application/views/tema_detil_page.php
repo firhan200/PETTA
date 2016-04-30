@@ -45,10 +45,14 @@
 				?>
 				<ul class="collection" style="border:0px;">
 					<li class="collection-item avatar">
+			      		<?php if($result->foto_dosen==null){ ?>
 			      		<img src="<?php echo base_url('assets/img/dosen/noava.png'); ?>" alt="" class="circle">
+			      		<?php }else{ ?>
+			      		<img src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>" alt="" class="circle">
+			      		<?php } ?>
 			      		<div class="row" style="margin-bottom:-5px;">
 			      			<div class="col s12 m12">
-			      				<a href="<?php echo site_url('profil/'.$result->id_pengguna.''); ?>"><div class="dosen-t"><?php echo htmlspecialchars($result->nama_dosen); ?></div></a>
+			      				<a href="<?php echo site_url('profil/index/'.$result->id_pengguna.''); ?>"><div class="dosen-t"><?php echo htmlspecialchars($result->nama_dosen); ?></div></a>
 			      			</div>
 			      		</div>
 			      		<span class="title"><b><?php echo htmlspecialchars($result->judul); ?></b></span>

@@ -33,7 +33,7 @@ $(document).ready(function(){
 					      		<div class="dosen-t">
 					      			<div class="row">
 					      				<div class="col s6">
-							      			<a href="#"><?php echo htmlspecialchars($info['nama']); ?></a>
+							      			<a href="<?php echo site_url('profil/index/'.$info['id']); ?>"><?php echo htmlspecialchars($info['nama']); ?></a>
 							      			<div style="margin-top:-5px;">
 							      				<b><?php echo htmlspecialchars($info['ni']); ?></b>
 							      			</div>
@@ -95,6 +95,7 @@ function getData($idUser, $level){
 		$q = "SELECT * FROM mahasiswa WHERE id_pengguna=".$idUser."";
 		$query = $ci->db->query($q);
 		foreach($query->result() as $result){
+			$data['id'] = $result->id_pengguna;
 			$data['nama'] = $result->nama_mahasiswa;
 			$data['foto'] = 'noava.png';
 			$data['ni'] = 'NIP : '.$result->nim;
@@ -103,6 +104,7 @@ function getData($idUser, $level){
 		$q = "SELECT * FROM dosen WHERE id_pengguna=".$idUser."";
 		$query = $ci->db->query($q);
 		foreach($query->result() as $result){
+			$data['id'] = $result->id_pengguna;
 			$data['nama'] = $result->nama_dosen;
 			$data['foto'] = $result->foto_dosen;
 			$data['ni'] = 'NIP : '.$result->nip;

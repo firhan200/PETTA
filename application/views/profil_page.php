@@ -11,13 +11,17 @@
 			<?php if ($level==2){?>
 			<?php foreach($query->result() as $result){?>
 			<div class="col s12 m3 l3" align="center">
+				<?php if($result->foto_dosen!=null){ ?>
 				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>">
+				<?php }else{ ?>
+				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/noava.png'); ?>">
+				<?php } ?>
 			</div>
 			<?php }?>
 			<?php	}else {?>
-			<div class="col s12 m3 l3" align="center" ></div>
+			<div class="col s12 m3 l3" align="center"></div>
 			<?php }?>
-			<div class="col s12 m9 l9 info-t" >
+			<div class="col s12 m9 l9 info-t">
 				<?php if ($level==2){?><!-- DOSEN -->
 					<?php foreach($query->result() as $result){?>
 						<div style="font-size:18pt;">
@@ -41,7 +45,7 @@
 		</div>
 	</div>
 </div>
-<div class="container pad-t" >
+<div class="container pad-t" style="margin-top:100px">
 	<div class="row">
 		<div class="col s12 m4 l3" >
 			<div class="box-t">

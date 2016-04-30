@@ -35,7 +35,7 @@ class Profil extends MY_Controller {
 		}else{
 			//cek self profile
 			if($id==$this->session->userdata('idpetta')){
-				$data['self'] = 1;
+				redirect(site_url('profil'));
 			}else{
 				$data['self'] = 0;
 			}

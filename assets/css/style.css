@@ -6,6 +6,7 @@ table{word-wrap:break-word;}
 .log-logo-t{max-width:200px;}
 .notif-t:hover{text-decoration:underline;}
 .error{color:red;}
+.activator{max-height:250px;overflow:hidden;}
 #pesan{border:1px solid #bdbdbd;padding:5px 0px 5px 0px;margin-top:5px;}
 .def-input{border:1px solid #bdbdbd !important;padding:5px 0px 5px 0px !important;margin-top:5px !important;}
 .container{width:90%;}
