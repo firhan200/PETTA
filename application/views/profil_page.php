@@ -11,7 +11,11 @@
 			<?php if ($level==2){?>
 			<?php foreach($query->result() as $result){?>
 			<div class="col s12 m3 l3" align="center">
+				<?php if(($result->foto_dosen)!=null){?>
 				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>">
+				<?php }else{?>
+				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/noava.png'); ?>">
+				<?php }?>
 			</div>
 			<?php }?>
 			<?php	}else {?>
@@ -112,12 +116,12 @@
   			<div class="modal-content">
   				<div class="modal-header">
   				 <i class="medium material-icons prefix">account_circle</i>
-  					<h4 class="modal-title"> Ubah Informasi</h4>
+  					<h4 class="modal-title"> Ubah Informasi</h4>&nbsp;<span class="error" id="reportEmail"></span>
   				</div>
   				<div class="modal-body">
 					<form action="edit" id="editform" method="post" enctype="multipart/form-data">
 						<div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditEmail" name="EditEmail" class="form-control" type="text" class="validate" required="required">
+					        <input placeholder="Placeholder" id="EditEmail" name="EditEmail" class="form-control" type="email" class="validate" required="required">
 					        <label for="Editmhs_email">Email</label>
 				        </div>
 						<div class="form-group input-field col s12">
@@ -234,6 +238,24 @@ function tgl($date){
 				success:function(data){
 					$("#modalUpload").hide();
 					window.location.reload(true);
+				}
+			});
+		});
+		$("#EditEmail").bind("keyup change","on change", function(){
+		var email = $(this).val();
+		$.ajax({
+			url:'profil/cekData/email/',
+			data:{send:true, value:email},
+			success:function(data){
+				if(data==1){
+					$("#reportEmail").text("");
+					$('button[type="submit"]').prop('disabled','');
+					$("#telepon").prop("disabled", '');
+				}else{
+					$("#reportEmail").text("*email sudah ada");
+					 $('button[type="submit"]').prop('disabled',true);
+					 $("#telepon").prop("disabled", true);
+					}
 				}
 			});
 		});
