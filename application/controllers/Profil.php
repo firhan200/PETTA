@@ -12,19 +12,52 @@ class Profil extends MY_Controller {
 		$this->load->model('MMahasiswa');
 		$this->load->model('MTema');
 		$this->load->model('MPeminatan');
-
+		$this->load->model('MPengguna');
 	}
 
-	public function index(){
+	public function index($id = null){
 		$data['menu4'] = true;
-		$data["row"] = $this->MMahasiswa->getMhs('pengguna',null,null,null);
-		$data['query'] = $this->MDosen->getWali('pengguna',null,null,null);
-		
-		if($this->session->userdata('levelpetta')==2){
-			$data['query1'] = $this->MPeminatan->readRiwayat(array('tema.id_pengguna'=>($this->session->userdata('idpetta'))));
-		}else if($this->session->userdata('levelpetta')==3){
-			$data['query1'] = $this->MPeminatan->readRiwayat(array('peminatan.id_pengguna'=>($this->session->userdata('idpetta'))));	
-		} 
+
+		if($id==null){
+			$data['self'] = 1;
+			$data['level'] = $this->session->userdata('levelpetta');
+
+			//query informasi
+			$data["row"] = $this->MMahasiswa->getMhs('pengguna',null,null,null);
+			$data['query'] = $this->MDosen->getWali('pengguna',null,null,null);
+
+			//query riwayat
+			if($this->session->userdata('levelpetta')==2){
+				$data['query1'] = $this->MPeminatan->readRiwayat(array('tema.id_pengguna'=>($this->session->userdata('idpetta'))));
+			}else if($this->session->userdata('levelpetta')==3){
+				$data['query1'] = $this->MPeminatan->readRiwayat(array('peminatan.id_pengguna'=>($this->session->userdata('idpetta'))));	
+			} 
+		}else{
+			//cek self profile
+			if($id==$this->session->userdata('idpetta')){
+				$data['self'] = 1;
+			}else{
+				$data['self'] = 0;
+			}
+
+			//get level pengguna
+			$queryLevel = $this->MPengguna->read(array('id_pengguna'=>$id), null, null);
+			foreach($queryLevel->result() as $result){
+				$data['level'] = $result->level;
+			}
+
+			//query informasi
+			$data["row"] = $this->MMahasiswa->read('mahasiswa', array('id_pengguna'=>$id),null,null);
+			$data['query'] = $this->MDosen->read('dosen', array('id_pengguna'=>$id),null,null);
+
+			//query riwayat
+			if($data['level']==2){
+				$data['query1'] = $this->MPeminatan->readRiwayat(array('tema.id_pengguna'=>$id));
+			}else if($data['level']==3){
+				$data['query1'] = $this->MPeminatan->readRiwayat(array('peminatan.id_pengguna'=>$id));	
+			} 
+		}
+
 		$this->load->view('layouts/header');
 		$this->load->view('profil_page', $data);
 		$this->load->view('layouts/footer');

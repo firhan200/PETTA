@@ -37,7 +37,7 @@
 			      		<img src="<?php echo base_url('assets/img/dosen/noava.png'); ?>" alt="" class="circle">
 			      		<div class="row" style="margin-bottom:-5px;">
 			      			<div class="col s8 m6 l6">
-			      				<a href="<?php echo site_url('profil/'.$result->id_pengguna.''); ?>"><div class="dosen-t"><?php echo htmlspecialchars($result->nama_dosen); ?></div></a>
+			      				<a href="<?php echo site_url('profil/index/'.$result->id_pengguna.''); ?>"><div class="dosen-t"><?php echo htmlspecialchars($result->nama_dosen); ?></div></a>
 			      			</div>
 			      			<div class="col s4 m6 l6" align="right">
 			      				<a href="#" class="ketchup tooltip" title="<?php echo getPeminat($result->id_tema); ?>"><i class="material-icons tiny">grade</i>&nbsp;<?php echo getJumlahPeminat($result->id_tema); ?>&nbsp;Peminat</a>

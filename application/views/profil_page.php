@@ -8,7 +8,7 @@
 <?php }?>
 	<div class="container">
 		<div class="row">
-			<?php if ($this->session->userdata("levelpetta")==2){?>
+			<?php if ($level==2){?>
 			<?php foreach($query->result() as $result){?>
 			<div class="col s12 m3 l3" align="center">
 				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>">
@@ -18,7 +18,7 @@
 			<div class="col s12 m3 l3" align="center" ></div>
 			<?php }?>
 			<div class="col s12 m9 l9 info-t" >
-				<?php if ($this->session->userdata("levelpetta")==2){?><!-- DOSEN -->
+				<?php if ($level==2){?><!-- DOSEN -->
 					<?php foreach($query->result() as $result){?>
 						<div style="font-size:18pt;">
 							<?php echo $result->nama_dosen;?>
@@ -27,7 +27,7 @@
 							<?php echo $result->email;?>
 						</div>	
 					<?php }?>
-				<?php	}else if($this->session->userdata("levelpetta")==3){?><!-- MAHASISWA -->
+				<?php	}else if($level==3){?><!-- MAHASISWA -->
 					<?php foreach($row->result() as $result){?>
 						<div style="font-size:18pt;">
 							<?php echo $result->nama_mahasiswa; ?>
@@ -49,7 +49,7 @@
 					<i class="material-icons">account_circle</i>&nbsp;INFORMASI
 				</div>
 				<ul class="category-t">
-				<?php if ($this->session->userdata("levelpetta")==2){?><!-- DOSEN -->
+				<?php if ($level==2){?><!-- DOSEN -->
 					<?php foreach($query->result() as $result){?>
 					<li id="nip_dosen"><?php echo $result->nip?></li>
 					<li id="nama_dosen"><?php echo $result->nama_dosen?></li>
@@ -58,7 +58,7 @@
 					
 					<?php }?>
 					
-				<?php	}else if($this->session->userdata("levelpetta")==3){?><!-- MAHASISWA -->
+				<?php	}else if($level==3){?><!-- MAHASISWA -->
 					<?php foreach($row->result() as $result){?>
 					<li id="nim_mhs"><?php echo $result->nim;?></li>
 					<li id="nama_mhs"><?php echo $result->nama_mahasiswa; ?></li>
@@ -71,15 +71,17 @@
 				</ul>
 				
 				<div align="right">
-					<!-- DOSEN -->
-					<?php if ($this->session->userdata("levelpetta")==2){?>
+					<?php if($self==1){ ?>
+						<!-- DOSEN -->
+						<?php if ($level==2){?>
+							<a href="#modalEdit" class="edit waves-effect waves-light modal-trigger" id="<?php echo $result->id ?>"><i class="material-icons tiny">settings</i>&nbsp;ubah</a>
+
+							<a href="#modalUpload" class="upload waves-effect waves-light modal-trigger" id="<?php echo $result->id ?>"><i class="material-icons tiny">assignment_ind</i>&nbsp;Upload</a>
+
+						<!-- MAHASISWA -->
+						<?php	}else if($level==3){?>
 						<a href="#modalEdit" class="edit waves-effect waves-light modal-trigger" id="<?php echo $result->id ?>"><i class="material-icons tiny">settings</i>&nbsp;ubah</a>
-
-						<a href="#modalUpload" class="upload waves-effect waves-light modal-trigger" id="<?php echo $result->id ?>"><i class="material-icons tiny">assignment_ind</i>&nbsp;Upload</a>
-
-					<!-- MAHASISWA -->
-					<?php	}else if($this->session->userdata("levelpetta")==3){?>
-					<a href="#modalEdit" class="edit waves-effect waves-light modal-trigger" id="<?php echo $result->id ?>"><i class="material-icons tiny">settings</i>&nbsp;ubah</a>
+						<?php }?>
 					<?php }?>
 				</div>
 			</div>
@@ -90,7 +92,7 @@
 				<div class="history-t">
 					<div class="row">
 						<div class="col s9">
-							<a href="#" class="notif-t"><?php echo htmlspecialchars($result->nama_mahasiswa); ?></a> meminati tema TA 
+							<a href="<?php echo site_url('profil/index/'.$result->id_mahasiswa.''); ?>" class="notif-t"><?php echo htmlspecialchars($result->nama_mahasiswa); ?></a> meminati tema TA 
 							<a href="<?php echo site_url('tema/detil/'.$result->id_tema.''); ?>" class="notif-t"><?php if(strlen(htmlspecialchars($result->judul)) < 50){ echo htmlspecialchars($result->judul); }else{ echo substr(htmlspecialchars($result->judul), 0, 50).'...'; } ?></a>
 						</div>
 						<div class="col s3" align="right">

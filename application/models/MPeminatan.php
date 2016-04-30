@@ -25,6 +25,7 @@ class MPeminatan extends CI_Model{
 
 	function readRiwayat($cond){
 		$this->db->select('*');
+		$this->db->select('mahasiswa.id_pengguna as id_mahasiswa');
 		$this->db->from('peminatan');
 		$this->db->join('mahasiswa','peminatan.id_pengguna = mahasiswa.id_pengguna');
 		$this->db->join('tema','peminatan.id_tema = tema.id_tema');

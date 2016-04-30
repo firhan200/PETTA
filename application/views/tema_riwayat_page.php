@@ -19,7 +19,7 @@
 				<div class="history-t">
 					<div class="row">
 						<div class="col s9">
-							<a href="#" class="notif-t"><?php echo htmlspecialchars($result->nama_mahasiswa); ?></a> meminati tema TA 
+							<a href="<?php echo site_url('profil/index/'.$result->id_mahasiswa.''); ?>" class="notif-t"><?php echo htmlspecialchars($result->nama_mahasiswa); ?></a> meminati tema TA 
 							<a href="<?php echo site_url('tema/detil/'.$result->id_tema.''); ?>" class="notif-t"><?php if(strlen(htmlspecialchars($result->judul)) < 50){ echo htmlspecialchars($result->judul); }else{ echo substr(htmlspecialchars($result->judul), 0, 50).'...'; } ?></a>
 						</div>
 						<div class="col s3" align="right">

@@ -96,7 +96,7 @@ function getPeminat($id){
 	$q = "SELECT * FROM peminatan P, mahasiswa M WHERE P.id_pengguna=M.id_pengguna AND id_tema=".$id." ORDER BY P.id DESC";
 	$query = $ci->db->query($q);
 	foreach($query->result() as $result){
-		echo '<tr><td width="80%">'.$result->nama_mahasiswa.'</td>';
+		echo '<tr><td width="80%"><a href="'.site_url('profil/index/'.$result->id_pengguna).'">'.$result->nama_mahasiswa.'</a></td>';
 		if($result->status_peminatan==1){
 			?>
 			<td align="right"><a href="<?php echo site_url('tema/batalkan_peminat/'.$id.'/'.$result->id_pengguna.''); ?>" onclick="return confirm('Batalkan Peminatan Mahasiswa?')"><button type="button" class="btn waves-effect red">Batalkan</button></a></td>
