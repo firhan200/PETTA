@@ -89,8 +89,14 @@ unlink('assets/img/dosen/'.$result['foto_dosen']);
 					'telepon'=>$result->telepon,
 					'foto_dosen'=>$result->foto_dosen
 				);
-				$data['foto_dosen'] = '<img src="'.base_url('assets/img/dosen/'.$result->foto_dosen).'" class="circle responsive-image " style="max-width:300px;max-height:400px">';
-				$data['fotoNameOnly'] = $result->foto_dosen;
+				if($result->foto_dosen){
+					$data['foto_dosen'] = '<img src="'.base_url('assets/img/dosen/'.$result->foto_dosen).'" class="circle responsive-image " style="max-width:300px;max-height:400px">';
+					$data['fotoNameOnly'] = $result->foto_dosen;
+				}else if(!$result->foto_dosen){
+					$data['foto_dosen'] = '<img src="'.base_url('assets/img/dosen/noava.png').'" class="circle responsive-image " style="max-width:300px;max-height:400px">';
+					$data['fotoNameOnly'] = $result->foto_dosen;
+				}
+				
 			}
 		header('Content-Type: application/json');
 		echo json_encode($data);

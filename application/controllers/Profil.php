@@ -62,9 +62,6 @@ class Profil extends MY_Controller {
 		$this->load->view('profil_page', $data);
 		$this->load->view('layouts/footer');
 	}
-	public function showProfileDsn(){
-
-	}
 
 	public function getDataMhs($id){
 		$query = $this->MMahasiswa->read('mahasiswa', array('id'=>$id), null, null);
@@ -170,5 +167,25 @@ class Profil extends MY_Controller {
 			$errors = $this->upload->display_errors('<p>','failed try again','</p');
 			flashMsg($errors);
 		}//else kalo gagal
+	}
+	public function cekData($field){
+		$data = $this->input->get('value');
+		if($this->session->userdata('levelpetta')==2){
+			$match = $this->MDosen->read('dosen', array($field=>$data), null, null);
+			if($match->num_rows() > 0){
+				$report = 2;
+			}else{
+				$report = 1;
+			}
+			echo $report;
+		}else if($this->session->userdata('levelpetta')==3){
+			$match = $this->MMahasiswa->read('mahasiswa', array($field=>$data), null, null);
+			if($match->num_rows() > 0){
+				$report = 2;
+			}else{
+				$report = 1;
+			}
+			echo $report;
+			}	
 	}
 }

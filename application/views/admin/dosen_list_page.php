@@ -176,7 +176,13 @@ function getTotalTema($id){
 					$("#infoNama").text(data['nama_dosen']);
 					$("#infoEmail").text(data['email']);
 					$("#infoTelepon").text(data['telepon']);
-					$("#infofoto").html(data['foto_dosen']);			
+					$("#infofoto").html(data['foto_dosen']);
+					/*if(($result->foto_dosen)!=null){
+						$("#infofoto").html(data['foto_dosen']);
+					}else if (($result->foto_dosen)==null){
+						$(#infofoto).attr('src','/assets/img/dosen/noava.png' );
+					}*/
+								
 				}
 			});
 		});

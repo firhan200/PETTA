@@ -7,11 +7,19 @@
 			<div class="pad2-t">
 				<div class="card">
 			    	<div class="card-image waves-effect waves-block waves-light">
+<<<<<<< HEAD
 			    		<?php if($result->foto_dosen==null){ ?>
 			    		<img class="activator" src="<?php echo base_url('assets/img/dosen/noava.png'); ?>">
 			    		<?php }else{ ?>
 			      		<img class="activator" src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>">
 			      		<?php } ?>
+=======
+			    		<?php if(($result->foto_dosen)!=null){?>
+			      		<img class="activator" src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>">
+			      		<?php }else{?>
+			      		<img class="activator" src="<?php echo base_url('assets/img/dosen/noava.png'); ?>">
+			      		<?php }?>
+>>>>>>> origin/master
 			    	</div>
 				    <div class="card-content">
 				      	<span class="card-title activator grey-text text-darken-4">
