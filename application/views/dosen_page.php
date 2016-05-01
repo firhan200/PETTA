@@ -2,7 +2,7 @@
 <div class="container pad-t">
 	<center><h4>DAFTAR DOSEN</h4></center>
 	<div class="row">
-		<?php foreach($query->result() as $result){ ?>
+		<?php $no=1;foreach($query->result() as $result){ ?>
 		<div class="col s12 m4 l3">
 			<div class="pad2-t">
 				<div class="card">
@@ -34,6 +34,10 @@
 			  	</div>
 			</div>
 		</div>
-		<?php } ?>
+		<?php 
+		if($no%4==0){
+			echo '<div class="col s12 m12"></div>';
+		}
+		$no++; } ?>
 	</div>
 </div>
