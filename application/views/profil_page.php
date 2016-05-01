@@ -11,19 +11,11 @@
 			<?php if ($level==2){?>
 			<?php foreach($query->result() as $result){?>
 			<div class="col s12 m3 l3" align="center">
-<<<<<<< HEAD
 				<?php if($result->foto_dosen!=null){ ?>
 				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>">
 				<?php }else{ ?>
 				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/noava.png'); ?>">
 				<?php } ?>
-=======
-				<?php if(($result->foto_dosen)!=null){?>
-				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>">
-				<?php }else{?>
-				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/noava.png'); ?>">
-				<?php }?>
->>>>>>> origin/master
 			</div>
 			<?php }?>
 			<?php	}else {?>
