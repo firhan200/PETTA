@@ -72,11 +72,11 @@
   			<div class="modal-body">
 				<form action="edit" id="editform" method="post" enctype="multipart/form-data">
 					<div class="form-group input-field col s12">
-				        <input placeholder="Placeholder" id="EditNip" name="EditNip" class="form-control" type="text" class="validate" required="required">
+				        <input placeholder="Placeholder" id="EditNip" maxlength="20" name="EditNip" class="form-control" type="text" class="validate" required="required">
 				        <label for="Editmhs_nim">Nip</label>
 			        </div>
 			        <div class="form-group input-field col s12">
-				        <input placeholder="Placeholder" id="EditNama" name="EditNama" class="form-control" type="text" class="validate" required="required">
+				        <input placeholder="Placeholder" id="EditNama" name="EditNama" maxlength="20" class="form-control" type="text" class="validate" required="required">
 				        <label for="Editmhs_nama">Nama</label>
 			        </div>
 			        <div class="form-group input-field col s12">

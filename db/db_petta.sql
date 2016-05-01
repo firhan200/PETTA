@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 29 Apr 2016 pada 15.47
--- Versi Server: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: May 01, 2016 at 07:55 AM
+-- Server version: 10.1.9-MariaDB
+-- PHP Version: 7.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,17 +23,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
+CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `id_pengguna` int(11) NOT NULL,
   `nama_admin` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `id_pengguna`, `nama_admin`) VALUES
@@ -42,10 +42,10 @@ INSERT INTO `admin` (`id`, `id_pengguna`, `nama_admin`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `dosen`
+-- Table structure for table `dosen`
 --
 
-CREATE TABLE IF NOT EXISTS `dosen` (
+CREATE TABLE `dosen` (
   `id` int(11) NOT NULL,
   `id_pengguna` int(11) NOT NULL,
   `foto_dosen` varchar(50) NOT NULL,
@@ -53,77 +53,87 @@ CREATE TABLE IF NOT EXISTS `dosen` (
   `nip` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `telepon` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `dosen`
+-- Dumping data for table `dosen`
 --
 
 INSERT INTO `dosen` (`id`, `id_pengguna`, `foto_dosen`, `nama_dosen`, `nip`, `email`, `telepon`) VALUES
-(1, 3, '04-04-16-15-29-59.jpg', 'Ragil Saputra', '23123123123123123', 'ragil@gmail.com', '087273828323'),
-(2, 5, '', 'Aris', '123123123123', 'aris@gmail.com', '123123123');
+(1, 3, '30-04-16-12-34-19.jpg', 'Ragil Saputra', '6520180280180280', 'ragil@gmail.com', '087273828323'),
+(2, 5, '01-05-16-12-54-25.jpg', 'Aris', '1234567890123456', 'aris@gmail.com', '123123123'),
+(4, 10, '01-05-16-12-46-01.jpg', 'Nurdin Bachtiar', '67894561123456789', 'nurdin@gmail.com', '085412346687'),
+(5, 11, '', 'Hilmie Arief W', '44556688798745', 'hilmi@gmail.com', '081380456778'),
+(6, 12, '01-05-16-12-49-32.jpg', 'Indra Waspada', '99874561234456', 'indra@gmail.com', '087456654112'),
+(7, 13, '', 'Suhartono', '556849777841235', 'suhartono@gmail.com', '087779444521'),
+(8, 14, '', 'Djalal Er Riyanto', '554688795112354', 'djalal@gmail.com', '084021350522');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
-CREATE TABLE IF NOT EXISTS `kategori` (
+CREATE TABLE `kategori` (
   `id_kategori` int(11) NOT NULL,
   `nama_kategori` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kategori`
+-- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
-(1, 'bidang 1'),
-(2, 'bidang 2'),
-(3, 'bidang 3'),
-(4, 'helo');
+(1, 'Sistem Cerdas'),
+(2, 'Sistem Pendukung Keputusan'),
+(3, 'Logika Fuzzy'),
+(4, 'Keamanan Jaringan');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mahasiswa`
+-- Table structure for table `mahasiswa`
 --
 
-CREATE TABLE IF NOT EXISTS `mahasiswa` (
+CREATE TABLE `mahasiswa` (
   `id` int(11) NOT NULL,
   `id_pengguna` int(11) NOT NULL,
   `nama_mahasiswa` varchar(255) NOT NULL,
   `nim` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `telepon` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `mahasiswa`
+-- Dumping data for table `mahasiswa`
 --
 
 INSERT INTO `mahasiswa` (`id`, `id_pengguna`, `nama_mahasiswa`, `nim`, `email`, `telepon`) VALUES
 (1, 2, 'Firhan Balweel', '24010313130080', 'firhan.faisal1995@gmail.com', '123'),
-(2, 4, 'Tes', '123', 'tes@gmail.com', '-'),
-(3, 8, 'Tes', '123', 'tes@gmail.com', '123');
+(2, 4, 'Mirza Chilman Garin', '24010313140088', 'mirzachilman@gmail.com', '085781429272'),
+(4, 15, 'Octareno Heddy H', '24010313140086', 'renocth@gmail.com', '087955462132'),
+(5, 16, 'Rizki Ramadiansyah', '24010313130091', 'rizkirmdn@gmail.com', '087955505521'),
+(6, 17, 'ressas selsabil', '24010313140074', 'ressas@gmail.com', '087995554665'),
+(7, 18, 'Amrizha', '24010313130079', 'amrizha@gmail.com', '088795555222'),
+(8, 19, 'Ikhsan Wisnuadji', '24010313130108', 'ikhsan@gmail.com', '087779546222'),
+(9, 20, 'Ananda Beniva', '24010313130078', 'ananda@gmail.com', '087955462222');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `peminatan`
+-- Table structure for table `peminatan`
 --
 
-CREATE TABLE IF NOT EXISTS `peminatan` (
+CREATE TABLE `peminatan` (
   `id` int(11) NOT NULL,
   `id_pengguna` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
   `waktu_peminatan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status_peminatan` char(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `peminatan`
+-- Dumping data for table `peminatan`
 --
 
 INSERT INTO `peminatan` (`id`, `id_pengguna`, `id_tema`, `waktu_peminatan`, `status_peminatan`) VALUES
@@ -132,24 +142,25 @@ INSERT INTO `peminatan` (`id`, `id_pengguna`, `id_tema`, `waktu_peminatan`, `sta
 (9, 4, 2, '2016-03-12 10:19:29', ''),
 (10, 2, 10, '2016-04-29 13:46:48', '1'),
 (11, 2, 7, '2016-04-04 08:38:05', ''),
-(12, 2, 11, '2016-04-29 13:47:20', '1');
+(12, 2, 11, '2016-04-29 13:47:20', '1'),
+(13, 15, 16, '2016-05-01 05:52:43', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengguna`
+-- Table structure for table `pengguna`
 --
 
-CREATE TABLE IF NOT EXISTS `pengguna` (
+CREATE TABLE `pengguna` (
   `id_pengguna` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
   `password` varchar(60) NOT NULL,
   `level` char(2) NOT NULL,
   `notifikasi` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pengguna`
+-- Dumping data for table `pengguna`
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `username`, `password`, `level`, `notifikasi`) VALUES
@@ -158,15 +169,25 @@ INSERT INTO `pengguna` (`id_pengguna`, `username`, `password`, `level`, `notifik
 (4, '24010313130081', '26752e7353a62fcabd95b8077fe7fe6ce16d5b9b', '3', 0),
 (5, '321', '5f6955d227a320c7f1f6c7da2a6d96a851a8118f', '2', 0),
 (6, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '1', 0),
-(8, '240', 'cae91e45aed80f3a3fe285c3c8c1a7e78d82d473', '3', 0);
+(10, 'nurdin', '9db6cdeecb690eb2369b77c8be766043678d268f', '2', 0),
+(11, 'Hilmie', '1a98ddaf820d16dfe55112029180370315b1314f', '2', 0),
+(12, 'indra', '300a29a2fe6e701da25021b20bb3f00151bc5498', '2', 0),
+(13, 'suhartono', '6505645811b627370cf5da621c52f16eb792b5d0', '2', 0),
+(14, 'djalal', '03658647ea2d84f6ec35ce609567648903d0e1ba', '2', 0),
+(15, '24010313140086', '5af2b2573a18bc55d77cb7c2789af421b776961d', '3', 0),
+(16, '24010313130091', '5c40c4c006b12d022c003d93a5f8e43d2db15d63', '3', 0),
+(17, '24010313140074', '2b44331f9b6f77f6b74e4c5d62cc3bc56eb70378', '3', 0),
+(18, '24010313130079', '13791df5e6e0789747ee134df09589c6886495b4', '3', 0),
+(19, '24010313130108', '50a160772596140ce2bb6e131856681ff6209dd4', '3', 0),
+(20, '24010313130078', 'dc5156c95d9a56498b4c37cbdfdc8108a3e91d41', '3', 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pesan`
+-- Table structure for table `pesan`
 --
 
-CREATE TABLE IF NOT EXISTS `pesan` (
+CREATE TABLE `pesan` (
   `id_pesan` bigint(20) NOT NULL,
   `id_pengirim` int(11) NOT NULL,
   `id_penerima` int(11) NOT NULL,
@@ -176,10 +197,10 @@ CREATE TABLE IF NOT EXISTS `pesan` (
   `baca` int(2) NOT NULL,
   `hapus` int(2) NOT NULL,
   `hapus2` int(2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pesan`
+-- Dumping data for table `pesan`
 --
 
 INSERT INTO `pesan` (`id_pesan`, `id_pengirim`, `id_penerima`, `pesan`, `tanggal`, `level`, `baca`, `hapus`, `hapus2`) VALUES
@@ -197,17 +218,17 @@ INSERT INTO `pesan` (`id_pesan`, `id_pengirim`, `id_penerima`, `pesan`, `tanggal
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tag`
+-- Table structure for table `tag`
 --
 
-CREATE TABLE IF NOT EXISTS `tag` (
+CREATE TABLE `tag` (
   `id` int(11) NOT NULL,
   `id_tema` int(11) NOT NULL,
   `id_kategori` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tag`
+-- Dumping data for table `tag`
 --
 
 INSERT INTO `tag` (`id`, `id_tema`, `id_kategori`) VALUES
@@ -215,34 +236,46 @@ INSERT INTO `tag` (`id`, `id_tema`, `id_kategori`) VALUES
 (48, 2, 3),
 (49, 2, 2),
 (63, 7, 3),
-(64, 10, 2),
-(65, 10, 3),
-(67, 11, 1);
+(67, 11, 1),
+(68, 12, 2),
+(69, 13, 3),
+(70, 14, 3),
+(71, 14, 2),
+(72, 10, 2),
+(73, 10, 3),
+(75, 15, 4),
+(76, 16, 4),
+(77, 16, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tema`
+-- Table structure for table `tema`
 --
 
-CREATE TABLE IF NOT EXISTS `tema` (
+CREATE TABLE `tema` (
   `id_tema` int(11) NOT NULL,
   `id_pengguna` int(11) NOT NULL,
   `judul` text NOT NULL,
   `keterangan` text NOT NULL,
   `tanggal_post` datetime NOT NULL,
   `status_tema` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tema`
+-- Dumping data for table `tema`
 --
 
 INSERT INTO `tema` (`id_tema`, `id_pengguna`, `judul`, `keterangan`, `tanggal_post`, `status_tema`) VALUES
 (2, 3, 'Prediksi Kurs Dollar Jaringan Syaraf Tiruan', 'asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdasdasdasdasd asdasdasd asdasdas', '2016-03-07 20:46:18', 1),
-(7, 5, 'Yes', 'asdasdasdasdasd', '2016-03-07 21:28:29', 0),
-(10, 3, 'Membuat sistem pendeteksi tingkat kesiapan panen menggunakan satelit Membuat sistem pendeteksi tingkat kesiapan panen menggunakan satelit', 'asdasdasdasdasda asdas asd ad asd as\r\nasda\r\nsd\r\nas\r\nd\r\nasdasd', '2016-03-09 14:09:02', 0),
-(11, 3, 'b', 'h', '2016-04-08 10:35:12', 1);
+(7, 5, 'Situs WEB interaktif PSIM Yogyakarta', 'hubungi saya', '2016-03-07 21:28:29', 0),
+(10, 3, 'Membuat sistem pendeteksi tingkat kesiapan panen menggunakan satelit Membuat sistem pendeteksi tingkat kesiapan panen menggunakan satelit', 'Hubungi saya untuk lebih lanjut', '2016-03-09 14:09:02', 0),
+(11, 3, 'Sistem informasi hotel di Kota Bandung berbasis WEB', 'hubungi saya', '2016-04-08 10:35:12', 1),
+(12, 10, 'Sistem pendukung keputusan pemilihan perguruan tinggi dengan metode proses hierarki analitik', 'hubungi saya untuk lebih lanjut', '2016-05-01 00:00:00', 0),
+(13, 11, 'The edge determining on the image with fuzzy method', 'hubungi saya untuk lebih lanjut', '2016-05-01 00:00:00', 0),
+(14, 11, 'Penerapan logika fuzzy dalam sistem pendukung keputusan pembelian ponsel', 'hubungi saya untuk lebih lanjut', '2016-05-01 00:00:00', 0),
+(15, 12, 'Sistem informasi geografis studi kasus PT. PLN [Persero] Unit Pelayanan Jaringan Sedayu Yogyakarta', 'hubungi saya untuk lebih lanjut', '2016-05-01 00:00:00', 0),
+(16, 12, 'Prototype sistem keamanan rumah dengan menggunakan sensor infra merah dan teknologi FBUS pada ponsel GSM', 'hubungi saya', '2016-05-01 00:00:00', 0);
 
 --
 -- Indexes for dumped tables
@@ -310,47 +343,47 @@ ALTER TABLE `tema`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `peminatan`
 --
 ALTER TABLE `peminatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `pengguna`
 --
 ALTER TABLE `pengguna`
-  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `id_pesan` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=106;
+  MODIFY `id_pesan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT for table `tema`
 --
 ALTER TABLE `tema`
-  MODIFY `id_tema` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id_tema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
