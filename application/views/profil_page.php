@@ -76,6 +76,7 @@
 				
 				<div align="right">
 					<?php if($self==1){ ?>
+						<a href="#modalPassword" class="pass waves-effect waves-light modal-trigger" id="<?php echo $result->id ?>"><i class="material-icons tiny">lock</i>&nbsp;ubah password</a>
 						<!-- DOSEN -->
 						<?php if ($level==2){?>
 							<a href="#modalEdit" class="edit waves-effect waves-light modal-trigger" id="<?php echo $result->id ?>"><i class="material-icons tiny">settings</i>&nbsp;ubah</a>
@@ -137,6 +138,39 @@
   		</div>
   	</div>
   	<!-- Edit Modal Structure End -->
+
+  	<!-- password Modal Structure Start -->
+    <div id="modalPassword" class="modal" style="width: 40%;">
+  		<div class="modal-dialog">
+  			<div class="modal-content">
+  				<div class="modal-header">
+  				 <i class="medium material-icons prefix">lock</i>
+  					<h4 class="modal-title"> Ubah Password</h4>
+  				</div>
+  				<div class="modal-body">
+					<form id="passform">
+						<div class="error" align="center" id="reportpass"></div>
+						<div class="input-field">
+					        <input id="oldpass" name="oldpass" type="password" class="validate" required="required">
+					        <label for="oldpass">Password Lama <span class="error" id="reportpass1"></span></label>
+				        </div>
+						<div class="input-field">
+					        <input id="newpass" name="newpass" type="password" class="validate" required="required">
+					        <label for="newpass">Password Baru <span class="error" id="reportpass2"></span></label>
+				        </div>
+				        <div class="input-field">
+					        <input id="confirmnewpass" name="confirmnewpass" type="password" class="validate" required="required">
+					        <label for="confirmnewpass">Ulangi Password Baru <span class="error" id="reportpass3"></span></label>
+				        </div>
+						<div class="modal-footer">
+							<button type="submit" id="btn_pass" class="btn waves-effect">Simpan</button>
+						</div>				
+					</form>
+				</div>
+  			</div>	
+  		</div>
+  	</div>
+  	<!-- password Modal Structure End -->
   	
   	<!-- Upload Modal Structure Start -->
     <div id="modalUpload" class="modal" style="width: 40%; height: auto">
@@ -190,6 +224,62 @@ function tgl($date){
 ?>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$("#btn_pass").prop('disabled', true);
+		//ubah password
+		$("#newpass").bind('keyup change', function(){
+			var newpass = $(this).val();
+			var confirmnewpass = $("#confirmnewpass").val();
+			if(newpass.length < 6){
+				$("#btn_pass").prop('disabled', true);
+				$("#reportpass2").text("*password minimal 6 karakter");
+			}else{
+				$("#btn_pass").prop('disabled', false);
+				is_same(newpass, confirmnewpass);
+				$("#reportpass2").text("");
+			}
+		});
+		$("#confirmnewpass").bind('keyup change', function(){
+			var confirmnewpass = $(this).val();
+			var newpass = $("#newpass").val();
+			is_same(newpass, confirmnewpass);
+		});
+		$("#passform").submit(function(e){
+			var formData = new FormData($(this)[0]);
+			$.ajax({
+				url:'pengguna/ubahPassword',
+				data:formData,
+				type:'POST',
+				contentType: false,
+				processData: false,
+				success:function(data){
+					if(data==1){
+						$("#reportpass").text("");
+						alert('Berhasil merubah password');
+						$('#modalPassword').closeModal();
+						$("#oldpass").val('');
+						$("#newpass").val('');
+						$("#confirmnewpass").val('');
+					}else if(data==2){
+						$("#reportpass").text("*Password lama salah");
+					}else if(data==3){
+						$("#reportpass").text("*Password dan Ulangi Password tidak sama");
+					}else if(data==4){
+						$("#reportpass").text("*Terjadi kesalahan, gagal merubah password");
+					}
+				}
+			});
+			return false;
+		});
+		function is_same(newpass, confirmpass){
+			if(newpass!=confirmpass){
+				$("#btn_pass").prop('disabled', true);
+				$("#reportpass3").text("*password tidak sama");
+			}else{
+				$("#btn_pass").prop('disabled', false);
+				$("#reportpass3").text("");
+			}
+		}
+
 		var id;var id1;
 
 		//GET DATA

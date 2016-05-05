@@ -76,4 +76,28 @@ class Pengguna extends MY_Controller {
 		$notif = $this->pullNotification();
 		echo $notif;
 	}
+
+	public function ubahPassword(){
+		$id_pengguna = $this->session->userdata('idpetta');
+		$oldpass = sha1($this->input->post('oldpass'));
+		$newpass = $this->input->post('newpass');
+		$confirmnewpass = $this->input->post('confirmnewpass');
+		//cek old pass
+		$query_cek = $this->MPengguna->read(array('id_pengguna'=>$id_pengguna, 'password'=>$oldpass), null, null);
+		if($query_cek->num_rows() > 0){
+			if($newpass==$confirmnewpass){
+				$data = array('password'=>sha1($newpass));
+				$reset = $this->MPengguna->update(array('id_pengguna'=>$id_pengguna), $data);
+				if($reset){
+					echo 1;
+				}else{
+					echo 4; //gagal
+				}
+			}else{
+				echo 3; //konfirm tidak sama
+			}
+		}else{
+			echo 2; //password lama salah
+		}
+	}
 }

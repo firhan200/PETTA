@@ -23,7 +23,7 @@
 							<a href="<?php echo site_url('tema/detil/'.$result->id_tema.''); ?>" class="notif-t"><?php if(strlen(htmlspecialchars($result->judul)) < 50){ echo htmlspecialchars($result->judul); }else{ echo substr(htmlspecialchars($result->judul), 0, 50).'...'; } ?></a>
 						</div>
 						<div class="col s3" align="right">
-							<?php echo date("d ", strtotime($result->tanggal_post)).$date[date("m", strtotime($result->tanggal_post))].date(" Y, H:i", strtotime($result->tanggal_post)); ?>
+							<?php echo date("d ", strtotime($result->waktu_peminatan)).$date[date("m", strtotime($result->waktu_peminatan))].date(" Y, H:i", strtotime($result->waktu_peminatan)); ?>
 						</div>
 					</div>
 				</div>
