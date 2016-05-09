@@ -126,4 +126,19 @@ unlink('assets/img/dosen/'.$result['foto_dosen']);
 		}
 		echo $report;
 	}
+
+	public function cekDataEdit($table, $field, $data, $dataOld){
+		$data = $this->input->get('value');	
+		if($data!=$dataOld){
+			$match = $this->MDosen->read($table, array($field=>$data), null, null);
+			if($match->num_rows() > 0){
+				$report = 2;
+			}else{
+				$report = 1;
+			}
+		}else{
+			$report = 1;
+		}
+		echo $report;
+	}
 }

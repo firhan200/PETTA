@@ -173,7 +173,7 @@ function getTotalTema($id){
 		$("#EditNip").bind("keyup change", function(){
 			var nip = $(this).val();
 			$.ajax({
-				url:'cekDataEdit/mahasiswa/nip/'+nip+'/'+nipOld,
+				url:'cekDataEdit/dosen/nip/'+nip+'/'+nipOld,
 				data:{send:true, value:nip},
 				success:function(data){
 					if(data==1){
@@ -195,7 +195,7 @@ function getTotalTema($id){
 		$("#EditNama").bind("on change", function(){
 			var nama = $(this).val();
 			$.ajax({
-				url:'cekDataEdit/mahasiswa/nama_dosen/'+nama+'/'+namaOld,
+				url:'cekDataEdit/dosen/nama_dosen/'+nama+'/'+namaOld,
 				data:{send:true, value:nama},
 				success:function(data){
 					if(data==1){
@@ -217,7 +217,7 @@ function getTotalTema($id){
 		$("#EditEmail").bind("on change", function(){
 			var email = $(this).val();
 			$.ajax({
-				url:'cekDataEdit/mahasiswa/email/',
+				url:'cekDataEdit/dosen/email/',
 				data:{send:true, value:email},
 				success:function(data){
 					if(data==1){
@@ -240,7 +240,7 @@ function getTotalTema($id){
 		});$("#EditTelepon").bind("on change", function(){
 			var telepon = $(this).val();
 			$.ajax({
-				url:'cekData/mahasiswa/telepon/'+telepon,
+				url:'cekData/dosen/telepon/'+telepon,
 				data:{send:true, value:telepon},
 				success:function(data){
 					if(data==1){
