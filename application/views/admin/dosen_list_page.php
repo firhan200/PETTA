@@ -73,19 +73,19 @@
 				<form action="edit" id="editform" method="post" enctype="multipart/form-data">
 					<div class="form-group input-field col s12">
 				        <input placeholder="Placeholder" id="EditNip" maxlength="20" name="EditNip" class="form-control" type="text" class="validate" required="required">
-				        <label for="Editmhs_nim">Nip</label>
+				        <label for="Editmhs_nim">Nip</label>&nbsp;<span class="error" id="reportNip"></span>
 			        </div>
 			        <div class="form-group input-field col s12">
 				        <input placeholder="Placeholder" id="EditNama" name="EditNama" maxlength="20" class="form-control" type="text" class="validate" required="required">
-				        <label for="Editmhs_nama">Nama</label>
+				        <label for="Editmhs_nama">Nama</label>&nbsp;<span class="error" id="reportNama"></span>
 			        </div>
 			        <div class="form-group input-field col s12">
 				        <input placeholder="Placeholder" id="EditEmail" name="EditEmail" class="form-control" type="text" class="validate" required="required">
-				        <label for="Editmhs_email">Email</label>
+				        <label for="Editmhs_email">Email</label>&nbsp;<span class="error" id="reportEmail"></span>
 			        </div>
 					<div class="form-group input-field col s12">
 				        <input placeholder="Placeholder" id="EditTelepon" name="EditTelepon" class="form-control" type="number" class="validate" required="required">
-				        <label for="Editmhs_telepon">telepon</label>
+				        <label for="Editmhs_telepon">telepon</label>&nbsp;<span class="error" id="reportTelepon"></span>
 			        </div>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary" >Simpan</button>
@@ -143,10 +143,14 @@ function getTotalTema($id){
 				success:function(data){
 					/*$("#EditmhsNim").val(namaOld);//Tidak usah sesuai urutan yang penting ID nya bener
 					$("#EditmhsName").val(data['nameMhs']);//Id buat naro hasil nya, sedangkan yang (data[''])*/
-					$("#EditNip").val(data['nip']);// di dapet dari controller
-					$("#EditNama").val(data['nama_dosen']);// di dapet dari controller
-					$("#EditEmail").val(data['email']);// di dapet dari controller
-					$("#EditTelepon").val(data['telepon']);
+					nipOld= data['nip'];
+					namaOld =data['nama_dosen'];
+					emailOld =data['email'];
+					teleponOld = data['telepon'];
+					$("#EditNip").val(nipOld);// di dapet dari controller
+					$("#EditNama").val(namaOld);// di dapet dari controller
+					$("#EditEmail").val(emailOld);// di dapet dari controller
+					$("#EditTelepon").val(teleponOld);
 				}
 			});
 		});
@@ -165,6 +169,97 @@ function getTotalTema($id){
 						window.location.reload(true);
 					}
 				});
+		});
+		$("#EditNip").bind("keyup change", function(){
+			var nip = $(this).val();
+			$.ajax({
+				url:'cekDataEdit/mahasiswa/nip/'+nip+'/'+nipOld,
+				data:{send:true, value:nip},
+				success:function(data){
+					if(data==1){
+						$("#reportNip").text("");
+						 $('button[type="submit"]').prop('disabled','');
+						 $("#EditNama").prop("disabled", '');
+						 $("#EditEmail").prop("disabled", '');
+						 $("#EditTelepon").prop("disabled", '');
+					}else{
+						$("#reportNip").text("*nim sudah ada");
+						 $('button[type="submit"]').prop('disabled',true);
+						 $("#EditNama").prop("disabled", true);
+						 $("#EditEmail").prop("disabled", true);
+						 $("#EditTelepon").prop("disabled", true);
+					}
+				}
+			});
+		});
+		$("#EditNama").bind("on change", function(){
+			var nama = $(this).val();
+			$.ajax({
+				url:'cekDataEdit/mahasiswa/nama_dosen/'+nama+'/'+namaOld,
+				data:{send:true, value:nama},
+				success:function(data){
+					if(data==1){
+						$("#reportNama").text("");
+						 $('button[type="submit"]').prop('disabled','');
+						 $("#EditNip").prop("disabled", '');
+						 $("#EditEmail").prop("disabled", '');
+						 $("#EditTelepon").prop("disabled", '');
+					}else{
+						$("#reportNama").text("*nama sudah ada");
+						 $('button[type="submit"]').prop('disabled',true);
+						 $("#EditNip").prop("disabled", true);
+						 $("#EditEmail").prop("disabled", true);
+						 $("#EditTelepon").prop("disabled", true);
+					}
+				}
+			});
+		});
+		$("#EditEmail").bind("on change", function(){
+			var email = $(this).val();
+			$.ajax({
+				url:'cekDataEdit/mahasiswa/email/',
+				data:{send:true, value:email},
+				success:function(data){
+					if(data==1){
+						$("#reportEmail").text("");
+						 $('button[type="submit"]').prop('disabled','');
+						 $("#EditNip").prop("disabled", '');
+						 $("#EditNama").prop("disabled", '');
+						 $("#EditTelepon").prop("disabled", '');
+						 editCheck=1;
+					}else{
+						$("#reportEmail").text("*email sudah ada");
+						 $('button[type="submit"]').prop('disabled',true);
+						 $("#EditNip").prop("disabled", true);
+						 $("#EditNama").prop("disabled", true);
+						 $("#EditTelepon").prop("disabled", true);
+						 editCheck=0;
+					}
+				}
+			});
+		});$("#EditTelepon").bind("on change", function(){
+			var telepon = $(this).val();
+			$.ajax({
+				url:'cekData/mahasiswa/telepon/'+telepon,
+				data:{send:true, value:telepon},
+				success:function(data){
+					if(data==1){
+						$("#reportTelepon").text("");
+						 $('button[type="submit"]').prop('disabled','');
+						 $("#EditNip").prop("disabled", '');
+						 $("#EditNama").prop("disabled", '');
+						 $("#EditEmail").prop("disabled", '');
+						 editCheck=1;
+					}else{
+						$("#reportTelepon").text("*telepon sudah ada");
+						 $('button[type="submit"]').prop('disabled',true);
+						 $("#EditNip").prop("disabled", true);
+						 $("#EditNama").prop("disabled", true);
+						 $("#EditEmail").prop("disabled", true);
+						 editCheck=0;
+					}
+				}
+			});
 		});
 		$(".info").click(function(){
 			id = $(this).attr('id');

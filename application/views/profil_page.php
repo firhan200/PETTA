@@ -1,6 +1,4 @@
 <?php $this->load->view('layouts/nav'); ?>
-
-
 <?php if ($this->session->userdata("levelpetta")==2){?>
 <div class="profile-t blue lighten-1">
 <?php } else{?>
@@ -11,7 +9,7 @@
 			<?php if ($level==2){?>
 			<?php foreach($query->result() as $result){?>
 			<div class="col s12 m3 l3" align="center">
-				<?php if($result->foto_dosen!=null){ ?>
+				<?php if($result->foto_dosen!=null){ ?><!--Setting Photo Whether it's exist or not -->
 				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/'.$result->foto_dosen); ?>">
 				<?php }else{ ?>
 				<img style="height: 250px;width: 250px;" class="circle responsive-image profile-img-t" src="<?php echo base_url('assets/img/dosen/noava.png'); ?>">
@@ -58,22 +56,17 @@
 					<li id="nip_dosen"><?php echo $result->nip?></li>
 					<li id="nama_dosen"><?php echo $result->nama_dosen?></li>
 					<li id="email_dosen"><?php echo $result->email?></li>
-					<li id="telepon_dosen"><?php echo $result->telepon?></li>
-					
-					<?php }?>
-					
+					<li id="telepon_dosen"><?php echo $result->telepon?></li>	
+					<?php }?>	
 				<?php	}else if($level==3){?><!-- MAHASISWA -->
 					<?php foreach($row->result() as $result){?>
 					<li id="nim_mhs"><?php echo $result->nim;?></li>
 					<li id="nama_mhs"><?php echo $result->nama_mahasiswa; ?></li>
 					<li id="email_mhs"><?php echo $result->email; ?></li>
-					<li id="telepon_mhs"><?php echo $result->telepon; ?></li>
-					
-					<?php }?>
-					
+					<li id="telepon_mhs"><?php echo $result->telepon; ?></li>	
+					<?php }?>	
 				<?php }?>
-				</ul>
-				
+				</ul>	
 				<div align="right">
 					<?php if($self==1){ ?>
 						<a href="#modalPassword" class="pass waves-effect waves-light modal-trigger" id="<?php echo $result->id ?>"><i class="material-icons tiny">lock</i>&nbsp;ubah password</a>
@@ -126,7 +119,7 @@
 					        <label for="Editmhs_email">Email</label>
 				        </div>
 						<div class="form-group input-field col s12">
-					        <input placeholder="Placeholder" id="EditTelepon" name="EditTelepon" class="form-control" type="number" class="validate" required="required">
+					        <input placeholder="Placeholder" id="EditTelepon" pattern="[0-9]{1,12}" maxlength="12" name="EditTelepon" class="form-control" type="text" class="validate" required="required">
 					        <label for="Editmhs_telepon">telepon</label>
 				        </div>
 						<div class="modal-footer">
@@ -202,26 +195,25 @@
   	</div>
   	<!-- Upload Modal Structure End -->
   	<?php
-function tgl($date){
-  list($year, $month, $day) = explode('-', $date);
-  switch ($month) {
-        case "1" : $month="Januari";break;
-        case "2" : $month="Februari";break;
-        case "3" : $month="Maret";break;
-        case "4" : $month="April";break;
-        case "5" : $month="Mei";break;
-        case "6" : $month="Juni";break;
-        case "7" : $month="Juli";break;
-        case "8" : $month="Agustus";break;
-        case "9" : $month="September";break;
-        case "10" : $month="Oktober";break;
-        case "11" : $month="November";break;
-        case "12" : $month="Desember";break;
-    }
-    return $day." ".$month." ".$year;
-}
-
-?>
+		function tgl($date){
+		  list($year, $month, $day) = explode('-', $date);
+		  switch ($month) {
+		        case "1" : $month="Januari";break;
+		        case "2" : $month="Februari";break;
+		        case "3" : $month="Maret";break;
+		        case "4" : $month="April";break;
+		        case "5" : $month="Mei";break;
+		        case "6" : $month="Juni";break;
+		        case "7" : $month="Juli";break;
+		        case "8" : $month="Agustus";break;
+		        case "9" : $month="September";break;
+		        case "10" : $month="Oktober";break;
+		        case "11" : $month="November";break;
+		        case "12" : $month="Desember";break;
+		    }
+		    return $day." ".$month." ".$year;
+		}
+	?>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#btn_pass").prop('disabled', true);
@@ -281,7 +273,6 @@ function tgl($date){
 		}
 
 		var id;var id1;
-
 		//GET DATA
 		$(".edit").click(function(){
 		 id = $(this).attr('id');
@@ -349,6 +340,5 @@ function tgl($date){
 				}
 			});
 		});
-		
 	});
 </script>

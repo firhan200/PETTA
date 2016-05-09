@@ -59,7 +59,20 @@ class Profil extends MY_Controller {
 		}
 
 		$this->load->view('layouts/header');
-		$this->load->view('profil_page', $data);
+
+		if($this->session->userdata('levelpetta')==2){
+			$this->load->view('profil_page', $data);
+		}else if($this->session->userdata('levelpetta')==3){
+			$row = $this->MMahasiswa->getMhs('pengguna',null,null,null);
+			foreach($row->result() as $result){
+				if(($result->email==null) || ($result->telepon==null)){
+					$this->load->view('verifikasi_page', $data);
+				}else if ((!$result->email==null) && (!$result->telepon==null)){
+					$this->load->view('profil_page', $data);
+				}
+			}
+		}	
+
 		$this->load->view('layouts/footer');
 	}
 
