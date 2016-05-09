@@ -59,7 +59,7 @@ class Pengguna extends MY_Controller {
 			if($level==1){
 				redirect(site_url('dashbor'));
 			}else{
-				redirect(site_url('profil'));
+				redirect(site_url('tema'));
 			}
 		}else{
 			redirect(site_url('?balasan=2'));
