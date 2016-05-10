@@ -24,6 +24,7 @@ class Profil extends MY_Controller {
 
 			//query informasi
 			$data["row"] = $this->MMahasiswa->getMhs('pengguna',null,null,null);
+			$data["rowDsn"] = $this->MDosen->getWali('pengguna',null,null,null);
 			$data['query'] = $this->MDosen->getWali('pengguna',null,null,null);
 
 			//query riwayat
@@ -59,20 +60,27 @@ class Profil extends MY_Controller {
 		}
 
 		$this->load->view('layouts/header');
-
-		if($this->session->userdata('levelpetta')==2){
-			$this->load->view('profil_page', $data);
-		}else if($this->session->userdata('levelpetta')==3){
-			$row = $this->MMahasiswa->getMhs('pengguna',null,null,null);
-			foreach($row->result() as $result){
-				if(($result->email==null) || ($result->telepon==null)){
-					$this->load->view('verifikasi_page', $data);
-				}else if ((!$result->email==null) && (!$result->telepon==null)){
-					$this->load->view('profil_page', $data);
+		if($this->session->userdata('levelpetta')==1){//admin
+				$this->load->view('profil_page', $data);
+			}else if($this->session->userdata('levelpetta')==3){//mahasiswa
+				$row = $this->MMahasiswa->getMhs('pengguna',null,null,null);
+				foreach($row->result() as $result){
+					if(($result->email==null) || ($result->telepon==null)){
+						$this->load->view('verifikasi_page', $data);
+					}else if ((!$result->email==null) && (!$result->telepon==null)){
+						$this->load->view('profil_page', $data);
+					}
 				}
-			}
-		}	
-
+			}else if ($this->session->userdata('levelpetta')==2){//dosen
+				$rowDsn = $this->MDosen->getWali('pengguna',null,null,null);
+				foreach($rowDsn->result() as $result){
+					if(($result->email==null) || ($result->telepon==null)){
+						$this->load->view('verifikasi_page', $data);
+					}else if ((!$result->email==null) && (!$result->telepon==null)){
+						$this->load->view('profil_page', $data);
+					}
+				}
+			}	
 		$this->load->view('layouts/footer');
 	}
 

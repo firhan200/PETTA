@@ -15,7 +15,9 @@
 				}
 				?>
 				<div class="row">
-				<?php foreach($row->result() as $result){?>
+
+				<?php if($this->session->userdata('levelpetta')==3){?>
+					<?php foreach($row->result() as $result){?>
 					<div class="col s12 m8 l6 offset-m2 offset-l3" align="center">
 						<form action="" method="post" id="<?php echo $result->id?>">
 				        	<div class="input-field">
@@ -31,6 +33,25 @@
 				      	</form>
 				      	<br/>
 					</div>
+					<?php }?>
+				<?php } else if ($this->session->userdata('levelpetta')==2){?>
+					<?php foreach($rowDsn->result() as $result){?>
+					<div class="col s12 m8 l6 offset-m2 offset-l3" align="center">
+						<form action="" method="post" id="<?php echo $result->id?>">
+				        	<div class="input-field">
+				          		<input id="EditEmail" value="<?php echo $result->email?>" name="EditEmail" type="email" maxlength="100" class="validate" required>
+				          		<label for="email">Email</label>&nbsp;<span class="error" id="reportEmail"></span>
+				        	</div>
+				        	<div class="input-field">
+				          		<input id="EditTelepon" value="<?php echo $result->telepon?>" name="EditTelepon" type="text" pattern="[0-9]{1,12}" maxlength="12" class="validate" required>
+				          		<label for="telepon">Telepon</label>
+				        	</div>
+				      		<br/>
+				      		<button type="submit" class="waves-effect waves-light btn blue darken-1">Tambah</button>
+				      	</form>
+				      	<br/>
+					</div>	
+					<?php }?>
 				<?php }?>
 				</div>
 			</div>

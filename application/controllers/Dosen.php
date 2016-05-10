@@ -6,19 +6,41 @@ class Dosen extends MY_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('MDosen');
+		$this->load->model('MMahasiswa');
 	}
 
 	public function index(){
 		$data['menu2'] = true;
 		$this->sessionOut(); //check session
-
+		$data["row"] = $this->MMahasiswa->getMhs('pengguna',null,null,null);
+		$data["rowDsn"] = $this->MDosen->getWali('pengguna',null,null,null);
 		$data['query'] = $this->MDosen->read('dosen',null, 'nama_dosen', 'ASC');
 		//START ACTIVE QUERY
 		//SELECT * FROM dosen WHERE=null ORDER BY nama_dosen ASC
 		//END ACTIVE QUERY
 
 		$this->load->view('layouts/header');
-		$this->load->view('dosen_page', $data);
+			if($this->session->userdata('levelpetta')==1){//admin
+				$this->load->view('dosen_page', $data);
+			}else if($this->session->userdata('levelpetta')==3){//mahasiswa
+				$row = $this->MMahasiswa->getMhs('pengguna',null,null,null);
+				foreach($row->result() as $result){
+					if(($result->email==null) || ($result->telepon==null)){
+						$this->load->view('verifikasi_page', $data);
+					}else if ((!$result->email==null) && (!$result->telepon==null)){
+						$this->load->view('dosen_page', $data);
+					}
+				}
+			}else if ($this->session->userdata('levelpetta')==2){//dosen
+				$rowDsn = $this->MDosen->getWali('pengguna',null,null,null);
+				foreach($rowDsn->result() as $result){
+					if(($result->email==null) || ($result->telepon==null)){
+						$this->load->view('verifikasi_page', $data);
+					}else if ((!$result->email==null) && (!$result->telepon==null)){
+						$this->load->view('dosen_page', $data);
+					}
+				}
+			}	
 		$this->load->view('layouts/footer');
 	}
 
@@ -72,13 +94,14 @@ class Dosen extends MY_Controller {
 	}
 	public function delete($id){
 		$query = $this->MDosen->read('dosen',array('id_pengguna'=>$id), null, null); 
-foreach ($query->result_array() as $result) { 
-unlink('assets/img/dosen/'.$result['foto_dosen']); 
-}
+		foreach ($query->result_array() as $result) { 
+		unlink('assets/img/dosen/'.$result['foto_dosen']); 
+		}
 		$this->db->delete('dosen',array('id_pengguna'=>$id));
 		$this->db->delete('pengguna',array('id_pengguna'=>$id));
 		redirect(site_url('dosen/data?balasan=2'));	
 	}
+	
 	public function getData($id){
 			$query = $this->MDosen->read('dosen', array('id'=>$id), null, null);
 			foreach($query->result() as $result){
@@ -116,6 +139,21 @@ unlink('assets/img/dosen/'.$result['foto_dosen']);
 		$update = $this->MDosen->update(array('id'=>$id),  $data);
 		redirect(site_url('dosen/data?balasan=1'));
 	}
+	public function updateVerif($id){
+		$emailMhs = $this->input->post('EditEmail');
+		$teleponMhs = $this->input->post('EditTelepon');
+		$data = array(
+				'email'=>$emailMhs,
+				'telepon'=>$teleponMhs
+				);
+		$update = $this->MMahasiswa->update(array('id'=>$id),  $data);
+		if($this->session->userdata('levelpetta')==1){
+			redirect(site_url('mahasiswa/data?balasan=1'));
+		}else if($this->session->userdata('levelpetta')==3){
+			redirect(site_url('profil'));
+		}
+	}
+
 	public function cekData($table,$field){
 		$data = $this->input->get('value');
 		$match = $this->MDosen->read($table,array($field=>$data), null, null);
