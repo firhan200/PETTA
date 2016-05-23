@@ -28,29 +28,29 @@
 					<div class="col s12 m8 l6 offset-m2 offset-l3" align="center">
 						<form action="<?php echo site_url('dosen/insertDosen') ?>" method="post" id="target">
 				        	<div class="input-field">
-				          		<i class="material-icons prefix">person*</i>
+				          		<i class="material-icons prefix">person</i>
 				          		<input id="username" name="username" type="text" maxlength="14" class="validate" required>
 				          		<label for="username">username</label>&nbsp;<span class="error" id="reportUsername"></span>
 				        	</div>
 				        	<div class="input-field">
-				          		<i class="material-icons prefix">lock*</i>
+				          		<i class="material-icons prefix">lock</i>
 				          		<input id="password" name="password" type="password" maxlength="20" class="validate" required>
 				          		<label for="password">password</label>
 				        	</div>
 				        	<div class="input-field">
 				          		<input id="nip" name="nip" type="text" maxlength="20" class="validate" required>
-				          		<label for="nip">*NIP</label>&nbsp;<span class="error" id="reportNip"></span>
+				          		<label for="nip">NIP</label>&nbsp;<span class="error" id="reportNip"></span>
 				        	</div>
 				        	<div class="input-field">
 				          		<input id="nama" name="nama" type="text" maxlength="40" class="validate" required>
-				          		<label for="nama">*Nama</label>&nbsp;<span class="error" id="reportNama"></span>
+				          		<label for="nama">Nama</label>&nbsp;<span class="error" id="reportNama"></span>
 				        	</div>
 				        	<div class="input-field">
-				          		<input id="email" name="email" type="email" maxlength="100" class="validate">
+				          		<input id="email" name="email" type="email" maxlength="100" class="validate" required>
 				          		<label for="email">E-mail</label>&nbsp;<span class="error" id="reportEmail"></span>
 				        	</div>
 				        	<div class="input-field">
-				          		<input id="telepon" name="telepon" type="text" pattern="[0-9]{1,12}" maxlength="12" class="validate" >
+				          		<input id="telepon" name="telepon" type="text" pattern="[0-9]{1,12}" maxlength="12" class="validate" required>
 				          		<label for="telepon">Telepon</label>
 				        	</div>
 				      		<br/>

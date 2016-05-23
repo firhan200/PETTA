@@ -9,7 +9,6 @@ class Tema extends MY_Controller {
 		$this->load->model('MTema');
 		$this->load->model('MTag');
 		$this->load->model('MDosen');
-		$this->load->model('MMahasiswa');
 		$this->load->model('MPeminatan');
 		$this->load->model('MPengguna');
 		$this->load->model('MPesan');
@@ -19,8 +18,6 @@ class Tema extends MY_Controller {
 		$this->sessionOut();
 		$data['menu1'] = true;
 		
-		$data["row"] = $this->MMahasiswa->getMhs('pengguna',null,null,null);
-		$data["rowDsn"] = $this->MDosen->getWali('pengguna',null,null,null);
 		$data['query'] = $this->MTema->readAll(array('status_tema'=>0), 'id_tema', 'DESC');
 		$data['queryKategori'] = $this->MKategori->read('kategori',null, 'nama_kategori', 'ASC');
 		$data['queryDosen'] = $this->MDosen->read('dosen',null, 'nama_dosen', 'ASC');
@@ -54,27 +51,7 @@ class Tema extends MY_Controller {
 		$data['date'] = $this->monthConverter();
 
 		$this->load->view('layouts/header');
-			if($this->session->userdata('levelpetta')==1){//admin
-				$this->load->view('home_page', $data);
-			}else if($this->session->userdata('levelpetta')==3){//mahasiswa
-				$row = $this->MMahasiswa->getMhs('pengguna',null,null,null);
-				foreach($row->result() as $result){
-					if(($result->email==null) || ($result->telepon==null)){
-						$this->load->view('verifikasi_page', $data);
-					}else if ((!$result->email==null) && (!$result->telepon==null)){
-						$this->load->view('home_page', $data);
-					}
-				}
-			}else if ($this->session->userdata('levelpetta')==2){//dosen
-				$rowDsn = $this->MDosen->getWali('pengguna',null,null,null);
-				foreach($rowDsn->result() as $result){
-					if(($result->email==null) || ($result->telepon==null)){
-						$this->load->view('verifikasi_page', $data);
-					}else if ((!$result->email==null) && (!$result->telepon==null)){
-						$this->load->view('home_page', $data);
-					}
-				}
-			}	
+		$this->load->view('home_page', $data);
 		$this->load->view('layouts/footer');
 	}
 
@@ -83,21 +60,12 @@ class Tema extends MY_Controller {
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		$data['menu32'] = true;
 
-		$data["rowDsn"] = $this->MDosen->getWali('pengguna',null,null,null);
 		$data['query'] = $this->MPeminatan->readRiwayat(array('tema.id_pengguna'=>($this->session->userdata('idpetta'))));
 		//config
 		$data['date'] = $this->monthConverter();
 		
 		$this->load->view('layouts/header');
-		$rowDsn = $this->MDosen->getWali('pengguna',null,null,null);
-		foreach($rowDsn->result() as $result){
-			if(($result->email==null) || ($result->telepon==null)){
-				$this->load->view('verifikasi_page', $data);
-			}else if ((!$result->email==null) && (!$result->telepon==null)){
-				$this->load->view('tema_riwayat_page', $data);
-			}
-		}
-
+		$this->load->view('tema_riwayat_page', $data);
 		$this->load->view('layouts/footer');
 	}
 
@@ -112,7 +80,7 @@ class Tema extends MY_Controller {
 		$data['date'] = $this->monthConverter();
 		
 		$this->load->view('layouts/header');
-		$this->load->view('tema_riwayat_page', $data);
+		$this->load->view('tema_list_page', $data);
 		$this->load->view('layouts/footer');
 	}
 
