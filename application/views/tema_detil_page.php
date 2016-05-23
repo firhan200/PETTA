@@ -23,9 +23,9 @@
 						?>
 						<a href="<?php echo site_url('tema/ubah/'.$result->id_tema.''); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect blue"><i class="material-icons left">settings</i>Ubah</a>
 			      		<a href="<?php echo site_url('tema/hapus/'.$result->id_tema.''); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect red" onclick="return confirm('Hapus Tema?')"><i class="material-icons left">delete</i>Hapus</a>
-						<?php }else if($self==3 AND $result->status_tema==0 AND $this->session->userdata('levelpetta')!=1){ ?>
+						<?php }else if($self==3 AND $result->status_tema==0){ ?>
 						<a href="<?php echo site_url('tema/minat/'.$result->id_tema.''); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect blue"><i class="material-icons left">done</i>Minati</a>
-						<?php }else if($self==4 AND $result->status_tema==0 AND $this->session->userdata('levelpetta')!=1){ ?>
+						<?php }else if($self==4 AND $result->status_tema==0){ ?>
 						<a href="<?php echo site_url('tema/batal_minat/'.$result->id_tema.''); ?>" style="margin-bottom:5px;" class="btn btn-small waves-light waves-effect red"><i class="material-icons left">clear</i>Batalkan</a>
 						<?php } ?>
 					</div>
