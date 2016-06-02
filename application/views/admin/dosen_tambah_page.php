@@ -42,7 +42,7 @@
 				          		<label for="nip">*NIP</label>&nbsp;<span class="error" id="reportNip"></span>
 				        	</div>
 				        	<div class="input-field">
-				          		<input id="nama" name="nama" type="text" maxlength="40" class="validate" required>
+				          		<input id="nama" name="nama" type="text" maxlength="40" class="validate" required pattern="[a-z,A-Z]{6,40}">
 				          		<label for="nama">*Nama</label>&nbsp;<span class="error" id="reportNama"></span>
 				        	</div>
 				        	<div class="input-field">

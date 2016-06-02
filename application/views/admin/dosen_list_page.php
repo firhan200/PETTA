@@ -76,7 +76,7 @@
 				        <label for="Editmhs_nim">Nip</label>&nbsp;<span class="error" id="reportNip"></span>
 			        </div>
 			        <div class="form-group input-field col s12">
-				        <input placeholder="Placeholder" id="EditNama" name="EditNama" maxlength="20" class="form-control" type="text" class="validate" required="required">
+				        <input placeholder="Placeholder" id="EditNama" name="EditNama" maxlength="20" class="form-control" type="text" class="validate" required="required" pattern="[a-z,A-Z]{6,40}">
 				        <label for="Editmhs_nama">Nama</label>&nbsp;<span class="error" id="reportNama"></span>
 			        </div>
 			        <div class="form-group input-field col s12">
