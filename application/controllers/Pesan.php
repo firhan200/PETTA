@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pesan extends MY_Controller {
 	public function __construct(){
+		/*PENJELASAN
+			load library dan model yang diperlukan 	
+		*/
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('MPesan');
@@ -12,6 +15,9 @@ class Pesan extends MY_Controller {
 	}
 
 	public function index(){
+		/*PENJELASAN
+			fungsi yang dijalankan ketika pertama kali page di load	
+		*/
 		$data['menu3'] = true;
 		$data['submenu2'] = true;
 		$this->sessionOut(); //check session
@@ -49,6 +55,9 @@ class Pesan extends MY_Controller {
 	}
 
 	public function pesan_keluar(){
+		/*PENJELASAN
+			fungsi untuk cek pesan yang telah di kirim
+		*/
 		$data['menu3'] = true;
 		$data['submenu3'] = true;
 		$this->sessionOut(); //check session
@@ -65,6 +74,9 @@ class Pesan extends MY_Controller {
 	}
 
 	public function pesan_baru(){
+		/*PENJELASAN
+			fungsi untuk membuat pesan	
+		*/
 		$data['menu3'] = true;
 		$this->sessionOut(); //check session
 		$data['notif'] = $this->pullMsgNotification();
@@ -84,6 +96,9 @@ class Pesan extends MY_Controller {
 	}
 
 	public function detil($id = null){
+		/*PENJELASAN
+			fungsi untuk melihat detail pesan	
+		*/
 		$data['menu3'] = true;
 		$this->sessionOut(); //check session
 
@@ -107,6 +122,9 @@ class Pesan extends MY_Controller {
 	}
 
 	public function hapus($id){
+		/*PENJELASAN
+			fungsi hapus pesan
+		*/ 
 		$cek = $this->MPesan->read(array('id_pesan'=>$id), null, null);
 		if($cek->num_rows() > 0){
 			//cek sender
@@ -141,6 +159,9 @@ class Pesan extends MY_Controller {
 	}
 
 	public function kirim($segment = null){
+		/*PENJELASAN
+			fungsi untuk mengirim pesan 	
+		*/
 		$sender = $this->session->userdata('idpetta');
 		if($segment==null){
 			$receiver = $this->input->post('penerima');
@@ -169,6 +190,9 @@ class Pesan extends MY_Controller {
 	}
 
 	public function monthConverter(){
+		/*PENJELASAN
+			fungsi untuk mengubah bulan 	
+		*/
 		$month = array(
 			'00'=>'asd', '01'=>'Januari','02'=>'Februari','03'=>'Maret','04'=>'April','05'=>'Mei',
 			'06'=>'Juni','07'=>'Juli','08'=>'Agustus','09'=>'September','10'=>'Oktober',
@@ -178,6 +202,9 @@ class Pesan extends MY_Controller {
 	}
 
 	public function addNotification($idReceiver, $order){
+		/*PENJELASAN
+			fungsi untuk memberikan notifikasi	
+		*/
 		$query = $this->MPengguna->read(array('id_pengguna'=>$idReceiver), null, null);
 		foreach($query->result() as $result){
 			$lastNumber = $result->notifikasi;

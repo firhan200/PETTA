@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashbor extends MY_Controller {
 	public function __construct(){
+		/*PENJELASAN
+			load model dan library yang diperlukan
+		*/
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('MDosen');
@@ -12,6 +15,10 @@ class Dashbor extends MY_Controller {
 	}
 
 	public function index(){
+		/*PENJELASAN
+			fungsi yang di jalankan ketika halaman dashbor terload eprtama kali
+			yaitu membaca data dari tabel yang telah di definisikan	
+		*/
 		$data['menu01'] = true;
 		$this->sessionOut(); //check session
 
@@ -33,6 +40,9 @@ class Dashbor extends MY_Controller {
 	}
 
 	public function getDataPeminatan(){
+		/*PENJELASAN
+			mendapatkan data dari orang-orang yang meminati tema
+		*/
 		$query = $this->MTema->read(array('status_tema'=>0), 'id_tema', 'DESC');
 		foreach($query->result() as $result){
 			if(strlen($result->judul) > 25){ 
@@ -47,6 +57,9 @@ class Dashbor extends MY_Controller {
 	}
 
 	public function getTotalPeminat($id){
+		/*PENJELASAN
+			mendapatkan total jumlah peminatan	
+		*/
 		$query = $this->MPeminatan->read(array('id_tema'=>$id), null, null);
 		return $query->num_rows();
 	}

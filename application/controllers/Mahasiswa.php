@@ -3,16 +3,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mahasiswa extends MY_Controller {
 	public function __construct(){
+		/*PENJELASAN
+			load library yang diperlukan	
+		*/
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('MMahasiswa');
 	}
 
 	public function minat_tema(){
+		/*PENJELASAN
+			fungsi untuk meminati tema	
+		*/
 		$this->sessionOut(); //check session
 	}
 
 	public function data(){
+		/*PENJELASAN
+			fungsi untuk me load data mahasiswa
+		*/
 		$data['menu03'] = true;
 		$this->sessionOut(); //check session
 
@@ -24,6 +33,9 @@ class Mahasiswa extends MY_Controller {
 	}
 
 	public function tambah(){
+		/*PENJELASAN
+			fungsi untuk mengarahkan apda halaman mahasiswa_tambah_page	
+		*/
 		$data['menu03'] = true;
 		$this->sessionOut(); //check session
 
@@ -32,6 +44,9 @@ class Mahasiswa extends MY_Controller {
 		$this->load->view('layouts/footer');
 	}
 	public function insertMahasiswa(){
+		/*PENJELASAN
+			fungsi tambah mahasiswa	
+		*/
 		$username = $this->input->post('username');
 		$password = sha1($this->input->post('password'));
 		$data1 = array(
@@ -72,11 +87,17 @@ class Mahasiswa extends MY_Controller {
 	}*/
 
 	public function delete($id){
+		/*PENJELASAN
+			fungsi delete mahasiswa	
+		*/
 		$this->db->delete('mahasiswa',array('id_pengguna'=>$id));
 		$this->db->delete('pengguna',array('id_pengguna'=>$id));
 		redirect(site_url('mahasiswa/data?balasan=2'));	
 	}
 	public function getData($id){
+		/*PENJELASAN
+			fungsi untuk mendapatkan data diri dari mahasiswa yang bersangkutan	
+		*/
 			$query = $this->MMahasiswa->read('mahasiswa', array('id'=>$id), null, null);
 			foreach($query->result() as $result){
 				$data = array(
@@ -91,6 +112,9 @@ class Mahasiswa extends MY_Controller {
 	}
 
 	public function update($id){
+		/*PENJELASAN
+			fungsi update	
+		*/
 		$nimMhs = $this->input->post('EditNim');
 		$namaMhs = $this->input->post('EditNama');
 		$emailMhs = $this->input->post('EditEmail');
@@ -110,6 +134,9 @@ class Mahasiswa extends MY_Controller {
 	}
 
 	public function updateVerif($id){
+		/*PENJELASAN
+			fungsi ketika ada data yang kosong agar melengkapi data yang kosong	
+		*/
 		$emailMhs = $this->input->post('EditEmail');
 		$teleponMhs = $this->input->post('EditTelepon');
 		$data = array(
@@ -126,6 +153,9 @@ class Mahasiswa extends MY_Controller {
 
 
 	public function cekData($table, $field){
+		/*PENJELASAN
+			cek apakah data sudah ada di tabel	
+		*/
 		$data = $this->input->get('value');
 		$match = $this->MMahasiswa->read($table, array($field=>$data), null, null);
 		if($match->num_rows() > 0){
@@ -136,6 +166,9 @@ class Mahasiswa extends MY_Controller {
 		echo $report;
 	}
 	public function cekDataEdit($table, $field, $data, $dataOld){
+		/*PENJELASAN
+			cek apakah data pertama di form sama dengan yang di database yang digunakan pada input pertama kali	
+		*/
 		$data = $this->input->get('value');	
 		if($data!=$dataOld){
 			$match = $this->MMahasiswa->read($table, array($field=>$data), null, null);

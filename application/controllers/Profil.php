@@ -4,6 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Profil extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
+		/*PENJELASAN
+			load library dan model yang diperlukan	
+		*/
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -16,6 +19,9 @@ class Profil extends MY_Controller {
 	}
 
 	public function index($id = null){
+		/*PENJELASAN
+			fungsi yand dijalankan ketika halaman terload pertama kali, membaca data yang diperlukan			
+		*/
 		$data['menu4'] = true;
 
 		if($id==null){
@@ -85,6 +91,9 @@ class Profil extends MY_Controller {
 	}
 
 	public function getDataMhs($id){
+		/*PENJELASAN
+			mendapatkan data mahasiswa yang login untuk di profil	
+		*/
 		$query = $this->MMahasiswa->read('mahasiswa', array('id'=>$id), null, null);
 		foreach($query->result() as $result){
 			$data = array(
@@ -96,6 +105,9 @@ class Profil extends MY_Controller {
 	}
 
 	public function getData($id){
+		/*PENJELASAN
+			fungsi untuk mendapatkan data dosen yang login untuk profil	
+		*/
 		if ($this->session->userdata("levelpetta")==2){
 			$query = $this->MDosen->read('dosen', array('id'=>$id), null, null);
 			foreach($query->result() as $result){
@@ -118,6 +130,9 @@ class Profil extends MY_Controller {
 		echo json_encode($data);
 	}
 	public function insertKategori(){
+		/*PENJELASAN
+			fungsi insert kategori	
+		*/
 		$namaKategori = $this->input->post('kategori');
 		$data = array(
 				'kategori'=>$namaKategori
@@ -126,6 +141,9 @@ class Profil extends MY_Controller {
 		redirect(site_url('kategori/data'));
 	}
 	public function update($id){
+		/*PENJELASAN
+			fungsi update dosen atau mahasiswa tergantung levelpetta	
+		*/
 		if($this->session->userdata('levelpetta')==2){//DOSEN
 			$emailDsn = $this->input->post('EditEmail');
 			$teleponDsn = $this->input->post('EditTelepon');
@@ -156,7 +174,9 @@ class Profil extends MY_Controller {
 	}
 
 	public function Upload($id){
-		
+		/*PENJELASAN
+			fungsi untuk upload foto pada dosen	
+		*/
 		$upload = $this->input->post('fotoDsn');
 		//Foto Set
 		$photoName = gmdate("d-m-y-H-i-s", time()+3600*7).".jpg";
@@ -190,6 +210,9 @@ class Profil extends MY_Controller {
 		}//else kalo gagal
 	}
 	public function cekData($field){
+		/*PENJELASAN
+			fungsi cek data	
+		*/
 		$data = $this->input->get('value');
 		if($this->session->userdata('levelpetta')==2){
 			$match = $this->MDosen->read('dosen', array($field=>$data), null, null);

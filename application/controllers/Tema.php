@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Tema extends MY_Controller {
 	public function __construct(){
+		/*PENJELASAN
+			load library dan model yang diperlukan	
+		*/
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('MKategori');
@@ -16,6 +19,11 @@ class Tema extends MY_Controller {
 	}
 
 	public function index(){
+		/*PENJELASAN
+			fungsi yang pertama kali di jalankan ketika page terload
+			yaitu membaca data pada beberapa tabel dan memfilter data berdasarkan
+			filter yang dipilih	
+		*/
 		$this->sessionOut();
 		$data['menu1'] = true;
 		
@@ -79,6 +87,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function riwayat(){
+		/*PENJELASAN
+			fungsi untuk menunjukkan riwayat tema yang dipilih	
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		$data['menu32'] = true;
@@ -102,6 +113,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function data(){
+		/*PENJELASAN
+			fungsi untuk membaca tema yang ada dan menampilkan	
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		$data['menu32'] = true;
@@ -117,6 +131,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function tambah(){
+		/*PENJELASAN
+			fungsi untk tambah tema	
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		unset($_SESSION['tag']);
@@ -130,6 +147,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function detil($id = null){
+		/*PENJELASAN
+			fungsi untuk melihat detail tema	
+		*/
 		$this->sessionOut();
 		$data['query'] = $this->MTema->readDetil($id);
 		if($data['query']->num_rows() > 0){
@@ -164,6 +184,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function ubah($id = null){
+		/*PENJELASAN
+			fungsi untuk mengubah tema pada bagian tag	
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		$data['menu32'] = true;
@@ -183,6 +206,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function create(){
+		/*PENJELASAN
+			fungsi untuk membuat tema baru	
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		if(!empty($_SESSION['tag'])){
@@ -209,6 +235,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function update($id = null){
+		/*PENJELASAN
+			fungsi update tema	
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		if(!empty($_SESSION['tag'])){
@@ -235,6 +264,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function hapus($id = null){
+		/*PENJELASAN
+			fungsi untuk menghapus tema	
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		$query = $this->MTema->read(array('id_tema'=>$id), null, null);
@@ -253,12 +285,18 @@ class Tema extends MY_Controller {
 	}
 
 	public function ubah_status($id, $status){
+		/*PENJELASAN
+			fungsi ubah status tema	
+		*/
 		$data = array('status_tema'=>$status);
 		$update = $this->MTema->update(array('id_tema'=>$id), $data);
 		redirect(site_url('tema/detil/'.$id.'?balasan=1'));
 	}
 
 	public function minat($id = null){
+		/*PENJELASAN
+			fungsi untuk meminati tema	
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=3){ redirect($_SERVER['HTTP_REFERER']); }
 		$this->load->model('MPeminatan');
@@ -272,6 +310,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function batal_minat($id = null){
+		/*PENJELASAN
+			fungsi untuk membatalkan tema	
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=3){ redirect($_SERVER['HTTP_REFERER']); }
 		$this->load->model('MPeminatan');
@@ -291,6 +332,9 @@ class Tema extends MY_Controller {
 	//tambahan
 
 	public function setujui_peminat($idTema = null, $idPengguna = null){
+		/*PENJELASAN
+			fungsi untuk menyutujui peminatan tema	
+		*/
 		//update status
 		$data_baru = array('status_peminatan'=>1);
 		$update_peminatan = $this->MPeminatan->update(array('id_pengguna'=>$idPengguna, 'id_tema'=>$idTema), $data_baru);
@@ -320,6 +364,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function batalkan_peminat($idTema = null, $idPengguna = null){
+		/*PENJELASAN
+			fungsi untuk mebatalakna pemintan tema	
+		*/
 		//update status
 		$data_baru = array('status_peminatan'=>null);
 		$update_peminatan = $this->MPeminatan->update(array('id_pengguna'=>$idPengguna, 'id_tema'=>$idTema), $data_baru);
@@ -330,6 +377,9 @@ class Tema extends MY_Controller {
 	//tambahan
 	
 	public function checkTitle($judul){
+		/*PENJELASAN
+			fungsi untuk cek judul apakah sudah ada atau belum	
+		*/
 		$match = $this->MTema->read(array('judul'=>$judul), null, null);
 		if($match->num_rows() > 0){
 			$response = 2;
@@ -340,6 +390,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function checkEditTitle($judul, $old){
+		/*PENJELASAN
+			fungsi cek judul lagi	
+		*/
 		if($judul!=$old){
 			$match = $this->MTema->read(array('judul'=>$judul), null, null);
 			if($match->num_rows() > 0){
@@ -354,10 +407,16 @@ class Tema extends MY_Controller {
 	}
 
 	public function getTags(){
+		/*PENJELASAN
+			fungsi untuk mendapatkan tema	
+		*/
 		$this->load->view('get_tags');
 	}
 
 	public function appendTags($id){
+		/*PENJELASAN
+			fungsi untuk meng-append tema	
+		*/
 		//session_destroy();
 		if($id!=""){
 			if(in_array($id, $_SESSION['tag'])==false){
@@ -367,11 +426,17 @@ class Tema extends MY_Controller {
 	}
 
 	public function removeTags($id){
+		/*PENJELASAN
+			fungsi untuk menghilangkan tema dari session yang sudah ada	
+		*/
 		$index = array_search($id, $_SESSION['tag']);
 		unset($_SESSION['tag'][$index]);
 	}
 
 	public function monthConverter(){
+		/*PENJELASAN
+			fungsi untuk mengubah bulan	
+		*/
 		$month = array(
 			'00'=>'asd', '01'=>'Januari','02'=>'Februari','03'=>'Maret','04'=>'April','05'=>'Mei',
 			'06'=>'Juni','07'=>'Juli','08'=>'Agustus','09'=>'September','10'=>'Oktober',
@@ -381,6 +446,9 @@ class Tema extends MY_Controller {
 	}
 
 	public function addNotification($idReceiver, $order){
+		/*PENJELASAN
+			fungsi untuk memberikan notifikasi pada peminatan tema	
+		*/
 		$query = $this->MPengguna->read(array('id_pengguna'=>$idReceiver), null, null);
 		foreach($query->result() as $result){
 			$lastNumber = $result->notifikasi;

@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Barang extends MY_Controller{
 	public function __construct(){
+		/*PENJELASAN
+			load library yang diperlukan
+		*/	
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -10,14 +13,19 @@ class Barang extends MY_Controller{
 	}
 
 	public function index(){
+		/*PENJELASAN
+			fungsi yang di jalankan ketika pertama kali halaman di load,
+		*/
 		$data['tab3'] = true;
-		$data['row'] = $this->Crud->read('kategori', null,null,null);
-		$data['query'] = $this->Crud->readBarang('barang', null, 'idbarang', 'DESC');
+		
 		$this->load->view('admin/barang_halaman', $data);
 	}
 
 	//check the data whether already inserted or not
 	public function cekData($table, $field, $data){
+		/*PENJELASAN
+			fungsi untuk menjalankan apakah data yang di table yang di inginkan sudah ada
+		*/
 		$match = $this->Crud->read($table, array($field=>$data), null, null);
 		if($match->num_rows() > 0){
 			$report = 2;
@@ -28,6 +36,10 @@ class Barang extends MY_Controller{
 	}
 
 	public function cekDataEdit($table, $field, $data, $dataOld){
+		/*PENJELASAN
+			fungsi yang untuk menjalankan apakah data yang akan di input
+			adalah data awal yang berada pada form	
+		*/
 		if($data!=$dataOld){
 			$match = $this->Crud->read($table, array($field=>$data), null, null);
 			if($match->num_rows() > 0){
@@ -42,32 +54,12 @@ class Barang extends MY_Controller{
 	}
 
 	//getData from databases
-	public function getData($id){
-		$query = $this->Crud->read('barang', array('idbarang'=>$id), null, null);
-		foreach($query->result() as $result){
-			$data = array('nama'=>$result->nama,
-				'idkategori'=>$result->idkategori,
-				'harga'=>$result->harga, 
-				'stock'=>$result->stock,
-				 'deskripsi'=>$result->deskripsi,
-				  'foto'=>$result->foto);
-
-			$data['foto'] = '<img src="'.base_url('assets/img/barang/'.$result->foto.'').'" class="img-responsive img-thumbnail" style="max-width:200px;max-height:200px">';
-			
-			$data['fotoNameOnly'] = $result->foto;
-		}
-		header('Content-Type: application/json');
-		echo json_encode($data);
-	}
-	public function getPetugas($id){
-		$query = $this->Crud->read('petugas', array('idpetugas'=>$id), null, null);
-		foreach($query->result() as $result){
-			$data = $result->nama;
-		}
-		echo $data;
-	}
-
 	public function create(){
+		/*PENJELASAN
+			fungsi insert lanjutan dari model create, untuk memasukan data
+			ketika data sudah berhasil atau gagal di masukan maka akan redirect ke 
+			page yang sudah di tentukan(insert data baru)
+		*/
 		$this->sessionOut();
 		if($this->session->userdata('levelpetta')!=2){ redirect($_SERVER['HTTP_REFERER']); }
 		if(!empty($_SESSION['tag'])){
@@ -94,6 +86,9 @@ class Barang extends MY_Controller{
 	}
 
 	public function insertKategori(){
+		/*PENJELASAN
+			fungsi memasukkan kategori
+		*/
 		$namaKategori = $this->input->post('kategori');
 		$data = array(
 				'kategori'=>$namaKategori
@@ -104,6 +99,9 @@ class Barang extends MY_Controller{
                                       
 	//insert data into database
 	public function insert(){
+		/*PENJELASAN
+			fungsi memasukan data 	
+		*/
 		$nama   = $this->input->post('nama');
 		$harga  = $this->input->post('harga');
 		$stock  = $this->input->post('stock');	
@@ -136,6 +134,9 @@ class Barang extends MY_Controller{
 
 	//update the database
 	public function update($id){
+		/*PENJELASAN
+			fungsi untuk mengupdate data
+		*/
 		$nama   = $this->input->post('ubahnama');
 		$stock  = $this->input->post('ubahstock');
 		$harga  = $this->input->post('ubahharga');
@@ -171,13 +172,14 @@ class Barang extends MY_Controller{
 		}
 	}
 	//delete 
-	public function delete($id){
+	/*public function delete($id){
+		
 		$query = $this->Crud->read('barang', array('idbarang'=>$id), null, null);
 		foreach($query->result() as $result){
 			unlink('assets/img/barang/'.$result->foto.'');
 		}
 		$delete = $this->Crud->delete(array('idbarang'=>$id), 'barang');
 		redirect(($_SERVER['HTTP_REFERER']), 'refresh');
-	}
+	}*/
 	
 }

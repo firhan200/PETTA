@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pengguna extends MY_Controller {
 	public function __construct(){
+		/*PENJELASAN
+			load library dan mdoel yang diperlukan	
+		*/
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('MPengguna');
@@ -12,6 +15,9 @@ class Pengguna extends MY_Controller {
 	}
 
 	public function masuk(){
+		/*PENJELASAN
+			fungsi untuk masuk, jika berhasil dan gagal	
+		*/
 		$this->sessionIn(); //cek session
 		if($this->input->get('balasan')!=null){
 			$data['report'] = 1;
@@ -23,6 +29,9 @@ class Pengguna extends MY_Controller {
 	}
 
 	public function loginProcess(){
+		/*PENJELASAN
+			fungsi untuk log in process	
+		*/
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		$match = $this->MPengguna->read(array('username'=>$username, 'password'=>sha1($password)), null, null);
@@ -67,17 +76,26 @@ class Pengguna extends MY_Controller {
 	}
 
 	public function logoutProcess(){
+		/*PENJELASAN
+			fungsi untuk logout	
+		*/
 		$this->session->unset_userdata('idpetta');
 		$this->session->unset_userdata('levelpetta');
 		redirect(site_url(''));
 	}
 
 	public function getNotification(){
+		/*PENJELASAN
+			fungsi untuk mendapatkan notifikasi	
+		*/
 		$notif = $this->pullNotification();
 		echo $notif;
 	}
 
 	public function ubahPassword(){
+		/*PENJELASAN
+			fungsi untuk mengubah password	
+		*/
 		$id_pengguna = $this->session->userdata('idpetta');
 		$oldpass = sha1($this->input->post('oldpass'));
 		$newpass = $this->input->post('newpass');
